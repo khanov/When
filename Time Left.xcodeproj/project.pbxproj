@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
+		A636CB56179D842600526D7A /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB55179D842600526D7A /* noise.png */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
 		A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6693561179D31E200E5A40F /* CoreGraphics.framework */; };
@@ -19,9 +21,14 @@
 		A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */; };
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
 		A669357D179D31E200E5A40F /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKViewController.m */; };
+		A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693584179D35F700E5A40F /* SKBackgroundView.m */; };
+		A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693589179D368D00E5A40F /* YLProgressBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
+		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
+		A636CB55179D842600526D7A /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +46,11 @@
 		A6693579179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		A669357B179D31E200E5A40F /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
 		A669357C179D31E200E5A40F /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		A6693583179D35F700E5A40F /* SKBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBackgroundView.h; sourceTree = "<group>"; };
+		A6693584179D35F700E5A40F /* SKBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBackgroundView.m; sourceTree = "<group>"; };
+		A6693587179D368D00E5A40F /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
+		A6693588179D368D00E5A40F /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
+		A6693589179D368D00E5A40F /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +97,17 @@
 		A6693563179D31E200E5A40F /* Time Left */ = {
 			isa = PBXGroup;
 			children = (
+				A6693586179D368D00E5A40F /* YLProgressBar */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
-				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
-				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A669357B179D31E200E5A40F /* SKViewController.h */,
 				A669357C179D31E200E5A40F /* SKViewController.m */,
+				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
+				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
+				A6693583179D35F700E5A40F /* SKBackgroundView.h */,
+				A6693584179D35F700E5A40F /* SKBackgroundView.m */,
+				A636CB52179D60D300526D7A /* SKEvent.h */,
+				A636CB53179D60D300526D7A /* SKEvent.m */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
 			);
 			path = "Time Left";
@@ -106,8 +123,19 @@
 				A669356F179D31E200E5A40F /* Default.png */,
 				A6693571179D31E200E5A40F /* Default@2x.png */,
 				A6693573179D31E200E5A40F /* Default-568h@2x.png */,
+				A636CB55179D842600526D7A /* noise.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A6693586179D368D00E5A40F /* YLProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				A6693587179D368D00E5A40F /* ARCMacro.h */,
+				A6693588179D368D00E5A40F /* YLProgressBar.h */,
+				A6693589179D368D00E5A40F /* YLProgressBar.m */,
+			);
+			path = YLProgressBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +196,7 @@
 				A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
 				A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */,
+				A636CB56179D842600526D7A /* noise.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +210,9 @@
 				A669356A179D31E200E5A40F /* main.m in Sources */,
 				A669356E179D31E200E5A40F /* SKAppDelegate.m in Sources */,
 				A669357D179D31E200E5A40F /* SKViewController.m in Sources */,
+				A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */,
+				A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */,
+				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +345,7 @@
 				A6693582179D31E200E5A40F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
