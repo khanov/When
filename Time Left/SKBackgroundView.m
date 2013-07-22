@@ -52,7 +52,7 @@
                                                       self.bounds.size.height / 2.0);
         
         // Draw the gradient
-        CGContextDrawRadialGradient(context, gradient, centerPoint, rect.size.width / 2, centerPoint, 0, (kCGGradientDrawsBeforeStartLocation));
+        CGContextDrawRadialGradient(context, gradient, centerPoint, rect.size.height / 2, centerPoint, 0, (kCGGradientDrawsBeforeStartLocation));
         
         CGGradientRelease(gradient);
         CGColorSpaceRelease(myColorspace);

@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="2" customClass="SKViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3" customClass="SKBackgroundView">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pex-9l-nsL" customClass="YLProgressBar"/>
@@ -30,22 +30,30 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="That is:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0G-dH-rUc">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Left:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0G-dH-rUc">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="IkQ-tn-paP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9F-kl-jlD">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9F-kl-jlD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCv-w4-SUX">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCv-w4-SUX">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-av-NPa">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-av-NPa">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-vn-RI3">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -57,23 +65,31 @@
                             <constraint firstAttribute="trailing" secondItem="9O0-Za-YVw" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="0f8-Uv-dtB"/>
                             <constraint firstItem="h9F-kl-jlD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="41J-Uw-fkf"/>
                             <constraint firstAttribute="trailing" secondItem="Pex-9l-nsL" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="8nm-vS-zO4"/>
-                            <constraint firstItem="MCv-w4-SUX" firstAttribute="top" secondItem="5K0-av-NPa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="9dX-EO-L2R"/>
+                            <constraint firstItem="l0G-dH-rUc" firstAttribute="top" secondItem="3" secondAttribute="top" constant="219" id="9QL-zk-Rgf"/>
                             <constraint firstItem="YtR-ak-bJi" firstAttribute="top" secondItem="3" secondAttribute="top" constant="146" id="EKb-tQ-mK1"/>
+                            <constraint firstAttribute="trailing" secondItem="l0G-dH-rUc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EfT-bo-ig0"/>
+                            <constraint firstAttribute="trailing" secondItem="5K0-av-NPa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="I3A-Tw-Zaj"/>
                             <constraint firstItem="l0G-dH-rUc" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Nda-Cs-nEc"/>
+                            <constraint firstItem="LAf-vn-RI3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="NmI-6i-ukA"/>
                             <constraint firstItem="9O0-Za-YVw" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Nre-FS-Eon"/>
-                            <constraint firstAttribute="bottom" secondItem="h9F-kl-jlD" secondAttribute="bottom" constant="89" id="OQY-w6-5B3"/>
+                            <constraint firstItem="5K0-av-NPa" firstAttribute="top" secondItem="l0G-dH-rUc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="QJW-vG-D03"/>
                             <constraint firstItem="9O0-Za-YVw" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Vbn-zx-gzK"/>
-                            <constraint firstItem="h9F-kl-jlD" firstAttribute="top" secondItem="MCv-w4-SUX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="dyM-mu-cHw"/>
+                            <constraint firstAttribute="trailing" secondItem="LAf-vn-RI3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="bM9-xH-bUo"/>
+                            <constraint firstAttribute="trailing" secondItem="MCv-w4-SUX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dD4-Hd-FSx"/>
                             <constraint firstItem="5K0-av-NPa" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="eRO-OP-UXE"/>
+                            <constraint firstItem="h9F-kl-jlD" firstAttribute="top" secondItem="MCv-w4-SUX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="f0B-i7-96R"/>
                             <constraint firstItem="YtR-ak-bJi" firstAttribute="centerX" secondItem="Pex-9l-nsL" secondAttribute="centerX" type="default" id="g3a-k6-5p2"/>
-                            <constraint firstAttribute="bottom" secondItem="l0G-dH-rUc" secondAttribute="bottom" constant="185" id="nxt-PZ-G3M"/>
+                            <constraint firstItem="MCv-w4-SUX" firstAttribute="top" secondItem="LAf-vn-RI3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ozf-Ap-Qw0"/>
+                            <constraint firstAttribute="trailing" secondItem="h9F-kl-jlD" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qTk-68-94o"/>
                             <constraint firstItem="MCv-w4-SUX" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="qUg-dd-ez1"/>
+                            <constraint firstItem="LAf-vn-RI3" firstAttribute="top" secondItem="5K0-av-NPa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="x1q-kO-37v"/>
                             <constraint firstItem="Pex-9l-nsL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="y4q-i0-zPa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="daysLabel" destination="h9F-kl-jlD" id="yuy-wH-g6o"/>
                         <outlet property="hoursLabel" destination="MCv-w4-SUX" id="nK3-vN-xcQ"/>
+                        <outlet property="minutesLabel" destination="LAf-vn-RI3" id="b4e-4O-O1D"/>
                         <outlet property="progressBar" destination="Pex-9l-nsL" id="ifr-OH-fxm"/>
                         <outlet property="progressLabel" destination="YtR-ak-bJi" id="fyZ-pO-BMM"/>
                         <outlet property="secondsLabel" destination="5K0-av-NPa" id="l0N-y8-bic"/>
@@ -87,6 +103,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

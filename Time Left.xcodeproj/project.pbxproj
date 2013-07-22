@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
 		A636CB56179D842600526D7A /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB55179D842600526D7A /* noise.png */; };
+		A636CB58179DB0C600526D7A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB57179DB0C600526D7A /* Icon.png */; };
+		A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB59179DB0C900526D7A /* Icon@2x.png */; };
+		A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5B179DB0CF00526D7A /* Icon-72.png */; };
+		A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5D179DB0D200526D7A /* Icon-72@2x.png */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
 		A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6693561179D31E200E5A40F /* CoreGraphics.framework */; };
@@ -29,6 +33,10 @@
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
 		A636CB55179D842600526D7A /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
+		A636CB57179DB0C600526D7A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		A636CB59179DB0C900526D7A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		A636CB5B179DB0CF00526D7A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
+		A636CB5D179DB0D200526D7A /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,6 +132,10 @@
 				A6693571179D31E200E5A40F /* Default@2x.png */,
 				A6693573179D31E200E5A40F /* Default-568h@2x.png */,
 				A636CB55179D842600526D7A /* noise.png */,
+				A636CB5D179DB0D200526D7A /* Icon-72@2x.png */,
+				A636CB5B179DB0CF00526D7A /* Icon-72.png */,
+				A636CB59179DB0C900526D7A /* Icon@2x.png */,
+				A636CB57179DB0C600526D7A /* Icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -197,6 +209,10 @@
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
 				A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */,
 				A636CB56179D842600526D7A /* noise.png in Resources */,
+				A636CB58179DB0C600526D7A /* Icon.png in Resources */,
+				A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */,
+				A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */,
+				A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

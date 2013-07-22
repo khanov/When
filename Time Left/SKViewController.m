@@ -12,6 +12,7 @@
 @interface SKViewController ()
 
 @property (nonatomic, strong) SKEvent *untilDeparture;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -22,6 +23,15 @@
     [super viewDidLoad];
     [self createEvent];
     [self updateViews];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                         target:self
+                                       selector:@selector(updateViews)
+                                       userInfo:nil
+                                        repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,13 +60,23 @@
     
     if (currentProgress < 0) {
         self.titleLabel.text = @"Until Departure to the US";
-        self.progressBar.progress = -currentProgress;
-        self.progressLabel.text = [NSString stringWithFormat:@"%.0lf%%", (-currentProgress * 100)];
+        self.progressBar.progress = 1.0 + currentProgress;
+        self.progressLabel.text = [NSString stringWithFormat:@"%.0lf%%", (100 + currentProgress * 100)];
+        
+        self.secondsLabel.text = [NSString stringWithFormat:@"%.0f seconds", [self.untilDeparture.startDate timeIntervalSinceDate:[NSDate date]]];
+        self.minutesLabel.text = [NSString stringWithFormat:@"or %.0f minutes", [self.untilDeparture.startDate timeIntervalSinceDate:[NSDate date]] / 60];
+        self.hoursLabel.text = [NSString stringWithFormat:@"or %.0f hours", [self.untilDeparture.startDate timeIntervalSinceDate:[NSDate date]] / 3600];
+        self.daysLabel.text = [NSString stringWithFormat:@"or %.0f days", [self.untilDeparture.startDate timeIntervalSinceDate:[NSDate date]] / 3600 / 24];
     }
     else {
         self.titleLabel.text = @"Global UGRAD Progress";
         self.progressBar.progress = currentProgress;
         self.progressLabel.text = [NSString stringWithFormat:@"%.0lf%%", (currentProgress * 100)];
+        
+        self.secondsLabel.text = [NSString stringWithFormat:@"%.0f seconds", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]]];
+        self.minutesLabel.text = [NSString stringWithFormat:@"or %.0f minutes", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]] / 60];
+        self.hoursLabel.text = [NSString stringWithFormat:@"or %.0f hours", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]] / 3600];
+        self.daysLabel.text = [NSString stringWithFormat:@"or %.0f days", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]] / 3600 / 24];
     }
 }
 
