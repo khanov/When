@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet YLProgressBar *progressBar;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minutesLabel;

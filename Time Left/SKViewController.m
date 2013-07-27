@@ -43,11 +43,11 @@
 - (void)createEvent
 {
     // Time interval spent in the US
-    NSString *start = @"06-08-2013";
-    NSString *end = @"18-12-2013";
+    NSString *start = @"06-08-2013 12:30:00";
+    NSString *end = @"18-12-2013 19:10:00";
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
     
     self.untilDeparture = [[SKEvent alloc] initWithStartDate:[dateFormatter dateFromString:start]
                                                   andEndDate:[dateFormatter dateFromString:end]];
@@ -69,7 +69,8 @@
         self.daysLabel.text = [NSString stringWithFormat:@"or %.0f days", [self.untilDeparture.startDate timeIntervalSinceDate:[NSDate date]] / 3600 / 24];
     }
     else {
-        self.titleLabel.text = @"Global UGRAD Progress";
+        self.titleLabel.text = @"My Global UGRAD Progress";
+        self.subTitleLabel.text = @"Until Departure:";
         self.progressBar.progress = currentProgress;
         self.progressLabel.text = [NSString stringWithFormat:@"%.0lf%%", (currentProgress * 100)];
         

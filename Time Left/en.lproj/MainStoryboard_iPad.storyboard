@@ -19,7 +19,7 @@
                             </progressView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qz5-Cl-WAU">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="89" id="jSQ-wM-ga3"/>
+                                    <constraint firstAttribute="width" constant="108" id="DVK-GJ-w4P"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,8 +36,8 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Left:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUq-J7-iOp">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="L6P-xz-2IH"/>
-                                    <constraint firstAttribute="width" constant="280" id="sDL-Ea-aQv"/>
+                                    <constraint firstAttribute="width" constant="329" id="F2m-pn-eMi"/>
+                                    <constraint firstAttribute="height" constant="28" id="YUY-lg-Bo7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,6 +62,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRp-zy-tI9">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="KPc-RZ-W7X"/>
+                                    <constraint firstAttribute="width" constant="280" id="m1S-fv-Tca"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,27 +85,26 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uGb-8u-n4u" firstAttribute="top" secondItem="PEm-Eq-jB2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="654-Af-auf"/>
-                            <constraint firstItem="dRp-zy-tI9" firstAttribute="leading" secondItem="kUq-J7-iOp" secondAttribute="leading" type="default" id="7os-6L-xrV"/>
                             <constraint firstAttribute="trailing" secondItem="egP-Ua-rfI" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="8Ef-Po-WTb"/>
+                            <constraint firstItem="Qz5-Cl-WAU" firstAttribute="centerX" secondItem="Iwi-ho-Z0I" secondAttribute="centerX" type="default" id="BwA-i0-XfU"/>
                             <constraint firstItem="Iwi-ho-Z0I" firstAttribute="top" secondItem="5" secondAttribute="top" constant="416" id="Chz-J5-VP3"/>
                             <constraint firstItem="uGb-8u-n4u" firstAttribute="leading" secondItem="pLF-Q7-yN8" secondAttribute="leading" type="default" id="EAq-cu-kOX"/>
                             <constraint firstItem="Qz5-Cl-WAU" firstAttribute="top" secondItem="5" secondAttribute="top" constant="344" id="Jpb-pI-1XV"/>
-                            <constraint firstItem="kUq-J7-iOp" firstAttribute="centerX" secondItem="Iwi-ho-Z0I" secondAttribute="centerX" type="default" id="JyS-Xt-G75"/>
-                            <constraint firstItem="Qz5-Cl-WAU" firstAttribute="centerX" secondItem="egP-Ua-rfI" secondAttribute="centerX" type="default" id="OVO-Vn-OSR"/>
                             <constraint firstItem="uGb-8u-n4u" firstAttribute="trailing" secondItem="pLF-Q7-yN8" secondAttribute="trailing" type="default" id="Okd-Xd-0WK"/>
-                            <constraint firstItem="Qz5-Cl-WAU" firstAttribute="centerX" secondItem="Iwi-ho-Z0I" secondAttribute="centerX" type="default" id="RPV-Sz-2CB"/>
+                            <constraint firstItem="kUq-J7-iOp" firstAttribute="centerX" secondItem="Iwi-ho-Z0I" secondAttribute="centerX" type="default" id="Wjs-kI-cZJ"/>
+                            <constraint firstItem="kUq-J7-iOp" firstAttribute="centerX" secondItem="egP-Ua-rfI" secondAttribute="centerX" type="default" id="Xgu-5u-TuY"/>
                             <constraint firstItem="PEm-Eq-jB2" firstAttribute="top" secondItem="dRp-zy-tI9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="YHB-2f-JAP"/>
                             <constraint firstItem="egP-Ua-rfI" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Ymw-zo-BdU"/>
+                            <constraint firstItem="kUq-J7-iOp" firstAttribute="top" secondItem="5" secondAttribute="top" constant="464" id="Ztg-eh-ks8"/>
                             <constraint firstItem="WQP-5F-zj9" firstAttribute="top" secondItem="5" secondAttribute="top" constant="-37" id="cDb-GY-qOO"/>
+                            <constraint firstItem="dRp-zy-tI9" firstAttribute="centerX" secondItem="kUq-J7-iOp" secondAttribute="centerX" type="default" id="fnw-Ea-6Ey"/>
                             <constraint firstItem="egP-Ua-rfI" firstAttribute="top" secondItem="5" secondAttribute="top" constant="103" id="hhv-hc-vRd"/>
-                            <constraint firstItem="kUq-J7-iOp" firstAttribute="top" secondItem="5" secondAttribute="top" constant="471" id="ilU-OS-GGp"/>
                             <constraint firstItem="dRp-zy-tI9" firstAttribute="trailing" secondItem="PEm-Eq-jB2" secondAttribute="trailing" type="default" id="oVQ-hK-Nkm"/>
                             <constraint firstItem="dRp-zy-tI9" firstAttribute="leading" secondItem="PEm-Eq-jB2" secondAttribute="leading" type="default" id="sQd-N5-Ikk"/>
                             <constraint firstItem="WQP-5F-zj9" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="274" id="t3X-hS-b70"/>
                             <constraint firstItem="pLF-Q7-yN8" firstAttribute="top" secondItem="uGb-8u-n4u" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uxa-xc-w5P"/>
                             <constraint firstItem="PEm-Eq-jB2" firstAttribute="leading" secondItem="uGb-8u-n4u" secondAttribute="leading" type="default" id="wmk-IE-7Ki"/>
                             <constraint firstItem="PEm-Eq-jB2" firstAttribute="trailing" secondItem="uGb-8u-n4u" secondAttribute="trailing" type="default" id="yGb-Jp-yhm"/>
-                            <constraint firstItem="dRp-zy-tI9" firstAttribute="trailing" secondItem="kUq-J7-iOp" secondAttribute="trailing" type="default" id="yaL-O8-7Lt"/>
                             <constraint firstAttribute="bottom" secondItem="pLF-Q7-yN8" secondAttribute="bottom" constant="356" id="zoh-HL-ZNW"/>
                         </constraints>
                     </view>
@@ -115,6 +115,7 @@
                         <outlet property="progressBar" destination="Iwi-ho-Z0I" id="7T6-BJ-3By"/>
                         <outlet property="progressLabel" destination="Qz5-Cl-WAU" id="XBC-CO-k4W"/>
                         <outlet property="secondsLabel" destination="dRp-zy-tI9" id="wMD-if-xtZ"/>
+                        <outlet property="subTitleLabel" destination="kUq-J7-iOp" id="NVu-lY-a7D"/>
                         <outlet property="titleLabel" destination="egP-Ua-rfI" id="HPa-cH-chu"/>
                     </connections>
                 </viewController>
