@@ -179,6 +179,11 @@
 				CLASSPREFIX = SK;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Salavat Khanov";
+				TargetAttributes = {
+					A6693559179D31E200E5A40F = {
+						DevelopmentTeam = 6P9PN587KS;
+					};
+				};
 			};
 			buildConfigurationList = A6693555179D31E200E5A40F /* Build configuration list for PBXProject "Time Left" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -323,12 +328,13 @@
 		A6693581179D31E200E5A40F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30CAF402-F052-4925-9578-3896D1EA2CF0";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -336,12 +342,13 @@
 		A6693582179D31E200E5A40F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30CAF402-F052-4925-9578-3896D1EA2CF0";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

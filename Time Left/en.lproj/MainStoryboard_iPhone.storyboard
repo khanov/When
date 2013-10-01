@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="SKViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Yt-va-7E6"/>
+                        <viewControllerLayoutGuide type="bottom" id="q7r-qM-Cvc"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3" customClass="SKBackgroundView">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pex-9l-nsL" customClass="YLProgressBar"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pex-9l-nsL" customClass="YLProgressBar">
+                                <rect key="frame" x="20" y="187" width="280" height="2"/>
+                            </progressView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtR-ak-bJi">
+                                <rect key="frame" x="126" y="146" width="69" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="DWq-kB-ngB"/>
                                     <constraint firstAttribute="width" constant="69" id="fDI-Qc-Gzv"/>
@@ -23,6 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O0-Za-YVw">
+                                <rect key="frame" x="20" y="20" width="280" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Cor-Mh-uNS"/>
                                 </constraints>
@@ -31,6 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Left:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0G-dH-rUc">
+                                <rect key="frame" x="20" y="219" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="IkQ-tn-paP"/>
                                 </constraints>
@@ -39,21 +49,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9F-kl-jlD">
+                                <rect key="frame" x="20" y="335" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCv-w4-SUX">
+                                <rect key="frame" x="20" y="306" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-av-NPa">
+                                <rect key="frame" x="20" y="248" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-vn-RI3">
+                                <rect key="frame" x="20" y="277" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -61,31 +75,32 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Pex-9l-nsL" firstAttribute="top" secondItem="YtR-ak-bJi" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0eX-rO-uVf"/>
-                            <constraint firstAttribute="trailing" secondItem="9O0-Za-YVw" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="0f8-Uv-dtB"/>
-                            <constraint firstItem="h9F-kl-jlD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="41J-Uw-fkf"/>
-                            <constraint firstAttribute="trailing" secondItem="Pex-9l-nsL" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="8nm-vS-zO4"/>
+                            <constraint firstItem="Pex-9l-nsL" firstAttribute="top" secondItem="YtR-ak-bJi" secondAttribute="bottom" constant="8" symbolic="YES" id="0eX-rO-uVf"/>
+                            <constraint firstAttribute="trailing" secondItem="9O0-Za-YVw" secondAttribute="trailing" constant="20" symbolic="YES" id="0f8-Uv-dtB"/>
+                            <constraint firstItem="h9F-kl-jlD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="41J-Uw-fkf"/>
+                            <constraint firstAttribute="trailing" secondItem="Pex-9l-nsL" secondAttribute="trailing" constant="20" symbolic="YES" id="8nm-vS-zO4"/>
                             <constraint firstItem="l0G-dH-rUc" firstAttribute="top" secondItem="3" secondAttribute="top" constant="219" id="9QL-zk-Rgf"/>
                             <constraint firstItem="YtR-ak-bJi" firstAttribute="top" secondItem="3" secondAttribute="top" constant="146" id="EKb-tQ-mK1"/>
-                            <constraint firstAttribute="trailing" secondItem="l0G-dH-rUc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EfT-bo-ig0"/>
-                            <constraint firstAttribute="trailing" secondItem="5K0-av-NPa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="I3A-Tw-Zaj"/>
-                            <constraint firstItem="l0G-dH-rUc" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Nda-Cs-nEc"/>
-                            <constraint firstItem="LAf-vn-RI3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="NmI-6i-ukA"/>
-                            <constraint firstItem="9O0-Za-YVw" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Nre-FS-Eon"/>
-                            <constraint firstItem="5K0-av-NPa" firstAttribute="top" secondItem="l0G-dH-rUc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="QJW-vG-D03"/>
-                            <constraint firstItem="9O0-Za-YVw" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Vbn-zx-gzK"/>
-                            <constraint firstAttribute="trailing" secondItem="LAf-vn-RI3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="bM9-xH-bUo"/>
-                            <constraint firstAttribute="trailing" secondItem="MCv-w4-SUX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dD4-Hd-FSx"/>
-                            <constraint firstItem="5K0-av-NPa" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="eRO-OP-UXE"/>
-                            <constraint firstItem="h9F-kl-jlD" firstAttribute="top" secondItem="MCv-w4-SUX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="f0B-i7-96R"/>
-                            <constraint firstItem="YtR-ak-bJi" firstAttribute="centerX" secondItem="Pex-9l-nsL" secondAttribute="centerX" type="default" id="g3a-k6-5p2"/>
-                            <constraint firstItem="MCv-w4-SUX" firstAttribute="top" secondItem="LAf-vn-RI3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ozf-Ap-Qw0"/>
-                            <constraint firstAttribute="trailing" secondItem="h9F-kl-jlD" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qTk-68-94o"/>
-                            <constraint firstItem="MCv-w4-SUX" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="qUg-dd-ez1"/>
-                            <constraint firstItem="LAf-vn-RI3" firstAttribute="top" secondItem="5K0-av-NPa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="x1q-kO-37v"/>
-                            <constraint firstItem="Pex-9l-nsL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="y4q-i0-zPa"/>
+                            <constraint firstAttribute="trailing" secondItem="l0G-dH-rUc" secondAttribute="trailing" constant="20" symbolic="YES" id="EfT-bo-ig0"/>
+                            <constraint firstAttribute="trailing" secondItem="5K0-av-NPa" secondAttribute="trailing" constant="20" symbolic="YES" id="I3A-Tw-Zaj"/>
+                            <constraint firstItem="l0G-dH-rUc" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="Nda-Cs-nEc"/>
+                            <constraint firstItem="LAf-vn-RI3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="NmI-6i-ukA"/>
+                            <constraint firstItem="9O0-Za-YVw" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" id="Nre-FS-Eon"/>
+                            <constraint firstItem="5K0-av-NPa" firstAttribute="top" secondItem="l0G-dH-rUc" secondAttribute="bottom" constant="8" symbolic="YES" id="QJW-vG-D03"/>
+                            <constraint firstItem="9O0-Za-YVw" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="Vbn-zx-gzK"/>
+                            <constraint firstAttribute="trailing" secondItem="LAf-vn-RI3" secondAttribute="trailing" constant="20" symbolic="YES" id="bM9-xH-bUo"/>
+                            <constraint firstAttribute="trailing" secondItem="MCv-w4-SUX" secondAttribute="trailing" constant="20" symbolic="YES" id="dD4-Hd-FSx"/>
+                            <constraint firstItem="5K0-av-NPa" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="eRO-OP-UXE"/>
+                            <constraint firstItem="h9F-kl-jlD" firstAttribute="top" secondItem="MCv-w4-SUX" secondAttribute="bottom" constant="8" symbolic="YES" id="f0B-i7-96R"/>
+                            <constraint firstItem="YtR-ak-bJi" firstAttribute="centerX" secondItem="Pex-9l-nsL" secondAttribute="centerX" id="g3a-k6-5p2"/>
+                            <constraint firstItem="MCv-w4-SUX" firstAttribute="top" secondItem="LAf-vn-RI3" secondAttribute="bottom" constant="8" symbolic="YES" id="ozf-Ap-Qw0"/>
+                            <constraint firstAttribute="trailing" secondItem="h9F-kl-jlD" secondAttribute="trailing" constant="20" symbolic="YES" id="qTk-68-94o"/>
+                            <constraint firstItem="MCv-w4-SUX" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="qUg-dd-ez1"/>
+                            <constraint firstItem="LAf-vn-RI3" firstAttribute="top" secondItem="5K0-av-NPa" secondAttribute="bottom" constant="8" symbolic="YES" id="x1q-kO-37v"/>
+                            <constraint firstItem="Pex-9l-nsL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="y4q-i0-zPa"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="daysLabel" destination="h9F-kl-jlD" id="yuy-wH-g6o"/>
                         <outlet property="hoursLabel" destination="MCv-w4-SUX" id="nK3-vN-xcQ"/>

@@ -23,6 +23,7 @@
     [super viewDidLoad];
     [self createEvent];
     [self updateViews];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -79,6 +80,11 @@
         self.hoursLabel.text = [NSString stringWithFormat:@"or %.0f hours", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]] / 3600];
         self.daysLabel.text = [NSString stringWithFormat:@"or %.0f days", [self.untilDeparture.endDate timeIntervalSinceDate:[NSDate date]] / 3600 / 24];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end
