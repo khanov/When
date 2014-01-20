@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SKEvent.h"
+#import "SKAddEventDelegate.h"
 
-@interface SKEventsTableViewController : UITableViewController
+@interface SKEventsTableViewController : UITableViewController <SKAddEventDelegate>
+
+- (void)saveEventDetails:(SKEvent *)event;
 
 
 @end

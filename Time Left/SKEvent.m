@@ -39,4 +39,9 @@
     return [self initWithName:nil startDate:nil andEndDate:nil];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"name '%@', startDate '%@', endDate '%@'", self.name, self.startDate, self.endDate];
+}
+
 @end

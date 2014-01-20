@@ -8,6 +8,7 @@
 
 #import "SKEventsTableViewController.h"
 #import "SKDetailViewController.h"
+#import "SKAddEventTableViewController.h"
 
 @interface SKEventsTableViewController ()
 
@@ -129,8 +130,20 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         SKDetailViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.events objectAtIndex:indexPath.row];
+    } else if ([segue.identifier isEqualToString:@"showAddEventView"]) {
+        SKAddEventTableViewController *controller = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+        controller.delegate = self;
     }
 }
 
+- (void)saveEventDetails:(SKEvent *)event
+{
+    [self.events addObject:event];
+    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:[self.events count]-1 inSection:0]];
+    
+    [self.tableView insertRowsAtIndexPaths:indexPaths
+                          withRowAnimation:UITableViewRowAnimationFade];
+    NSLog(@"Added: %@", event);
+}
 
 @end

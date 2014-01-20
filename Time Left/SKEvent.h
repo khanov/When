@@ -16,5 +16,6 @@
 
 - (id)initWithName:(NSString *)name startDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
 - (CGFloat)progress;
+- (NSString *)description;
 
 @end
