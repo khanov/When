@@ -13,6 +13,7 @@
 		A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB59179DB0C900526D7A /* Icon@2x.png */; };
 		A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5B179DB0CF00526D7A /* Icon-72.png */; };
 		A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5D179DB0D200526D7A /* Icon-72@2x.png */; };
+		A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
 		A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6693561179D31E200E5A40F /* CoreGraphics.framework */; };
@@ -24,9 +25,11 @@
 		A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6693573179D31E200E5A40F /* Default-568h@2x.png */; };
 		A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */; };
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
-		A669357D179D31E200E5A40F /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKViewController.m */; };
+		A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKDetailViewController.m */; };
 		A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693584179D35F700E5A40F /* SKBackgroundView.m */; };
 		A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693589179D368D00E5A40F /* YLProgressBar.m */; };
+		A6FD0289186AB028007E0D54 /* SKAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FD0288186AB028007E0D54 /* SKAddEventViewController.m */; };
+		A6FD028C186AB528007E0D54 /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FD028B186AB528007E0D54 /* SKAddEventTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,8 @@
 		A636CB59179DB0C900526D7A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		A636CB5B179DB0CF00526D7A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		A636CB5D179DB0D200526D7A /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
+		A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventsTableViewController.h; sourceTree = "<group>"; };
+		A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventsTableViewController.m; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,13 +57,17 @@
 		A6693573179D31E200E5A40F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A6693576179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A6693579179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		A669357B179D31E200E5A40F /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
-		A669357C179D31E200E5A40F /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		A669357B179D31E200E5A40F /* SKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
+		A669357C179D31E200E5A40F /* SKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
 		A6693583179D35F700E5A40F /* SKBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBackgroundView.h; sourceTree = "<group>"; };
 		A6693584179D35F700E5A40F /* SKBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBackgroundView.m; sourceTree = "<group>"; };
 		A6693587179D368D00E5A40F /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
 		A6693588179D368D00E5A40F /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
 		A6693589179D368D00E5A40F /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
+		A6FD0287186AB028007E0D54 /* SKAddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKAddEventViewController.h; path = ../SKAddEventViewController.h; sourceTree = "<group>"; };
+		A6FD0288186AB028007E0D54 /* SKAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKAddEventViewController.m; path = ../SKAddEventViewController.m; sourceTree = "<group>"; };
+		A6FD028A186AB528007E0D54 /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKAddEventTableViewController.h; path = ../SKAddEventTableViewController.h; sourceTree = "<group>"; };
+		A6FD028B186AB528007E0D54 /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKAddEventTableViewController.m; path = ../SKAddEventTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,14 +117,20 @@
 				A6693586179D368D00E5A40F /* YLProgressBar */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
-				A669357B179D31E200E5A40F /* SKViewController.h */,
-				A669357C179D31E200E5A40F /* SKViewController.m */,
+				A669357B179D31E200E5A40F /* SKDetailViewController.h */,
+				A669357C179D31E200E5A40F /* SKDetailViewController.m */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6693583179D35F700E5A40F /* SKBackgroundView.h */,
 				A6693584179D35F700E5A40F /* SKBackgroundView.m */,
 				A636CB52179D60D300526D7A /* SKEvent.h */,
 				A636CB53179D60D300526D7A /* SKEvent.m */,
+				A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */,
+				A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */,
+				A6FD0287186AB028007E0D54 /* SKAddEventViewController.h */,
+				A6FD0288186AB028007E0D54 /* SKAddEventViewController.m */,
+				A6FD028A186AB528007E0D54 /* SKAddEventTableViewController.h */,
+				A6FD028B186AB528007E0D54 /* SKAddEventTableViewController.m */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
 			);
 			path = "Time Left";
@@ -230,9 +245,12 @@
 			files = (
 				A669356A179D31E200E5A40F /* main.m in Sources */,
 				A669356E179D31E200E5A40F /* SKAppDelegate.m in Sources */,
-				A669357D179D31E200E5A40F /* SKViewController.m in Sources */,
+				A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */,
 				A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */,
+				A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */,
+				A6FD028C186AB528007E0D54 /* SKAddEventTableViewController.m in Sources */,
 				A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */,
+				A6FD0289186AB028007E0D54 /* SKAddEventViewController.m in Sources */,
 				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +351,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -347,6 +366,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

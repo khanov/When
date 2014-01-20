@@ -12,8 +12,9 @@
 
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
+@property (nonatomic, strong) NSString *name;
 
-- (id)initWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
+- (id)initWithName:(NSString *)name startDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
 - (CGFloat)progress;
 
 @end

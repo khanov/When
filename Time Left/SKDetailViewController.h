@@ -1,5 +1,5 @@
 //
-//  SKViewController.h
+//  SKDetailViewController.h
 //  Time Left
 //
 //  Created by Salavat Khanov on 7/22/13.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "YLProgressBar.h"
+#import "SKEvent.h"
 
-@interface SKViewController : UIViewController
+@interface SKDetailViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet YLProgressBar *progressBar;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
@@ -21,6 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
 @property (weak, nonatomic) IBOutlet UILabel *daysLabel;
 
-
+@property (strong, nonatomic) SKEvent *event;
 
 @end

@@ -10,10 +10,11 @@
 
 @implementation SKEvent
 
-- (id)initWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate
+- (id)initWithName:(NSString *)name startDate:(NSDate *)startDate andEndDate:(NSDate *)endDate
 {
     self = [super init];
     if (self) {
+        _name = name;
         _startDate = startDate;
         _endDate = endDate;
     }
@@ -35,7 +36,7 @@
 
 - (id)init
 {
-    return [self initWithStartDate:nil andEndDate:nil];
+    return [self initWithName:nil startDate:nil andEndDate:nil];
 }
 
 @end
