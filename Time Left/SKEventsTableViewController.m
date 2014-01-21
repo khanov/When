@@ -38,7 +38,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                            target:self
-                                                                                           action:@selector(addItemToTableView)];
+                                                                                           action:@selector(addItemToTableView)];    
     
     // Time interval spent in the US
     NSString *start1 = @"06-08-2013 12:30:00";

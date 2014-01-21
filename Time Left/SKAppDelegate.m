@@ -12,10 +12,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window.tintColor = [UIColor whiteColor];
+    
+    // Remove 1pt underline under the navbar
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+                                      forBarPosition:UIBarPositionAny
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

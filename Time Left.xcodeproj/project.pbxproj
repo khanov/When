@@ -13,6 +13,8 @@
 		A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB59179DB0C900526D7A /* Icon@2x.png */; };
 		A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5B179DB0CF00526D7A /* Icon-72.png */; };
 		A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5D179DB0D200526D7A /* Icon-72@2x.png */; };
+		A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */; };
+		A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */; };
 		A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
@@ -26,9 +28,8 @@
 		A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */; };
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
 		A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKDetailViewController.m */; };
-		A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693584179D35F700E5A40F /* SKBackgroundView.m */; };
-		A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693589179D368D00E5A40F /* YLProgressBar.m */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
+		A6B8E0A2188D925F007E857F /* SKEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,10 @@
 		A636CB59179DB0C900526D7A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		A636CB5B179DB0CF00526D7A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		A636CB5D179DB0D200526D7A /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
+		A64EEE5F188D953E00EB237B /* SKEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventDetailsViewController.h; sourceTree = "<group>"; };
+		A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsViewController.m; sourceTree = "<group>"; };
+		A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKProgressIndicator.h; sourceTree = "<group>"; };
+		A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKProgressIndicator.m; sourceTree = "<group>"; };
 		A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventsTableViewController.h; sourceTree = "<group>"; };
 		A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventsTableViewController.m; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,14 +63,11 @@
 		A6693579179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		A669357B179D31E200E5A40F /* SKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		A669357C179D31E200E5A40F /* SKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
-		A6693583179D35F700E5A40F /* SKBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBackgroundView.h; sourceTree = "<group>"; };
-		A6693584179D35F700E5A40F /* SKBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBackgroundView.m; sourceTree = "<group>"; };
-		A6693587179D368D00E5A40F /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
-		A6693588179D368D00E5A40F /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
-		A6693589179D368D00E5A40F /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
 		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
+		A6B8E0A0188D925F007E857F /* SKEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventDetailsView.h; sourceTree = "<group>"; };
+		A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,15 +114,18 @@
 		A6693563179D31E200E5A40F /* Time Left */ = {
 			isa = PBXGroup;
 			children = (
-				A6693586179D368D00E5A40F /* YLProgressBar */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
 				A669357B179D31E200E5A40F /* SKDetailViewController.h */,
 				A669357C179D31E200E5A40F /* SKDetailViewController.m */,
+				A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */,
+				A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */,
+				A6B8E0A0188D925F007E857F /* SKEventDetailsView.h */,
+				A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */,
+				A64EEE5F188D953E00EB237B /* SKEventDetailsViewController.h */,
+				A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
-				A6693583179D35F700E5A40F /* SKBackgroundView.h */,
-				A6693584179D35F700E5A40F /* SKBackgroundView.m */,
 				A636CB52179D60D300526D7A /* SKEvent.h */,
 				A636CB53179D60D300526D7A /* SKEvent.m */,
 				A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */,
@@ -150,16 +155,6 @@
 				A636CB57179DB0C600526D7A /* Icon.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A6693586179D368D00E5A40F /* YLProgressBar */ = {
-			isa = PBXGroup;
-			children = (
-				A6693587179D368D00E5A40F /* ARCMacro.h */,
-				A6693588179D368D00E5A40F /* YLProgressBar.h */,
-				A6693589179D368D00E5A40F /* YLProgressBar.m */,
-			);
-			path = YLProgressBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,11 +238,12 @@
 				A669356A179D31E200E5A40F /* main.m in Sources */,
 				A669356E179D31E200E5A40F /* SKAppDelegate.m in Sources */,
 				A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */,
-				A6693585179D35F700E5A40F /* SKBackgroundView.m in Sources */,
 				A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */,
 				A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */,
-				A669358A179D368D00E5A40F /* YLProgressBar.m in Sources */,
+				A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */,
+				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,
 				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
+				A6B8E0A2188D925F007E857F /* SKEventDetailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +346,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -365,6 +362,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

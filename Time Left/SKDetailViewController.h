@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YLProgressBar.h"
 #import "SKEvent.h"
 
 @interface SKDetailViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet YLProgressBar *progressBar;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
