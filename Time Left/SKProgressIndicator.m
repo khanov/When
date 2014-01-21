@@ -13,8 +13,11 @@ static NSInteger kInnnerCircleLineWidth = 22;
 static NSInteger kOuterCircleRadius = 138;
 static CGFloat kOuterCircleLineWidth = 2.5;
 
-static NSString *kTextInCircleFontName = @"DINAlternate-Bold";
-static CGFloat kTextInCircleFontSize = 70;
+static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
+static CGFloat kNumberInsideCircleFontSize = 70;
+static NSString *kWordInsideCircleFontName = @"DINAlternate-Bold";
+static CGFloat kWordInsideCircleFontSize = 15;
+static CGFloat kMarginBetweenNumberAndWord = 12;
 
 @implementation SKProgressIndicator
 
@@ -47,10 +50,12 @@ static CGFloat kTextInCircleFontSize = 70;
 
 - (void)drawRect:(CGRect)rect
 {
+    // Draw circles
     [self drawInnerCircleBackgroundIn:rect];
     [self drawInnerCircleProgress:self.percent inRect:rect];
     [self drawOuterCircleBackgroundIn:rect];
     [self drawOuterCircleProgress:self.percent+20 inRect:rect];
+    // Draw texts
     [self drawTextInsideCircleInRect:rect];
 }
 
@@ -126,26 +131,47 @@ static CGFloat kTextInCircleFontSize = 70;
 
 - (void)drawTextInsideCircleInRect:(CGRect)rect
 {
-    // Display our percentage as a string
-    NSString *text = [NSString stringWithFormat:@"%ld", self.percent];
+    NSString *numberSting = [NSString stringWithFormat:@"%ld", self.percent];
+    NSString *wordString = @"PRCNT";
     
-    UIFont *font = [UIFont fontWithName:kTextInCircleFontName size:kTextInCircleFontSize];
+    UIFont *fontForNumber = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
+    UIFont *fontForWord = [UIFont fontWithName:kWordInsideCircleFontName size:kWordInsideCircleFontSize];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSDictionary *attributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
-                                  NSFontAttributeName : font,
-                                  NSParagraphStyleAttributeName : paragraphStyle};
+    NSDictionary *numberAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
+                                        NSFontAttributeName : fontForNumber,
+                                        NSParagraphStyleAttributeName : paragraphStyle};
     
-    NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    NSDictionary *wordAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
+                                      NSFontAttributeName : fontForWord,
+                                      NSParagraphStyleAttributeName : paragraphStyle};
     
-    CGFloat textWidth = attrText.size.width;
-    CGFloat textHeight = attrText.size.height;
-    CGRect textRect = CGRectMake((rect.size.width / 2.0) - textWidth/2.0, (rect.size.height / 2.0) - textHeight/2.0, textWidth, textHeight);
+    NSAttributedString *numberAttrText = [[NSAttributedString alloc] initWithString:numberSting attributes:numberAttributes];
+    NSAttributedString *wordAttrText = [[NSAttributedString alloc] initWithString:wordString attributes:wordAttributes];
     
-    [attrText drawInRect:textRect];
+    // Sizes
+    CGFloat numberWidth = numberAttrText.size.width;
+    CGFloat numberHeight = numberAttrText.size.height;
+    CGFloat wordWidth = wordAttrText.size.width;
+    CGFloat wordHeight = wordAttrText.size.height;
+    CGFloat margin = kMarginBetweenNumberAndWord;
+    
+    // Draw number inside the circle
+    CGRect numberRect = CGRectMake((rect.size.width / 2.0) - (numberWidth / 2.0),
+                                   (rect.size.height / 2.0) - (numberHeight + margin + wordHeight) / 2.0,
+                                   numberWidth,
+                                   numberHeight);
+    [numberAttrText drawInRect:numberRect];
+    
+    // Draw word below the number
+    CGRect wordRect = CGRectMake((rect.size.width / 2.0) - (wordWidth / 2.0),
+                                   numberRect.origin.y + numberHeight / 2.0 + wordHeight + margin,
+                                   wordWidth,
+                                   wordHeight);
+    [wordAttrText drawInRect:wordRect];
 }
 
 @end
