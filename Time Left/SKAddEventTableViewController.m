@@ -174,7 +174,8 @@ static NSInteger kDatePickerCellHeight = 164;
     else {
         SKEvent *newEvent = [[SKEvent alloc] initWithName:self.nameTextField.text
                                                 startDate:self.startsDatePicker.date
-                                               andEndDate:self.endsDatePicker.date];
+                                                  endDate:self.endsDatePicker.date
+                                               andDetails:nil];
         
         [self.delegate saveEventDetails:newEvent];
         [self dismissViewControllerAnimated:YES completion:nil];

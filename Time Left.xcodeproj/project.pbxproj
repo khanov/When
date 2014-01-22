@@ -28,8 +28,8 @@
 		A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */; };
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
 		A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKDetailViewController.m */; };
+		A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
-		A6B8E0A2188D925F007E857F /* SKEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,11 +63,10 @@
 		A6693579179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		A669357B179D31E200E5A40F /* SKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		A669357C179D31E200E5A40F /* SKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
+		A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
 		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
-		A6B8E0A0188D925F007E857F /* SKEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventDetailsView.h; sourceTree = "<group>"; };
-		A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */,
 				A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */,
 				A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */,
 				A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */,
@@ -104,6 +104,7 @@
 		A669355C179D31E200E5A40F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */,
 				A669355D179D31E200E5A40F /* UIKit.framework */,
 				A669355F179D31E200E5A40F /* Foundation.framework */,
 				A6693561179D31E200E5A40F /* CoreGraphics.framework */,
@@ -116,18 +117,10 @@
 			children = (
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
-				A669357B179D31E200E5A40F /* SKDetailViewController.h */,
-				A669357C179D31E200E5A40F /* SKDetailViewController.m */,
-				A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */,
-				A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */,
-				A6B8E0A0188D925F007E857F /* SKEventDetailsView.h */,
-				A6B8E0A1188D925F007E857F /* SKEventDetailsView.m */,
-				A64EEE5F188D953E00EB237B /* SKEventDetailsViewController.h */,
-				A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */,
+				A6A3E8A5188EC02100A3E4FB /* Event Details */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
-				A636CB52179D60D300526D7A /* SKEvent.h */,
-				A636CB53179D60D300526D7A /* SKEvent.m */,
+				A6A3E8A6188EC41300A3E4FB /* Model */,
 				A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */,
 				A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */,
 				A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */,
@@ -155,6 +148,28 @@
 				A636CB57179DB0C600526D7A /* Icon.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A6A3E8A5188EC02100A3E4FB /* Event Details */ = {
+			isa = PBXGroup;
+			children = (
+				A669357B179D31E200E5A40F /* SKDetailViewController.h */,
+				A669357C179D31E200E5A40F /* SKDetailViewController.m */,
+				A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */,
+				A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */,
+				A64EEE5F188D953E00EB237B /* SKEventDetailsViewController.h */,
+				A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */,
+			);
+			name = "Event Details";
+			sourceTree = "<group>";
+		};
+		A6A3E8A6188EC41300A3E4FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A636CB52179D60D300526D7A /* SKEvent.h */,
+				A636CB53179D60D300526D7A /* SKEvent.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,7 +258,6 @@
 				A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */,
 				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,
 				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
-				A6B8E0A2188D925F007E857F /* SKEventDetailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

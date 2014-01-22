@@ -19,6 +19,10 @@ static NSString *kWordInsideCircleFontName = @"DINAlternate-Bold";
 static CGFloat kWordInsideCircleFontSize = 15;
 static CGFloat kMarginBetweenNumberAndWord = 12;
 
+@interface SKProgressIndicator ()
+@property (nonatomic, weak) CAShapeLayer *pathLayer;
+@end
+
 @implementation SKProgressIndicator
 
 - (id)initWithFrame:(CGRect)frame
@@ -35,26 +39,35 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
     // Determine our start and stop angles for the arc (in radians)
     self.startAngle = M_PI * 1.5;
     self.endAngle = self.startAngle + (M_PI * 2);
-    self.percent = 28;
+    // Defaults
+    self.word = @"PRCNT";
+    self.number = self.percentInnerCircle;
     
     [self setupColors];
 }
 
 - (void)setupColors
 {
+    self.backgroundColor = [UIColor colorWithRed:255/255.0 green:149/255.0 blue:0/255.0 alpha:1.0];
     self.circleBackgroundColor = [UIColor whiteColor];
-    self.circleProgressColor = [UIColor colorWithRed:139/255.0 green:136/255.0 blue:255/255.0 alpha:1.0];
+    self.circleProgressColor = [UIColor colorWithRed:105/255.0 green:50/255.0 blue:0/255.0 alpha:1.0]; // dark orange
     self.circleOuterColor = [UIColor whiteColor];
     self.textInsideCircleColor = [UIColor whiteColor];
+
+//    self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
+//    self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+//    self.circleProgressColor = [UIColor colorWithRed:80/255.0 green:54/255.0 blue:101/255.0 alpha:1.0]; // night version
+//    self.circleOuterColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+//    self.textInsideCircleColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
 }
 
 - (void)drawRect:(CGRect)rect
 {
     // Draw circles
     [self drawInnerCircleBackgroundIn:rect];
-    [self drawInnerCircleProgress:self.percent inRect:rect];
+    [self drawInnerCircleProgress:self.percentInnerCircle inRect:rect];
     [self drawOuterCircleBackgroundIn:rect];
-    [self drawOuterCircleProgress:self.percent+20 inRect:rect];
+    [self drawOuterCircleProgress:self.percentOuterCircle inRect:rect];
     // Draw texts
     [self drawTextInsideCircleInRect:rect];
 }
@@ -111,28 +124,56 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
 
 - (void)drawOuterCircleProgress:(CGFloat)percent inRect:(CGRect)rect
 {
+    [self startOuterCircleAnimation];
+}
+
+- (void)startOuterCircleAnimation
+{
+    NSLog(@"animation");
+    
     CGFloat startAngle = M_PI * 1.5;
     CGFloat endAngle = startAngle + (M_PI * 2);
+    CGFloat duration = 1.0;
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    if (self.pathLayer == nil) {
+        UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+        [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
+                                     radius:kOuterCircleRadius
+                          startAngle:startAngle
+                            endAngle:endAngle
+                                  clockwise:YES];
+
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = bezierPath.CGPath;
+        shapeLayer.strokeColor = self.circleProgressColor.CGColor;
+        shapeLayer.fillColor = nil;
+        shapeLayer.lineWidth = kOuterCircleLineWidth;
+        shapeLayer.lineJoin = kCALineJoinRound;
+        [self.layer addSublayer:shapeLayer];
+        self.pathLayer = shapeLayer;
+        
+        CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        pathAnimation.duration = duration;
+        pathAnimation.repeatCount = INFINITY;
+        pathAnimation.fromValue = @(0.0f);
+        pathAnimation.toValue = @(1.0f);
+        pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        
+        [self.pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
+    }
+}
+
+- (void)stopOuterCircleAnimation
+{
     
-    [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kOuterCircleRadius
-                      startAngle:startAngle
-                        endAngle:(endAngle - startAngle) * (percent / 100.0) + startAngle
-                       clockwise:YES];
-    
-    bezierPath.lineWidth = kOuterCircleLineWidth;
-    [self.circleProgressColor setStroke];
-    [bezierPath stroke];
 }
 
 #pragma mark - Draw Texts
 
 - (void)drawTextInsideCircleInRect:(CGRect)rect
 {
-    NSString *numberSting = [NSString stringWithFormat:@"%ld", self.percent];
-    NSString *wordString = @"PRCNT";
+    NSString *numberString = [NSString stringWithFormat:@"%ld", self.number];
+    NSString *wordString = self.word;
     
     UIFont *fontForNumber = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
     UIFont *fontForWord = [UIFont fontWithName:kWordInsideCircleFontName size:kWordInsideCircleFontSize];
@@ -149,7 +190,7 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
                                       NSFontAttributeName : fontForWord,
                                       NSParagraphStyleAttributeName : paragraphStyle};
     
-    NSAttributedString *numberAttrText = [[NSAttributedString alloc] initWithString:numberSting attributes:numberAttributes];
+    NSAttributedString *numberAttrText = [[NSAttributedString alloc] initWithString:numberString attributes:numberAttributes];
     NSAttributedString *wordAttrText = [[NSAttributedString alloc] initWithString:wordString attributes:wordAttributes];
     
     // Sizes

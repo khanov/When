@@ -10,15 +10,19 @@
 
 @interface SKProgressIndicator : UIView
 
+@property (assign, nonatomic) NSInteger percentInnerCircle;
+@property (assign, nonatomic) CGFloat percentOuterCircle;
+@property (assign, nonatomic) NSInteger number; // you can override this to show other than percent number
+@property (strong, nonatomic) NSString *word;   // you can overrode this to show other than default 'PRCNT' text
+
 @property (assign, nonatomic) CGFloat startAngle;
 @property (assign, nonatomic) CGFloat endAngle;
-@property (assign, nonatomic) NSInteger percent;
-
 
 @property (strong, nonatomic) UIColor *circleBackgroundColor;
 @property (strong, nonatomic) UIColor *circleProgressColor;
 @property (strong, nonatomic) UIColor *circleOuterColor;
-
 @property (strong, nonatomic) UIColor *textInsideCircleColor;
+
+- (void)startOuterCircleAnimation;
 
 @end

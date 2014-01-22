@@ -13,9 +13,17 @@
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *details;
 
-- (id)initWithName:(NSString *)name startDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
+- (id)initWithName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate andDetails:(NSString *)details;
 - (CGFloat)progress;
 - (NSString *)description;
+
+- (NSInteger)daysLeft;
+- (NSInteger)hoursLeft;
+- (NSInteger)minutesLeft;
+- (NSInteger)secondsLeft;
+
+- (NSDictionary *)bestNumberAndText;
 
 @end

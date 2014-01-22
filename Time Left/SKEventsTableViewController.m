@@ -47,15 +47,21 @@
     NSString *start2 = @"23-12-2013 00:00:00";
     NSString *end2 = @"23-12-2015 00:00:00";
     
+    NSString *start3 = @"22-01-2014 21:00:00";
+    NSString *end3 = @"23-01-2014 00:00:00";
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
     
     self.events = [[NSMutableArray alloc] init];
     [self.events addObject:[[SKEvent alloc] initWithName:@"Global UGRAD" startDate:[dateFormatter dateFromString:start1]
-                                                   andEndDate:[dateFormatter dateFromString:end1]]];
+                                                   endDate:[dateFormatter dateFromString:end1] andDetails:@"United States of America"]];
     
     [self.events addObject:[[SKEvent alloc] initWithName:@"Home Residence" startDate:[dateFormatter dateFromString:start2]
-                                                   andEndDate:[dateFormatter dateFromString:end2]]];
+                                                   endDate:[dateFormatter dateFromString:end2] andDetails:@"2 Year Home Residence Rule"]];
+    
+    [self.events addObject:[[SKEvent alloc] initWithName:@"Weekend" startDate:[dateFormatter dateFromString:start3]
+                                                 endDate:[dateFormatter dateFromString:end3] andDetails:@"Until the Weekend"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
