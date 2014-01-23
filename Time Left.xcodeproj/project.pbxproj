@@ -29,7 +29,10 @@
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
 		A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669357C179D31E200E5A40F /* SKDetailViewController.m */; };
 		A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */; };
+		A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */; };
+		A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AF1891301500A3E4FB /* SKEventCell.m */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
+		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,9 +67,15 @@
 		A669357B179D31E200E5A40F /* SKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		A669357C179D31E200E5A40F /* SKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
 		A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A6A3E8A91891255C00A3E4FB /* SKEventsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventsCollectionViewController.h; sourceTree = "<group>"; };
+		A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventsCollectionViewController.m; sourceTree = "<group>"; };
+		A6A3E8AE1891301500A3E4FB /* SKEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCell.h; sourceTree = "<group>"; };
+		A6A3E8AF1891301500A3E4FB /* SKEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCell.m; sourceTree = "<group>"; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
 		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
+		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
+		A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCellProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,17 +124,16 @@
 		A6693563179D31E200E5A40F /* Time Left */ = {
 			isa = PBXGroup;
 			children = (
+				A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */,
+				A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */,
+				A6A3E8AD1891257C00A3E4FB /* Event Grid */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6A3E8A6188EC41300A3E4FB /* Model */,
-				A650BC3118672CF4005F2F72 /* SKEventsTableViewController.h */,
-				A650BC3218672CF4005F2F72 /* SKEventsTableViewController.m */,
-				A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */,
-				A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */,
-				A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */,
+				A6A3E8AC1891256800A3E4FB /* Adding Events */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
 			);
 			path = "Time Left";
@@ -170,6 +178,29 @@
 				A636CB53179D60D300526D7A /* SKEvent.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		A6A3E8AC1891256800A3E4FB /* Adding Events */ = {
+			isa = PBXGroup;
+			children = (
+				A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */,
+				A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */,
+				A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */,
+			);
+			name = "Adding Events";
+			sourceTree = "<group>";
+		};
+		A6A3E8AD1891257C00A3E4FB /* Event Grid */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3E8AE1891301500A3E4FB /* SKEventCell.h */,
+				A6A3E8AF1891301500A3E4FB /* SKEventCell.m */,
+				A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */,
+				A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */,
+				A6A3E8A91891255C00A3E4FB /* SKEventsCollectionViewController.h */,
+				A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */,
+			);
+			name = "Event Grid";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,11 +283,14 @@
 			files = (
 				A669356A179D31E200E5A40F /* main.m in Sources */,
 				A669356E179D31E200E5A40F /* SKAppDelegate.m in Sources */,
+				A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */,
 				A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */,
 				A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */,
 				A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */,
+				A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */,
 				A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */,
 				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,
+				A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */,
 				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

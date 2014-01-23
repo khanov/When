@@ -60,7 +60,6 @@
     NSInteger currentProgressPercent = lroundf([self.event progress] * 100);
     self.progressView.percentInnerCircle = currentProgressPercent;
     
-    
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"ss"];
     NSInteger secs = [[DateFormatter stringFromDate:[NSDate date]] integerValue];

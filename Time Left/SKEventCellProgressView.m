@@ -1,29 +1,25 @@
 //
-//  SKProgressIndicator.m
+//  SKEventCellProgressView.m
 //  Time Left
 //
-//  Created by Salavat Khanov on 1/21/14.
+//  Created by Salavat Khanov on 1/23/14.
 //  Copyright (c) 2014 Salavat Khanov. All rights reserved.
 //
 
-#import "SKProgressIndicator.h"
+#import "SKEventCellProgressView.h"
 
-static NSInteger kInnerCircleRadius = 117;
-static NSInteger kInnnerCircleLineWidth = 22;
+static NSInteger kInnerCircleRadius = 49;
+static NSInteger kInnnerCircleLineWidth = 12;
 static NSInteger kOuterCircleRadius = 138;
 static CGFloat kOuterCircleLineWidth = 2.5;
 
 static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kNumberInsideCircleFontSize = 70;
+static CGFloat kNumberInsideCircleFontSize = 35;
 static NSString *kWordInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kWordInsideCircleFontSize = 15;
-static CGFloat kMarginBetweenNumberAndWord = 12;
+static CGFloat kWordInsideCircleFontSize = 12;
+static CGFloat kMarginBetweenNumberAndWord = 2;
 
-@interface SKProgressIndicator ()
-@property (nonatomic, weak) CAShapeLayer *pathLayer;
-@end
-
-@implementation SKProgressIndicator
+@implementation SKEventCellProgressView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -52,12 +48,12 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
     self.circleProgressColor = [UIColor colorWithRed:105/255.0 green:50/255.0 blue:0/255.0 alpha:1.0]; // dark orange
     self.circleOuterColor = [UIColor whiteColor];
     self.textInsideCircleColor = [UIColor whiteColor];
-
-//    self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
-//    self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//    self.circleProgressColor = [UIColor colorWithRed:80/255.0 green:54/255.0 blue:101/255.0 alpha:1.0]; // night version
-//    self.circleOuterColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//    self.textInsideCircleColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+    
+    //    self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
+    //    self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+    //    self.circleProgressColor = [UIColor colorWithRed:80/255.0 green:54/255.0 blue:101/255.0 alpha:1.0]; // night version
+    //    self.circleOuterColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+    //    self.textInsideCircleColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
 }
 
 - (void)drawRect:(CGRect)rect
@@ -65,13 +61,9 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
     // Draw circles
     [self drawInnerCircleBackgroundIn:rect];
     [self drawInnerCircleProgress:self.percentInnerCircle inRect:rect];
-    [self drawOuterCircleBackgroundIn:rect];
-    [self drawOuterCircleProgress:self.percentOuterCircle inRect:rect];
-    // Draw texts
+    // Draw text
     [self drawTextInsideCircleInRect:rect];
 }
-
-#pragma mark - Draw Circles
 
 - (void)drawInnerCircleBackgroundIn:(CGRect)rect
 {
@@ -105,70 +97,6 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
     [self.circleProgressColor setStroke];
     [bezierPath stroke];
 }
-
-- (void)drawOuterCircleBackgroundIn:(CGRect)rect
-{
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
-    [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kOuterCircleRadius
-                      startAngle:0
-                        endAngle:M_PI * 2
-                       clockwise:YES];
-    
-    bezierPath.lineWidth = kOuterCircleLineWidth;
-    [self.circleOuterColor setStroke];
-    [bezierPath stroke];
-}
-
-- (void)drawOuterCircleProgress:(CGFloat)percent inRect:(CGRect)rect
-{
-    [self startOuterCircleAnimation];
-}
-
-- (void)startOuterCircleAnimation
-{
-    NSLog(@"animation");
-    
-    CGFloat startAngle = M_PI * 1.5;
-    CGFloat endAngle = startAngle + (M_PI * 2);
-    CGFloat duration = 1.0;
-    
-    if (self.pathLayer == nil) {
-        UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-        [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
-                                     radius:kOuterCircleRadius
-                          startAngle:startAngle
-                            endAngle:endAngle
-                                  clockwise:YES];
-
-        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-        shapeLayer.path = bezierPath.CGPath;
-        shapeLayer.strokeColor = self.circleProgressColor.CGColor;
-        shapeLayer.fillColor = nil;
-        shapeLayer.lineWidth = kOuterCircleLineWidth;
-        shapeLayer.lineJoin = kCALineJoinRound;
-        [self.layer addSublayer:shapeLayer];
-        self.pathLayer = shapeLayer;
-        
-        CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        pathAnimation.duration = duration;
-        pathAnimation.repeatCount = INFINITY;
-        pathAnimation.fromValue = @(0.0f);
-        pathAnimation.toValue = @(1.0f);
-        pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        
-        [self.pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
-    }
-}
-
-- (void)stopOuterCircleAnimation
-{
-    // TODO: Stop animation
-    // http://stackoverflow.com/questions/784365/core-animation-cyclic-animations
-}
-
-#pragma mark - Draw Texts
 
 - (void)drawTextInsideCircleInRect:(CGRect)rect
 {
@@ -209,9 +137,9 @@ static CGFloat kMarginBetweenNumberAndWord = 12;
     
     // Draw word below the number
     CGRect wordRect = CGRectMake((rect.size.width / 2.0) - (wordWidth / 2.0),
-                                   numberRect.origin.y + numberHeight / 2.0 + wordHeight + margin,
-                                   wordWidth,
-                                   wordHeight);
+                                 numberRect.origin.y + numberHeight / 2.0 + wordHeight + margin,
+                                 wordWidth,
+                                 wordHeight);
     [wordAttrText drawInRect:wordRect];
 }
 
