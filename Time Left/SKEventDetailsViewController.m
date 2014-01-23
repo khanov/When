@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet SKProgressIndicator *progressView;
 @property (strong, nonatomic) NSTimer *timer;
 
+- (IBAction)swipeGesture:(id)sender;
+
 @end
 
 @implementation SKEventDetailsViewController
@@ -96,4 +98,8 @@
     
 }
 
+- (IBAction)swipeGesture:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

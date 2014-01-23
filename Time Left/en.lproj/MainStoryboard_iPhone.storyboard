@@ -38,12 +38,16 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="NtW-n1-HOL" secondAttribute="centerY" id="9E8-w8-P5A"/>
                             <constraint firstAttribute="trailing" secondItem="NtW-n1-HOL" secondAttribute="trailing" constant="20" symbolic="YES" id="LkJ-Lh-bb6"/>
                             <constraint firstItem="NtW-n1-HOL" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" constant="80" id="dbP-Yh-iwf"/>
                             <constraint firstItem="NtW-n1-HOL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="fbP-2l-RcX"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Snq-mk-sZs" appends="YES" id="mn5-SN-CFA"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title=" " id="B2h-3E-Dm6"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -54,6 +58,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Snq-mk-sZs">
+                    <connections>
+                        <action selector="swipeGesture:" destination="2" id="fYY-wk-PPJ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1326" y="-64"/>
         </scene>
