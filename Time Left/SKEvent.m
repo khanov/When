@@ -9,9 +9,10 @@
 #import "SKEvent.h"
 
 static NSString *kDays = @"DAYS LEFT";
-static NSString *kHours = @"HOURS LEFT";
+static NSString *kHours = @"HRS LEFT";
 static NSString *kMinutes = @"MINS LEFT";
 static NSString *kSeconds = @"SECS LEFT";
+static NSString *kDone = @"DONE";
 
 @implementation SKEvent
 
@@ -83,9 +84,13 @@ static NSString *kSeconds = @"SECS LEFT";
         number = @([self minutesLeft]);
         text = kMinutes;
     }
-    else {
+    else if ([self secondsLeft] >= 0) {
         number = @([self secondsLeft]);
         text = kSeconds;
+    }
+    else {
+        number = @(0);
+        text = kDone;
     }
     
     return @{@"number": number,

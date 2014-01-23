@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet SKProgressIndicator *progressView;
 @property (strong, nonatomic) NSTimer *timer;
 
+- (IBAction)swipeGesture:(id)sender;
+
 @end
 
 @implementation SKEventDetailsViewController
@@ -60,7 +62,6 @@
     NSInteger currentProgressPercent = lroundf([self.event progress] * 100);
     self.progressView.percentInnerCircle = currentProgressPercent;
     
-    
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"ss"];
     NSInteger secs = [[DateFormatter stringFromDate:[NSDate date]] integerValue];
@@ -97,4 +98,8 @@
     
 }
 
+- (IBAction)swipeGesture:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
