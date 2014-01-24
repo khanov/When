@@ -8,10 +8,19 @@
 
 #import "SKAddEventTableViewController.h"
 
+static NSInteger kTextFieldSection = 0;
 static NSInteger kNameCellIndex = 0;
-static NSInteger kStartDatePickerIndex = 2;
-static NSInteger kEndDatePickerIndex = 4;
+static NSInteger kDescriptionCellIndex = 1;
+
+static NSInteger kDatePickerSection = 1;
+static NSInteger kStartDatePickerIndex = 1;
+static NSInteger kEndDatePickerIndex = 3;
 static NSInteger kDatePickerCellHeight = 164;
+
+static NSString *kEndsDateDefaultString = @"Choose...";
+static NSString *kErrorEmptyNameTitle = @"Empty Name";
+static NSString *kErrorEmptyNameMessage = @"Please give a name to the event.";
+static NSString *kErrorEmptyNameCancel = @"OK";
 
 @interface SKAddEventTableViewController ()
 
@@ -58,7 +67,7 @@ static NSInteger kDatePickerCellHeight = 164;
     self.startsDateLabel.text = [self.dateFormatter stringFromDate:now];
     self.startsDateLabel.textColor = [self.tableView tintColor];
     
-    self.endsDateLabel.text = nil;
+    self.endsDateLabel.text = kEndsDateDefaultString;
     self.endsDateLabel.textColor = [self.tableView tintColor];
 }
 
@@ -80,9 +89,9 @@ static NSInteger kDatePickerCellHeight = 164;
 {
     CGFloat height = self.tableView.rowHeight;
     // Set height = 0 for hidden date pickers
-    if (indexPath.row == kStartDatePickerIndex) {
+    if (indexPath.section == kDatePickerSection && indexPath.row == kStartDatePickerIndex) {
         height = self.startsDatePicker.isHidden ? 0 : kDatePickerCellHeight;
-    } else if (indexPath.row == kEndDatePickerIndex) {
+    } else if (indexPath.section == kDatePickerSection && indexPath.row == kEndDatePickerIndex) {
         height =  self.endsDatePicker.isHidden ? 0 : kDatePickerCellHeight;
     }
     return height;
@@ -92,15 +101,16 @@ static NSInteger kDatePickerCellHeight = 164;
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row != kNameCellIndex) {
+    if ((indexPath.row != kNameCellIndex) || (indexPath.section != kTextFieldSection) || (indexPath.row != kDescriptionCellIndex)) {
         [self.nameTextField resignFirstResponder];
+        [self.descriptionTextField resignFirstResponder];
     }
     
-    if (indexPath.row == kStartDatePickerIndex - 1) {
+    if (indexPath.row == kStartDatePickerIndex - 1 && indexPath.section == kDatePickerSection) {
         // Hide/show Start Date picker
         self.startsDatePicker.isHidden ? [self showCellForDatePicker:self.startsDatePicker] : [self hideCellForDatePicker:self.startsDatePicker];
         [self hideCellForDatePicker:self.endsDatePicker];
-    } else if (indexPath.row == kEndDatePickerIndex - 1) {
+    } else if (indexPath.row == kEndDatePickerIndex - 1 && indexPath.section == kDatePickerSection) {
         // Hide/show End Date picker
         [self hideCellForDatePicker:self.startsDatePicker];
         self.endsDatePicker.isHidden ? [self showCellForDatePicker:self.endsDatePicker] : [self hideCellForDatePicker:self.endsDatePicker];
@@ -164,18 +174,18 @@ static NSInteger kDatePickerCellHeight = 164;
 - (IBAction)saveButton:(id)sender
 {
     if (self.nameTextField.text.length == 0) {
-        NSString *title = @"Empty Name";
-        NSString *message = @"Please give a name to the event.";
-        NSString *cancelTitle = @"OK";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:cancelTitle otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kErrorEmptyNameTitle
+                                                            message:kErrorEmptyNameMessage
+                                                           delegate:nil
+                                                  cancelButtonTitle:kErrorEmptyNameCancel
+                                                  otherButtonTitles:nil];
         [alertView show];
     }
     else {
         SKEvent *newEvent = [[SKEvent alloc] initWithName:self.nameTextField.text
                                                 startDate:self.startsDatePicker.date
                                                   endDate:self.endsDatePicker.date
-                                               andDetails:nil];
+                                               andDetails:self.descriptionTextField.text];
         
         [self.delegate saveEventDetails:newEvent];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -190,11 +200,19 @@ static NSInteger kDatePickerCellHeight = 164;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // Show the firts date picker and hide the second one
-    [self showCellForDatePicker:self.startsDatePicker];
-    [self hideCellForDatePicker:self.endsDatePicker];
-    [self.nameTextField resignFirstResponder];
-
+    if ([textField isEqual:self.nameTextField]) {
+        NSLog(@"boo");
+        // Swith to description text field from name text field
+        [self.nameTextField resignFirstResponder];
+        [self.descriptionTextField becomeFirstResponder];
+    }
+    else {
+        NSLog(@"zoo");
+        [self.descriptionTextField resignFirstResponder];
+        // Show the firts date picker and hide the second one
+        [self showCellForDatePicker:self.startsDatePicker];
+        [self hideCellForDatePicker:self.endsDatePicker];
+    }
     return YES;
 }
 

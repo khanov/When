@@ -11,7 +11,7 @@
 #import "SKDetailViewController.h"
 #import "SKAddEventTableViewController.h"
 
-static NSInteger kMarginTopBottom = 30;
+static NSInteger kMarginTopBottom = 0;
 static NSInteger kMarginLeftRight = 10;
 static NSInteger kCellWeightHeight = 145;
 
@@ -143,8 +143,8 @@ static NSInteger kCellWeightHeight = 145;
         SKDetailViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.events objectAtIndex:indexPath.row];
     } else if ([segue.identifier isEqualToString:@"showAddEventView"]) {
-        SKAddEventTableViewController *controller = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
-        controller.delegate = self;
+        SKAddEventTableViewController *addEventsController = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+        addEventsController.delegate = self;
     }
 }
 

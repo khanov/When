@@ -129,11 +129,11 @@
 				A6A3E8AD1891257C00A3E4FB /* Event Grid */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
+				A6A3E8AC1891256800A3E4FB /* Add Events */,
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6A3E8A6188EC41300A3E4FB /* Model */,
-				A6A3E8AC1891256800A3E4FB /* Adding Events */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
 			);
 			path = "Time Left";
@@ -180,14 +180,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		A6A3E8AC1891256800A3E4FB /* Adding Events */ = {
+		A6A3E8AC1891256800A3E4FB /* Add Events */ = {
 			isa = PBXGroup;
 			children = (
 				A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */,
 				A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */,
 				A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */,
 			);
-			name = "Adding Events";
+			name = "Add Events";
 			sourceTree = "<group>";
 		};
 		A6A3E8AD1891257C00A3E4FB /* Event Grid */ = {
