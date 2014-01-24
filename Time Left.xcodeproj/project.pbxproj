@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A62A080C18928E8E0031AE7F /* SKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A080B18928E8E0031AE7F /* SKInfoViewController.m */; };
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
 		A636CB56179D842600526D7A /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB55179D842600526D7A /* noise.png */; };
 		A636CB58179DB0C600526D7A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB57179DB0C600526D7A /* Icon.png */; };
@@ -36,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A62A080A18928E8E0031AE7F /* SKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKInfoViewController.h; sourceTree = "<group>"; };
+		A62A080B18928E8E0031AE7F /* SKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKInfoViewController.m; sourceTree = "<group>"; };
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
 		A636CB55179D842600526D7A /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
@@ -93,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A62A080D18928E930031AE7F /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				A62A080A18928E8E0031AE7F /* SKInfoViewController.h */,
+				A62A080B18928E8E0031AE7F /* SKInfoViewController.m */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
 		A6693551179D31E200E5A40F = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +143,7 @@
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
 				A6A3E8AC1891256800A3E4FB /* Add Events */,
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
+				A62A080D18928E930031AE7F /* Info */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6A3E8A6188EC41300A3E4FB /* Model */,
@@ -287,6 +300,7 @@
 				A669357D179D31E200E5A40F /* SKDetailViewController.m in Sources */,
 				A650BC3318672CF4005F2F72 /* SKEventsTableViewController.m in Sources */,
 				A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */,
+				A62A080C18928E8E0031AE7F /* SKInfoViewController.m in Sources */,
 				A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */,
 				A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */,
 				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,

@@ -5,7 +5,35 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Event Details View Controller -  -->
+        <!--Info View Controller-->
+        <scene sceneID="RUo-zO-0li">
+            <objects>
+                <viewController id="dDx-Jq-qrM" customClass="SKInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vdV-Zh-Bvw"/>
+                        <viewControllerLayoutGuide type="bottom" id="NXH-7N-m6W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l8f-na-HSH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KEg-Vh-8R1">
+                                <rect key="frame" x="0.0" y="187" width="320" height="325"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ax-Yx-Q6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1890" y="-1136"/>
+        </scene>
+        <!--Event Details View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="SKEventDetailsViewController" sceneMemberID="viewController">
@@ -23,7 +51,7 @@
                                 <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
-                                <rect key="frame" x="20" y="33" width="280" height="21"/>
+                                <rect key="frame" x="20" y="29" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +77,6 @@
                             <outletCollection property="gestureRecognizers" destination="Snq-mk-sZs" appends="YES" id="mn5-SN-CFA"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title=" " id="B2h-3E-Dm6"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="DIu-rn-aMV" id="POB-LM-L57"/>
@@ -64,14 +91,14 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1896" y="-722"/>
+            <point key="canvasLocation" x="1890" y="-435"/>
         </scene>
         <!--Events Collection View Controller-->
         <scene sceneID="6wM-dL-zns">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="cjh-Jl-h0H" customClass="SKEventsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="3ZP-2q-OY7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rjg-pH-1KC">
@@ -82,7 +109,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="aRY-3T-9ec" customClass="SKEventCell">
-                                <rect key="frame" x="0.0" y="64" width="145" height="145"/>
+                                <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
@@ -107,7 +134,7 @@
                                 <connections>
                                     <outlet property="name" destination="zfQ-S7-rSb" id="OjO-xc-F9y"/>
                                     <outlet property="progressView" destination="fVT-H1-iuK" id="Hef-3C-0Xf"/>
-                                    <segue destination="2" kind="modal" identifier="showEventView" modalTransitionStyle="flipHorizontal" id="o8B-nz-D0K"/>
+                                    <segue destination="2" kind="push" identifier="showEventView" id="o8B-nz-D0K"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -117,7 +144,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="bXW-m9-cJb">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Viv-vG-6SM"/>
+                        <barButtonItem key="leftBarButtonItem" title="About" id="Viv-vG-6SM">
+                            <connections>
+                                <segue destination="dDx-Jq-qrM" kind="modal" modalTransitionStyle="partialCurl" id="B7M-lQ-xSC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cn9-bZ-8Vk">
                             <connections>
                                 <segue destination="7kO-RI-vHG" kind="modal" identifier="showAddEventView" id="RmP-3u-yLi"/>
@@ -378,18 +409,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DDi-KZ-sgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2422" y="45"/>
+            <point key="canvasLocation" x="2392" y="305"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBb-uC-EEj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="URi-zq-5RL" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="URi-zq-5RL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GaV-pa-KhS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GaV-pa-KhS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5si-d8-amL">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="cjh-Jl-h0H" kind="relationship" relationship="rootViewController" id="dOa-5E-rQX"/>
                     </connections>
@@ -416,7 +453,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuY-9b-NlP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1896" y="45"/>
+            <point key="canvasLocation" x="1890" y="305"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
