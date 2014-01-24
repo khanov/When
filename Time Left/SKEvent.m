@@ -72,7 +72,6 @@ static NSString *kDone = @"DONE";
     NSString *text;
     
     if ([self daysLeft] > 2) {
-        NSLog(@"days left: %lf", [self hoursLeft] / 24.0);
         number = @([self daysLeft]);
         text = kDays;
     }
@@ -80,7 +79,7 @@ static NSString *kDone = @"DONE";
         number = @([self hoursLeft]);
         text = kHours;
     }
-    else if ([self minutesLeft] > 2) {
+    else if ([self minutesLeft] > 5) {
         number = @([self minutesLeft]);
         text = kMinutes;
     }

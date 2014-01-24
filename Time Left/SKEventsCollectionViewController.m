@@ -17,6 +17,7 @@ static NSInteger kCellWeightHeight = 145;
 
 @interface SKEventsCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *events;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation SKEventsCollectionViewController
@@ -33,9 +34,6 @@ static NSInteger kCellWeightHeight = 145;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // whenever the collection view needs to create a cell, it uses the default UICollectionViewCell class
-//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"EventCell"];
     
     // Time interval spent in the US
     NSString *start1 = @"06-08-2013 12:30:00";
@@ -59,7 +57,31 @@ static NSInteger kCellWeightHeight = 145;
     
     [self.events addObject:[[SKEvent alloc] initWithName:@"Weekend" startDate:[dateFormatter dateFromString:start3]
                                                  endDate:[dateFormatter dateFromString:end3] andDetails:@"Until the Weekend"]];
+    
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // setup timer to update view every second
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // stop timer
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+- (void)updateView
+{
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,12 +118,6 @@ static NSInteger kCellWeightHeight = 145;
     
     return cell;
 }
-// 4
-/*- (UICollectionReusableView *)collectionView:
- (UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
- {
- return [[UICollectionReusableView alloc] init];
- }*/
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -119,8 +135,8 @@ static NSInteger kCellWeightHeight = 145;
 {
     CGSize cellSize = CGSizeMake(kCellWeightHeight, kCellWeightHeight);
     // padding
-//    retval.height += 35;
-//    retval.width += 35;
+//    cellSize.height += 35;
+//    cellSize.width += 35;
     return cellSize;
 }
 
@@ -129,8 +145,6 @@ static NSInteger kCellWeightHeight = 145;
 {
     return UIEdgeInsetsMake(kMarginTopBottom, kMarginLeftRight, kMarginTopBottom, kMarginLeftRight);
 }
-
-
 
 #pragma mark - Navigation
 
