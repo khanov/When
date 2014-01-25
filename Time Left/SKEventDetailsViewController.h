@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SKProgressIndicator.h"
 #import "SKEvent.h"
+#import "SKEvent+Helper.h"
 
 @interface SKEventDetailsViewController : UIViewController
 

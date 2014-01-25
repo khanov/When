@@ -182,12 +182,12 @@ static NSString *kErrorEmptyNameCancel = @"OK";
         [alertView show];
     }
     else {
-        SKEvent *newEvent = [[SKEvent alloc] initWithName:self.nameTextField.text
-                                                startDate:self.startsDatePicker.date
-                                                  endDate:self.endsDatePicker.date
-                                               andDetails:self.descriptionTextField.text];
+        [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
+                                                 startDate:self.startsDatePicker.date
+                                                   endDate:self.endsDatePicker.date
+                                                   details:self.descriptionTextField.text];
+        [[SKDataManager sharedManager] saveContext];
         
-        [self.delegate saveEventDetails:newEvent];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -201,13 +201,11 @@ static NSString *kErrorEmptyNameCancel = @"OK";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if ([textField isEqual:self.nameTextField]) {
-        NSLog(@"boo");
         // Swith to description text field from name text field
         [self.nameTextField resignFirstResponder];
         [self.descriptionTextField becomeFirstResponder];
     }
     else {
-        NSLog(@"zoo");
         [self.descriptionTextField resignFirstResponder];
         // Show the firts date picker and hide the second one
         [self showCellForDatePicker:self.startsDatePicker];

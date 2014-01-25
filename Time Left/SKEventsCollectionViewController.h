@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SKEvent.h"
-#import "SKAddEventDelegate.h"
+#import "SKEvent+Helper.h"
+#import "SKDataManager.h"
 
-@interface SKEventsCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKAddEventDelegate>
-
-- (void)saveEventDetails:(SKEvent *)event;
+@interface SKEventsCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end

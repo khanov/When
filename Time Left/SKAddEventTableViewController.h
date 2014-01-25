@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SKAddEventDelegate.h"
+#import "SKDataManager.h"
 
 @interface SKAddEventTableViewController : UITableViewController <UITextFieldDelegate>
 
@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *endsDateLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startsDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endsDatePicker;
-@property (weak, nonatomic) id<SKAddEventDelegate> delegate;
 
 - (IBAction)pickerDateChanged:(UIDatePicker *)sender;
 - (IBAction)cancelButton:(id)sender;

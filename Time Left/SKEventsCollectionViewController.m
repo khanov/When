@@ -8,7 +8,7 @@
 
 #import "SKEventsCollectionViewController.h"
 #import "SKEventCell.h"
-#import "SKDetailViewController.h"
+#import "SKEventDetailsViewController.h"
 #import "SKAddEventTableViewController.h"
 
 static NSInteger kMarginTopBottom = 0;
@@ -16,8 +16,9 @@ static NSInteger kMarginLeftRight = 10;
 static NSInteger kCellWeightHeight = 145;
 
 @interface SKEventsCollectionViewController ()
-@property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong) NSArray *fetchedEventsArray;
 @end
 
 @implementation SKEventsCollectionViewController
@@ -26,7 +27,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -35,6 +36,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     [super viewDidLoad];
     
+    /*
     // Time interval spent in the US
     NSString *start1 = @"06-08-2013 12:30:00";
     NSString *end1 = @"17-12-2013 19:10:00";
@@ -58,12 +60,13 @@ static NSInteger kCellWeightHeight = 145;
     [self.events addObject:[[SKEvent alloc] initWithName:@"Weekend" startDate:[dateFormatter dateFromString:start3]
                                                  endDate:[dateFormatter dateFromString:end3] andDetails:@"Until the Weekend"]];
     
+    */
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self updateView];
     // setup timer to update view every second
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
 }
@@ -71,7 +74,6 @@ static NSInteger kCellWeightHeight = 145;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
     // stop timer
     if (self.timer) {
         [self.timer invalidate];
@@ -81,6 +83,7 @@ static NSInteger kCellWeightHeight = 145;
 
 - (void)updateView
 {
+    self.fetchedEventsArray = [[SKDataManager sharedManager] getAllEvents];
     [self.collectionView reloadData];
 }
 
@@ -94,7 +97,7 @@ static NSInteger kCellWeightHeight = 145;
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
-    return [self.events count];
+    return [self.fetchedEventsArray count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
@@ -106,7 +109,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     SKEventCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"EventCell" forIndexPath:indexPath];
     
-    SKEvent *event = self.events[indexPath.row];
+    SKEvent *event = self.fetchedEventsArray[indexPath.row];
     cell.name.text = event.name;
     cell.progressView.percentInnerCircle = lroundf(event.progress * 100);
     
@@ -133,13 +136,8 @@ static NSInteger kCellWeightHeight = 145;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(kCellWeightHeight, kCellWeightHeight);
-    // padding
-//    cellSize.height += 35;
-//    cellSize.width += 35;
-    return cellSize;
+    return CGSizeMake(kCellWeightHeight, kCellWeightHeight);
 }
-
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
@@ -154,22 +152,10 @@ static NSInteger kCellWeightHeight = 145;
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"showEventView"]) {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-        SKDetailViewController *eventDetailsViewController = segue.destinationViewController;
-        eventDetailsViewController.event = [self.events objectAtIndex:indexPath.row];
-    } else if ([segue.identifier isEqualToString:@"showAddEventView"]) {
-        SKAddEventTableViewController *addEventsController = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
-        addEventsController.delegate = self;
+        
+        SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
+        eventDetailsViewController.event = [self.fetchedEventsArray objectAtIndex:indexPath.row];
     }
 }
-
-- (void)saveEventDetails:(SKEvent *)event
-{
-    [self.events addObject:event];
-    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:[self.events count]-1 inSection:0]];
-    
-    [self.collectionView insertItemsAtIndexPaths:indexPaths];
-    NSLog(@"Added: %@", event);
-}
-
 
 @end

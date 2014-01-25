@@ -7,23 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface SKEvent : NSObject
+@interface SKEvent : NSManagedObject
 
-@property (nonatomic, strong) NSDate *startDate;
-@property (nonatomic, strong) NSDate *endDate;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *details;
-
-- (id)initWithName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate andDetails:(NSString *)details;
-- (CGFloat)progress;
-- (NSString *)description;
-
-- (NSInteger)daysLeft;
-- (NSInteger)hoursLeft;
-- (NSInteger)minutesLeft;
-- (NSInteger)secondsLeft;
-
-- (NSDictionary *)bestNumberAndText;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * details;
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSDate * endDate;
 
 @end
