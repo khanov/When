@@ -16,9 +16,14 @@ static NSInteger kMarginLeftRight = 10;
 static NSInteger kCellWeightHeight = 145;
 
 @interface SKEventsCollectionViewController ()
+
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSArray *fetchedEventsArray;
+
+- (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer;
+- (IBAction)deleteButton:(UIButton *)sender;
+
 @end
 
 @implementation SKEventsCollectionViewController
@@ -36,31 +41,11 @@ static NSInteger kCellWeightHeight = 145;
 {
     [super viewDidLoad];
     
-    /*
-    // Time interval spent in the US
-    NSString *start1 = @"06-08-2013 12:30:00";
-    NSString *end1 = @"17-12-2013 19:10:00";
+//    [[SKDataManager sharedManager] createDefaultEvents];
+//    [[SKDataManager sharedManager] deleteAllEvents];
     
-    NSString *start2 = @"23-12-2013 00:00:00";
-    NSString *end2 = @"23-12-2015 00:00:00";
-    
-    NSString *start3 = @"22-01-2014 21:00:00";
-    NSString *end3 = @"24-01-2014 00:00:00";
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    
-    self.events = [[NSMutableArray alloc] init];
-    [self.events addObject:[[SKEvent alloc] initWithName:@"Global UGRAD" startDate:[dateFormatter dateFromString:start1]
-                                                 endDate:[dateFormatter dateFromString:end1] andDetails:@"United States of America"]];
-    
-    [self.events addObject:[[SKEvent alloc] initWithName:@"Home Residence" startDate:[dateFormatter dateFromString:start2]
-                                                 endDate:[dateFormatter dateFromString:end2] andDetails:@"2 Year Home Residence Rule"]];
-    
-    [self.events addObject:[[SKEvent alloc] initWithName:@"Weekend" startDate:[dateFormatter dateFromString:start3]
-                                                 endDate:[dateFormatter dateFromString:end3] andDetails:@"Until the Weekend"]];
-    
-    */
+//    [[SKDataManager sharedManager] saveContext];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -113,6 +98,8 @@ static NSInteger kCellWeightHeight = 145;
     cell.name.text = event.name;
     cell.progressView.percentInnerCircle = lroundf(event.progress * 100);
     
+    self.isEditing ? [cell startQuivering] : [cell stopQuivering];
+    
     NSDictionary *options = [event bestNumberAndText];
     cell.progressView.number = [[options valueForKey:@"number"] integerValue];
     cell.progressView.word = [[options valueForKey:@"text"] description];
@@ -127,6 +114,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     // TODO: Select Item
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Deselect item
@@ -146,7 +134,6 @@ static NSInteger kCellWeightHeight = 145;
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
     // Pass the selected object to the new view controller.
@@ -156,6 +143,44 @@ static NSInteger kCellWeightHeight = 145;
         SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.fetchedEventsArray objectAtIndex:indexPath.row];
     }
+}
+
+- (void)showAddEventView
+{
+    [self performSegueWithIdentifier:@"showAddEventView" sender:nil];
+}
+
+#pragma mark - Edit mode
+
+- (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer
+{
+    if ([recognizer state] == UIGestureRecognizerStateBegan) {
+        // Replace Add button to Done
+        UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing)];
+        [self.navigationItem setRightBarButtonItem:done];
+        // Start Editing mode
+        NSLog(@"Start editing");
+        self.editing = YES;
+        [self updateView];
+    }
+}
+
+- (IBAction)deleteButton:(UIButton *)sender
+{
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:(SKEventCell *)sender.superview.superview];
+    [[SKDataManager sharedManager] deleteEvent:self.fetchedEventsArray[indexPath.row]];
+    [[SKDataManager sharedManager] saveContext];
+}
+
+- (void)doneEditing
+{
+    NSLog(@"Done editing");
+    // Replace Add button to Done
+    UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddEventView)];
+    [self.navigationItem setRightBarButtonItem:add];
+    // Stop Edit mode
+    self.editing = NO;
+    [self updateView];
 }
 
 @end

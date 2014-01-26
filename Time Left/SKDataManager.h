@@ -15,8 +15,14 @@
 + (SKDataManager *)sharedManager;
 - (void)saveContext;
 
+// Bulk Add/Delete
+- (void)createDefaultEvents;
+- (void)deleteAllEvents;
 
+// Events
 - (NSArray *)getAllEvents;
 - (SKEvent *)createEventWithName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate details:(NSString *)details;
+- (void)swapEvent:(SKEvent *)thisEvent withOtherEvent:(SKEvent *)otherEvent;
+- (void)deleteEvent:(SKEvent *)event;
 
 @end

@@ -75,7 +75,7 @@ static NSString *kErrorEmptyNameCancel = @"OK";
 {
     self.startsDatePicker.hidden = YES;
     self.endsDatePicker.hidden = YES;
-    self.endsDatePicker.minimumDate = [self.startsDatePicker date];
+    self.endsDatePicker.minimumDate = [NSDate date];
 }
 
 - (void)signUpForKeyboardNotifications {
@@ -152,7 +152,7 @@ static NSString *kErrorEmptyNameCancel = @"OK";
     if (sender.tag == 0) {
         // Start Date Picker Changed
         self.startsDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
-        self.endsDatePicker.minimumDate = self.startsDatePicker.date;
+        self.endsDatePicker.minimumDate = [self.startsDatePicker.date laterDate:[NSDate date]];
     } else if (sender.tag == 1) {
         // End Date Picker Changed
         if (self.endsDateLabel.text.length == 0) {

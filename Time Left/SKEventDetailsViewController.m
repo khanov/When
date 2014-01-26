@@ -53,7 +53,14 @@
 - (void)setupLabels
 {
     self.nameLabel.text = self.event.name;
-    self.descriptionLabel.text = self.event.details;
+    if (self.event.details.length == 0) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        self.descriptionLabel.text = [dateFormatter stringFromDate:self.event.endDate];
+    } else {
+        self.descriptionLabel.text = self.event.details;
+    }
 }
 
 - (void)updateProgressView

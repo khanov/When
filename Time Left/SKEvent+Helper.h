@@ -17,7 +17,6 @@
 - (NSInteger)minutesLeft;
 - (NSInteger)secondsLeft;
 - (NSDictionary *)bestNumberAndText;
-
 @end
 
 

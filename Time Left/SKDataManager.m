@@ -189,7 +189,6 @@ static NSString *kEventEntityName = @"Event";
     [self saveTheContext:self.managedObjectContext];
 }
 
-
 #pragma mark -
 #pragma mark Events
 
@@ -219,6 +218,78 @@ static NSString *kEventEntityName = @"Event";
     newEvent.startDate = startDate;
     newEvent.endDate = endDate;
     return newEvent;
+}
+
+- (void)deleteEvent:(SKEvent *)event
+{
+    NSLog(@"Deleted: %@", event);
+    [self.managedObjectContext deleteObject:event];
+}
+
+- (void)createDefaultEvents
+{
+    NSString *start1 = @"06-08-2013 12:30:00";
+    NSString *end1 = @"17-12-2013 19:10:00";
+    
+    NSString *start2 = @"23-12-2013 00:00:00";
+    NSString *end2 = @"23-12-2015 00:00:00";
+    
+    NSString *start3 = @"22-01-2014 21:00:00";
+    NSString *end3 = @"24-01-2014 00:00:00";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    
+    [self createEventWithName:@"Global UGRAD"
+                    startDate:[dateFormatter dateFromString:start1]
+                      endDate:[dateFormatter dateFromString:end1]
+                      details:@"United States of America"];
+    
+    [self createEventWithName:@"Home Residence"
+                    startDate:[dateFormatter dateFromString:start2]
+                      endDate:[dateFormatter dateFromString:end2]
+                      details:@"2 Year Home Residence Rule"];
+    
+    [self createEventWithName:@"Weekend"
+                    startDate:[dateFormatter dateFromString:start3]
+                      endDate:[dateFormatter dateFromString:end3]
+                      details:@"Until the Weekend"];
+}
+
+- (void)deleteAllEvents
+{
+    NSFetchRequest *allEvents = [[NSFetchRequest alloc] init];
+    [allEvents setEntity:[NSEntityDescription entityForName:kEventEntityName inManagedObjectContext:self.managedObjectContext]];
+    [allEvents setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    NSError *error = nil;
+    NSArray *events = [self.managedObjectContext executeFetchRequest:allEvents error:&error];
+
+    for (NSManagedObject * event in events) {
+        [self.managedObjectContext deleteObject:event];
+    }
+}
+
+- (void)swapEvent:(SKEvent *)thisEvent withOtherEvent:(SKEvent *)otherEvent
+{
+    id tmp;
+    
+    tmp = thisEvent.name;
+    thisEvent.name = otherEvent.name;
+    otherEvent.name = tmp;
+    
+    tmp = thisEvent.details;
+    thisEvent.details = otherEvent.details;
+    otherEvent.details = tmp;
+    
+    tmp = thisEvent.startDate;
+    thisEvent.startDate = otherEvent.startDate;
+    otherEvent.startDate = tmp;
+    
+    tmp = thisEvent.endDate;
+    thisEvent.endDate = otherEvent.endDate;
+    otherEvent.endDate = tmp;
+    
 }
 
 

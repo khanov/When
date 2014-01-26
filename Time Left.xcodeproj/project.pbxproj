@@ -12,6 +12,7 @@
 		A62A08121892A30D0031AE7F /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A62A08101892A30D0031AE7F /* AppModel.xcdatamodeld */; };
 		A62A08181893E2860031AE7F /* SKDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A08171893E2860031AE7F /* SKDataManager.m */; };
 		A62A081E1893F3A10031AE7F /* SKEvent+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A081D1893F3A10031AE7F /* SKEvent+Helper.m */; };
+		A62A0834189504380031AE7F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62A0833189504380031AE7F /* Media.xcassets */; };
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
 		A636CB56179D842600526D7A /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB55179D842600526D7A /* noise.png */; };
 		A636CB58179DB0C600526D7A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB57179DB0C600526D7A /* Icon.png */; };
@@ -48,6 +49,7 @@
 		A62A081C1893F3A10031AE7F /* SKEvent+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKEvent+Helper.h"; sourceTree = "<group>"; };
 		A62A081D1893F3A10031AE7F /* SKEvent+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEvent+Helper.m"; sourceTree = "<group>"; };
 		A62A081F18940BC60031AE7F /* Time Left.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Time Left.entitlements"; sourceTree = "<group>"; };
+		A62A0833189504380031AE7F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
 		A636CB55179D842600526D7A /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		A6693563179D31E200E5A40F /* Time Left */ = {
 			isa = PBXGroup;
 			children = (
+				A62A0833189504380031AE7F /* Media.xcassets */,
 				A62A081F18940BC60031AE7F /* Time Left.entitlements */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
@@ -289,6 +292,7 @@
 			files = (
 				A6693568179D31E200E5A40F /* InfoPlist.strings in Resources */,
 				A6693570179D31E200E5A40F /* Default.png in Resources */,
+				A62A0834189504380031AE7F /* Media.xcassets in Resources */,
 				A6693572179D31E200E5A40F /* Default@2x.png in Resources */,
 				A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,

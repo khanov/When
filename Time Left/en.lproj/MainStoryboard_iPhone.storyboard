@@ -101,6 +101,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rjg-pH-1KC">
                             <size key="itemSize" width="145" height="145"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -115,23 +116,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfQ-S7-rSb">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfQ-S7-rSb" userLabel="Event Name">
                                             <rect key="frame" x="9" y="120" width="127" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVT-H1-iuK" customClass="SKEventCellProgressView">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVT-H1-iuK" userLabel="Progress View" customClass="SKEventCellProgressView">
                                             <rect key="frame" x="17" y="6" width="111" height="111"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMe-xq-T7r" userLabel="Delete Button">
+                                            <rect key="frame" x="6" y="0.0" width="27" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="delete-button"/>
+                                            <connections>
+                                                <action selector="deleteButton:" destination="cjh-Jl-h0H" eventType="touchUpInside" id="rUo-6u-7B3"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <connections>
+                                    <outlet property="deleteButton" destination="IMe-xq-T7r" id="KqV-RU-6lo"/>
                                     <outlet property="name" destination="zfQ-S7-rSb" id="OjO-xc-F9y"/>
                                     <outlet property="progressView" destination="fVT-H1-iuK" id="Hef-3C-0Xf"/>
                                     <segue destination="2" kind="push" identifier="showEventView" id="o8B-nz-D0K"/>
@@ -141,6 +153,7 @@
                         <connections>
                             <outlet property="dataSource" destination="cjh-Jl-h0H" id="2Q3-Bg-slH"/>
                             <outlet property="delegate" destination="cjh-Jl-h0H" id="13z-7E-WZB"/>
+                            <outletCollection property="gestureRecognizers" destination="SMq-KN-H2g" appends="YES" id="VFt-fG-Z8S"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="bXW-m9-cJb">
@@ -149,7 +162,7 @@
                                 <segue destination="dDx-Jq-qrM" kind="modal" modalTransitionStyle="partialCurl" id="B7M-lQ-xSC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="cn9-bZ-8Vk">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cn9-bZ-8Vk">
                             <connections>
                                 <segue destination="7kO-RI-vHG" kind="modal" identifier="showAddEventView" id="RmP-3u-yLi"/>
                             </connections>
@@ -157,6 +170,11 @@
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrd-SI-Ipu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="SMq-KN-H2g">
+                    <connections>
+                        <action selector="longPressGesture:" destination="cjh-Jl-h0H" id="v3y-zB-gUp"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1279" y="-435"/>
         </scene>
@@ -456,6 +474,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="1890" y="305"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="delete-button" width="512" height="512"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

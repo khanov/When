@@ -13,5 +13,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet SKEventCellProgressView *progressView;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+
+- (void)startQuivering;
+- (void)stopQuivering;
 
 @end
