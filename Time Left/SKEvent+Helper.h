@@ -12,10 +12,10 @@
 
 @required
 - (CGFloat)progress;
-- (NSInteger)daysLeft;
-- (NSInteger)hoursLeft;
-- (NSInteger)minutesLeft;
-- (NSInteger)secondsLeft;
+- (NSInteger)daysLeftToDate:(NSDate *)date;
+- (NSInteger)hoursLeftToDate:(NSDate *)date;
+- (NSInteger)minutesLeftToDate:(NSDate *)date;
+- (NSInteger)secondsLeftToDate:(NSDate *)date;
 - (NSDictionary *)bestNumberAndText;
 @end
 
@@ -25,10 +25,10 @@
 - (CGFloat)progress;
 - (NSString *)description;
 
-- (NSInteger)daysLeft;
-- (NSInteger)hoursLeft;
-- (NSInteger)minutesLeft;
-- (NSInteger)secondsLeft;
+- (NSInteger)daysLeftToDate:(NSDate *)date;
+- (NSInteger)hoursLeftToDate:(NSDate *)date;
+- (NSInteger)minutesLeftToDate:(NSDate *)date;
+- (NSInteger)secondsLeftToDate:(NSDate *)date;
 
 - (NSDictionary *)bestNumberAndText;
 

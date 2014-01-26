@@ -68,12 +68,7 @@
     // Set percent for progress indicator
     NSInteger currentProgressPercent = lroundf([self.event progress] * 100);
     self.progressView.percentInnerCircle = currentProgressPercent;
-    
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"ss"];
-    NSInteger secs = [[DateFormatter stringFromDate:[NSDate date]] integerValue];
-    self.progressView.percentOuterCircle = secs * 100 / 60.0;
-    
+        
     // Set the best number and word to display
     NSDictionary *options = [self.event bestNumberAndText];
     self.progressView.number = [[options valueForKey:@"number"] integerValue];

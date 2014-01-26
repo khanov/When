@@ -23,6 +23,4 @@
 @property (strong, nonatomic) UIColor *circleOuterColor;
 @property (strong, nonatomic) UIColor *textInsideCircleColor;
 
-- (void)startOuterCircleAnimation;
-
 @end
