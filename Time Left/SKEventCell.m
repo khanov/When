@@ -53,7 +53,6 @@
 
 - (void)stopQuivering
 {
-    NSLog(@"Stop quivering called.");
     if (self.quiveringAnimation) {
         self.quiveringAnimation = nil;
         self.deleteButton.hidden = YES;

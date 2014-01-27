@@ -223,7 +223,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)drawTextInsideCircleInRect:(CGRect)rect
 {
-    NSString *numberString = [NSString stringWithFormat:@"%ld", self.number];
+    NSString *numberString = [NSString stringWithFormat:@"%ld", (long)self.number];
     NSString *wordString = self.word;
     
     UIFont *fontForNumber = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];

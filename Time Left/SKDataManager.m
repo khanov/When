@@ -63,6 +63,12 @@ static NSString *kEventEntityName = @"Event";
             [moc setPersistentStoreCoordinator: psc];
         }];
         
+        NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+        [dc addObserver:self
+               selector:@selector(objectContextDidSave:)
+                   name:NSManagedObjectContextDidSaveNotification
+                 object:_managedObjectContext];
+        
         _managedObjectContext = moc;
     } else {
         NSLog(@"Error while creating coordinator");
@@ -167,7 +173,7 @@ static NSString *kEventEntityName = @"Event";
 - (void)saveTheContext:(NSManagedObjectContext *)theContext
 {
     if ([self.persistentStoreCoordinator.persistentStores count] != 0) {
-        
+
         NSError *error = nil;
         [theContext save:&error];
         if (error) {
@@ -270,29 +276,6 @@ static NSString *kEventEntityName = @"Event";
     }
 }
 
-- (void)swapEvent:(SKEvent *)thisEvent withOtherEvent:(SKEvent *)otherEvent
-{
-    id tmp;
-    
-    tmp = thisEvent.name;
-    thisEvent.name = otherEvent.name;
-    otherEvent.name = tmp;
-    
-    tmp = thisEvent.details;
-    thisEvent.details = otherEvent.details;
-    otherEvent.details = tmp;
-    
-    tmp = thisEvent.startDate;
-    thisEvent.startDate = otherEvent.startDate;
-    otherEvent.startDate = tmp;
-    
-    tmp = thisEvent.endDate;
-    thisEvent.endDate = otherEvent.endDate;
-    otherEvent.endDate = tmp;
-    
-}
-
-
 #pragma mark -
 #pragma mark iCloud notifications
 
@@ -303,7 +286,7 @@ static NSString *kEventEntityName = @"Event";
     NSManagedObjectContext *moc = [self managedObjectContext];
     [moc performBlock:^{
         [moc mergeChangesFromContextDidSaveNotification:changeNotification];
-        [self eventAddedNotification];
+//        [self eventAddedNotification];
     }];
 }
 
@@ -329,11 +312,19 @@ static NSString *kEventEntityName = @"Event";
 }
 
 
-- (void)eventAddedNotification
+#pragma mark -
+#pragma mark Model notifications
+
+- (void)objectContextDidSave:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"EventUpdated"
-                                                         object:self
-                                                       userInfo:nil];
+    if ([notification.userInfo objectForKey:NSInsertedObjectsKey]) {
+        for (id object in [notification.userInfo objectForKey:NSInsertedObjectsKey]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"EventAdded"
+                                                                object:self
+                                                              userInfo:@{@"added": object}];
+        }
+
+    }
 }
 
 @end

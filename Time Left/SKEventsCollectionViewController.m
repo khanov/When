@@ -19,7 +19,7 @@ static NSInteger kCellWeightHeight = 145;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic,strong) NSArray *fetchedEventsArray;
+@property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
 
 - (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer;
 - (IBAction)deleteButton:(UIButton *)sender;
@@ -51,13 +51,17 @@ static NSInteger kCellWeightHeight = 145;
 - (void)registerForNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(modelEventUpdated:)
-                                                 name:@"EventUpdated"
+                                             selector:@selector(eventAdded:)
+                                                 name:@"EventAdded"
                                                object:nil];
 }
 
-- (void)modelEventUpdated:(NSNotification *)notification
+- (void)eventAdded:(NSNotification *)addedNotification
 {
+    if ([[addedNotification.userInfo allKeys][0] isEqual:@"added"]) {
+        [self.fetchedEventsArray addObject:[addedNotification.userInfo objectForKey:@"added"]];
+        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.fetchedEventsArray.count-1 inSection:0]]];
+    }
     [self updateView];
 }
 
@@ -81,7 +85,7 @@ static NSInteger kCellWeightHeight = 145;
 
 - (void)updateView
 {
-    self.fetchedEventsArray = [[SKDataManager sharedManager] getAllEvents];
+    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     // Update progress view of visible cells
     [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
 }
@@ -184,7 +188,7 @@ static NSInteger kCellWeightHeight = 145;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:(SKEventCell *)sender.superview.superview];
     [[SKDataManager sharedManager] deleteEvent:self.fetchedEventsArray[indexPath.row]];
     [[SKDataManager sharedManager] saveContext];
-    self.fetchedEventsArray = [[SKDataManager sharedManager] getAllEvents];
+    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
