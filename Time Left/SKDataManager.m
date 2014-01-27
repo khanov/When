@@ -279,14 +279,14 @@ static NSString *kEventEntityName = @"Event";
 #pragma mark -
 #pragma mark iCloud notifications
 
-- (void)persistentStoreDidImportUbiquitiousContentChanges:(NSNotification*)changeNotification
+- (void)persistentStoreDidImportUbiquitiousContentChanges:(NSNotification *)changeNotification
 {
     NSLog(@"Merging changes from iCloud");
     
     NSManagedObjectContext *moc = [self managedObjectContext];
     [moc performBlock:^{
         [moc mergeChangesFromContextDidSaveNotification:changeNotification];
-//        [self eventAddedNotification];
+        [self objectContextDidSaveFromiCloud:changeNotification];
     }];
 }
 
@@ -324,6 +324,20 @@ static NSString *kEventEntityName = @"Event";
                                                               userInfo:@{@"added": object}];
         }
 
+    }
+}
+
+- (void)objectContextDidSaveFromiCloud:(NSNotification *)notification
+{    
+    NSDictionary *insertedObjectIDs = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
+    for (NSManagedObjectID *objID in insertedObjectIDs) {
+        NSError *error = nil;
+        NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
+        if (!error) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"EventAdded"
+                                                                object:self
+                                                              userInfo:@{@"added": object}];
+        }
     }
 }
 
