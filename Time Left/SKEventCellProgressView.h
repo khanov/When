@@ -10,8 +10,7 @@
 
 @interface SKEventCellProgressView : UIView
 
-@property (assign, nonatomic) NSInteger percentInnerCircle;
-@property (assign, nonatomic) CGFloat percentOuterCircle;
+@property (assign, nonatomic) CGFloat percentCircle;
 @property (assign, nonatomic) NSInteger number; // you can override this to show other than percent number
 @property (strong, nonatomic) NSString *word;   // you can overrode this to show other than default 'PRCNT' text
 

@@ -29,8 +29,10 @@
 
 - (void)startQuivering
 {
+    NSLog(@"Start quivering called.");
     // do not create animation if it is already animated
     if (!self.quiveringAnimation) {
+        NSLog(@"Create cuivering animation.");
         self.deleteButton.hidden = NO;
     
         CABasicAnimation *quiverAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
@@ -45,16 +47,18 @@
         quiverAnim.timeOffset = timeOffset;
         self.quiveringAnimation = quiverAnim;
     }
-
+    NSLog(@"Quivering animation added.");
     [self.layer addAnimation:self.quiveringAnimation forKey:@"quivering"];
 }
 
 - (void)stopQuivering
 {
+    NSLog(@"Stop quivering called.");
     if (self.quiveringAnimation) {
         self.quiveringAnimation = nil;
         self.deleteButton.hidden = YES;
         [self.layer removeAnimationForKey:@"quivering"];
+        NSLog(@"Quiverig animation removed");
     }
 }
 

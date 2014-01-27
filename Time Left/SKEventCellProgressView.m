@@ -8,10 +8,8 @@
 
 #import "SKEventCellProgressView.h"
 
-static NSInteger kInnerCircleRadius = 49;
-static NSInteger kInnnerCircleLineWidth = 12;
-static NSInteger kOuterCircleRadius = 138;
-static CGFloat kOuterCircleLineWidth = 2.5;
+static NSInteger kCircleRadius = 49;
+static NSInteger kCircleLineWidth = 12;
 
 static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
 static CGFloat kNumberInsideCircleFontSize = 35;
@@ -37,7 +35,7 @@ static CGFloat kMarginBetweenNumberAndWord = 2;
     self.endAngle = self.startAngle + (M_PI * 2);
     // Defaults
     self.word = @"PRCNT";
-    self.number = self.percentInnerCircle;
+    self.number = lroundf(self.percentCircle);
     [self setupColors];
 }
 
@@ -60,7 +58,7 @@ static CGFloat kMarginBetweenNumberAndWord = 2;
 {
     // Draw circles
     [self drawInnerCircleBackgroundIn:rect];
-    [self drawInnerCircleProgress:self.percentInnerCircle inRect:rect];
+    [self drawInnerCircleProgress:self.percentCircle inRect:rect];
     // Draw text
     [self drawTextInsideCircleInRect:rect];
 }
@@ -70,12 +68,12 @@ static CGFloat kMarginBetweenNumberAndWord = 2;
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kInnerCircleRadius
+                          radius:kCircleRadius
                       startAngle:0
                         endAngle:M_PI * 2
                        clockwise:YES];
     
-    bezierPath.lineWidth = kInnnerCircleLineWidth;
+    bezierPath.lineWidth = kCircleLineWidth;
     [self.circleBackgroundColor setStroke];
     [bezierPath stroke];
 }
@@ -86,14 +84,14 @@ static CGFloat kMarginBetweenNumberAndWord = 2;
     CGFloat endAngle = startAngle + (M_PI * 2);
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
+
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kInnerCircleRadius
+                          radius:kCircleRadius
                       startAngle:startAngle
                         endAngle:(endAngle - startAngle) * (percent / 100.0) + startAngle
                        clockwise:YES];
-    
-    bezierPath.lineWidth = kInnnerCircleLineWidth;
+
+    bezierPath.lineWidth = kCircleLineWidth;
     [self.circleProgressColor setStroke];
     [bezierPath stroke];
 }

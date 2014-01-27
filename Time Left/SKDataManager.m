@@ -303,6 +303,7 @@ static NSString *kEventEntityName = @"Event";
     NSManagedObjectContext *moc = [self managedObjectContext];
     [moc performBlock:^{
         [moc mergeChangesFromContextDidSaveNotification:changeNotification];
+        [self eventAddedNotification];
     }];
 }
 
@@ -325,6 +326,14 @@ static NSString *kEventEntityName = @"Event";
 - (void)storesDidChange:(NSNotification *)n
 {
     NSLog(@"storesDidChange");
+}
+
+
+- (void)eventAddedNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"EventUpdated"
+                                                         object:self
+                                                       userInfo:nil];
 }
 
 @end

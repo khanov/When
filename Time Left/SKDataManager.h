@@ -25,4 +25,7 @@
 - (void)swapEvent:(SKEvent *)thisEvent withOtherEvent:(SKEvent *)otherEvent;
 - (void)deleteEvent:(SKEvent *)event;
 
+// Notifications
+- (void)eventAddedNotification;
+
 @end

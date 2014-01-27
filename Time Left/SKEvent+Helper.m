@@ -21,8 +21,6 @@ static NSString *kDone = @"DONE";
     if (self.startDate && self.endDate) {
         NSTimeInterval intervalSinceStart = [self.endDate timeIntervalSinceDate:self.startDate];
         NSTimeInterval intervalSinceNow = [[NSDate date] timeIntervalSinceDate:self.startDate];
-        
-        NSLog(@"progress: %f", intervalSinceNow / intervalSinceStart);
         return intervalSinceNow / intervalSinceStart;
     }
     

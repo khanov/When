@@ -40,12 +40,25 @@ static NSInteger kCellWeightHeight = 145;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    [[SKDataManager sharedManager] createDefaultEvents];
+    [self registerForNotifications];
+
 //    [[SKDataManager sharedManager] deleteAllEvents];
-    
+//    [[SKDataManager sharedManager] createDefaultEvents];    
 //    [[SKDataManager sharedManager] saveContext];
 
+}
+
+- (void)registerForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(modelEventUpdated:)
+                                                 name:@"EventUpdated"
+                                               object:nil];
+}
+
+- (void)modelEventUpdated:(NSNotification *)notification
+{
+    [self updateView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,7 +82,8 @@ static NSInteger kCellWeightHeight = 145;
 - (void)updateView
 {
     self.fetchedEventsArray = [[SKDataManager sharedManager] getAllEvents];
-    [self.collectionView reloadData];
+    // Update progress view of visible cells
+    [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,7 +110,7 @@ static NSInteger kCellWeightHeight = 145;
     
     SKEvent *event = self.fetchedEventsArray[indexPath.row];
     cell.name.text = event.name;
-    cell.progressView.percentInnerCircle = lroundf(event.progress * 100);
+    cell.progressView.percentCircle = [event progress] * 100;
     
     self.isEditing ? [cell startQuivering] : [cell stopQuivering];
     
@@ -170,6 +184,8 @@ static NSInteger kCellWeightHeight = 145;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:(SKEventCell *)sender.superview.superview];
     [[SKDataManager sharedManager] deleteEvent:self.fetchedEventsArray[indexPath.row]];
     [[SKDataManager sharedManager] saveContext];
+    self.fetchedEventsArray = [[SKDataManager sharedManager] getAllEvents];
+    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
 - (void)doneEditing
