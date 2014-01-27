@@ -259,7 +259,7 @@
 				ORGANIZATIONNAME = "Salavat Khanov";
 				TargetAttributes = {
 					A6693559179D31E200E5A40F = {
-						DevelopmentTeam = 6P9PN587KS;
+						DevelopmentTeam = ZT95237CCP;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
