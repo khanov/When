@@ -37,6 +37,8 @@
 		A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AF1891301500A3E4FB /* SKEventCell.m */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
 		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
+		CE5C0C021897E7CB00B8926A /* add-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C011897E7CB00B8926A /* add-icon@2x.png */; };
+		CE5C0C061897EA0300B8926A /* about-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C051897EA0300B8926A /* about-icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
 		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
 		A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCellProgressView.m; sourceTree = "<group>"; };
+		CE5C0C011897E7CB00B8926A /* add-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		CE5C0C051897EA0300B8926A /* about-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-icon@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,8 @@
 		A6693564179D31E200E5A40F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE5C0C011897E7CB00B8926A /* add-icon@2x.png */,
+				CE5C0C051897EA0300B8926A /* about-icon@2x.png */,
 				A6693565179D31E200E5A40F /* Time Left-Info.plist */,
 				A6693566179D31E200E5A40F /* InfoPlist.strings */,
 				A6693569179D31E200E5A40F /* main.m */,
@@ -293,6 +299,7 @@
 				A6693568179D31E200E5A40F /* InfoPlist.strings in Resources */,
 				A6693570179D31E200E5A40F /* Default.png in Resources */,
 				A62A0834189504380031AE7F /* Media.xcassets in Resources */,
+				CE5C0C021897E7CB00B8926A /* add-icon@2x.png in Resources */,
 				A6693572179D31E200E5A40F /* Default@2x.png in Resources */,
 				A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -302,6 +309,7 @@
 				A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */,
 				A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */,
 				A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */,
+				CE5C0C061897EA0300B8926A /* about-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,14 +428,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -437,14 +445,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
