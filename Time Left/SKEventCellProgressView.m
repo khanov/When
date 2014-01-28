@@ -80,6 +80,8 @@ static CGFloat kMarginBetweenNumberAndWord = 2.0;
 
 - (void)drawInnerCircleProgress:(CGFloat)percent inRect:(CGRect)rect
 {
+//    NSLog(@"percent %f", percent);
+    
     CGFloat startAngle = M_PI * 1.5;
     CGFloat someAngle = startAngle + (M_PI * 2.0);
     CGFloat endAngle = (someAngle - startAngle) * (percent / 100.0) + startAngle;

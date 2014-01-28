@@ -315,28 +315,55 @@ static NSString *kEventEntityName = @"Event";
 #pragma mark -
 #pragma mark Model notifications
 
+static NSString *kEventAddedNotificationName = @"EventAdded";
+static NSString *kEventDeletedNotificationName = @"EventDeleted";
+
+static NSString *kAddedKey = @"added";
+static NSString *kDeletedKey = @"deleted";
+
 - (void)objectContextDidSave:(NSNotification *)notification
 {
+    // Event inserted
     if ([notification.userInfo objectForKey:NSInsertedObjectsKey]) {
         for (id object in [notification.userInfo objectForKey:NSInsertedObjectsKey]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"EventAdded"
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEventAddedNotificationName
                                                                 object:self
-                                                              userInfo:@{@"added": object}];
+                                                              userInfo:@{kAddedKey: object}];
         }
-
     }
+    // Event deleted
+    if ([notification.userInfo objectForKey:NSDeletedObjectsKey]) {
+        for (id object in [notification.userInfo objectForKey:NSInsertedObjectsKey]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotificationName
+                                                                object:self
+                                                              userInfo:@{kDeletedKey: object}];
+        }
+    }
+    
 }
 
 - (void)objectContextDidSaveFromiCloud:(NSNotification *)notification
-{    
+{
+    // Event inserted
     NSDictionary *insertedObjectIDs = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
     for (NSManagedObjectID *objID in insertedObjectIDs) {
         NSError *error = nil;
         NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
         if (!error) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"EventAdded"
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEventAddedNotificationName
                                                                 object:self
-                                                              userInfo:@{@"added": object}];
+                                                              userInfo:@{kAddedKey: object}];
+        }
+    }
+    // Event deleted
+    NSDictionary *deletedObjectIDs = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
+    for (NSManagedObjectID *objID in deletedObjectIDs) {
+        NSError *error = nil;
+        NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
+        if (!error) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotificationName
+                                                                object:self
+                                                              userInfo:@{kDeletedKey: object}];
         }
     }
 }

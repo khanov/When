@@ -54,6 +54,11 @@ static NSInteger kCellWeightHeight = 145;
                                              selector:@selector(eventAdded:)
                                                  name:@"EventAdded"
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(eventDeleted:)
+                                                 name:@"EventDeleted"
+                                               object:nil];
 }
 
 - (void)eventAdded:(NSNotification *)addedNotification
@@ -61,6 +66,17 @@ static NSInteger kCellWeightHeight = 145;
     if ([[addedNotification.userInfo allKeys][0] isEqual:@"added"]) {
         [self.fetchedEventsArray addObject:[addedNotification.userInfo objectForKey:@"added"]];
         [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.fetchedEventsArray.count-1 inSection:0]]];
+    }
+    [self updateView];
+}
+
+- (void)eventDeleted:(NSNotification *)deletedNotification
+{
+    if ([[deletedNotification.userInfo allKeys][0] isEqual:@"deleted"]) {
+        SKEvent *eventToDelete = [deletedNotification.userInfo objectForKey:@"deleted"];
+        NSInteger index = [self.fetchedEventsArray indexOfObject:eventToDelete];
+        [self.fetchedEventsArray removeObject:eventToDelete];
+        [self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
     }
     [self updateView];
 }
