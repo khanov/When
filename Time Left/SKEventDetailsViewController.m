@@ -35,6 +35,7 @@
     [super viewDidLoad];
     [self setupLabels];
     [self setupColors];
+    [self setupShareButton];
     [self updateProgressView];
 }
 
@@ -61,6 +62,13 @@
     } else {
         self.descriptionLabel.text = self.event.details;
     }
+}
+
+- (void)setupShareButton
+{
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(shareBurronPressed)];
+    
+    [self.navigationItem setRightBarButtonItem:shareButton];
 }
 
 - (void)updateProgressView
