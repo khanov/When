@@ -42,13 +42,8 @@
 - (void)setupColors
 {
     UIColor *dayColor = [UIColor colorWithRed:255/255.0 green:149/255.0 blue:0/255.0 alpha:1.0];
-//    UIColor *nightColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0];
-    
     self.view.backgroundColor = dayColor;
-//    self.view.backgroundColor = nightColor;
-    
     self.navigationController.navigationBar.backgroundColor = dayColor;
-//    self.navigationController.navigationBar.backgroundColor = nightColor;
 }
 
 - (void)setupLabels
@@ -78,8 +73,8 @@
         
     // Set the best number and word to display
     NSDictionary *options = [self.event bestNumberAndText];
-    self.progressView.number = [[options valueForKey:@"number"] integerValue];
-    self.progressView.word = [[options valueForKey:@"text"] description];
+    self.progressView.progressLabel.text = [options valueForKey:@"number"];
+    self.progressView.metaLabel.text = [options valueForKey:@"text"];
     
     // Redraw
     [self.progressView setNeedsDisplay];
@@ -88,7 +83,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
 }
 
@@ -102,11 +96,9 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
 }
 
 - (IBAction)swipeGesture:(id)sender

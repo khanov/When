@@ -13,12 +13,6 @@ static NSInteger kInnnerCircleLineWidth = 22;
 static NSInteger kOuterCircleRadius = 138;
 static CGFloat kOuterCircleLineWidth = 2.5;
 
-static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kNumberInsideCircleFontSize = 70;
-static NSString *kWordInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kWordInsideCircleFontSize = 15;
-static CGFloat kMarginBetweenNumberAndWord = 12;
-
 static NSString *kRotationAnimationKey = @"strokeEnd";
 static NSString *kColorAnimationKey = @"strokeColor";
 
@@ -39,12 +33,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)awakeFromNib
 {
-    // Determine our start and stop angles for the arc (in radians)
-    self.startAngle = M_PI * 1.5;
-    self.endAngle = self.startAngle + (M_PI * 2);
-    // Defaults
-    self.word = @"PRCNT";
-    self.number = self.percentInnerCircle;
     [self setupColors];
 }
 
@@ -70,8 +58,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
     [self drawInnerCircleProgress:self.percentInnerCircle inRect:rect];
     [self drawOuterCircleBackgroundIn:rect];
     [self drawOuterCircleProgress:self.percentInnerCircle inRect:rect];
-    // Draw texts
-    [self drawTextInsideCircleInRect:rect];
 }
 
 #pragma mark - Draw Circles
@@ -217,53 +203,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
         
         [shapeLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];
     }
-}
-
-#pragma mark - Draw Texts
-
-- (void)drawTextInsideCircleInRect:(CGRect)rect
-{
-    NSString *numberString = [NSString stringWithFormat:@"%ld", (long)self.number];
-    NSString *wordString = self.word;
-    
-    UIFont *fontForNumber = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
-    UIFont *fontForWord = [UIFont fontWithName:kWordInsideCircleFontName size:kWordInsideCircleFontSize];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    NSDictionary *numberAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
-                                        NSFontAttributeName : fontForNumber,
-                                        NSParagraphStyleAttributeName : paragraphStyle};
-    
-    NSDictionary *wordAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
-                                      NSFontAttributeName : fontForWord,
-                                      NSParagraphStyleAttributeName : paragraphStyle};
-    
-    NSAttributedString *numberAttrText = [[NSAttributedString alloc] initWithString:numberString attributes:numberAttributes];
-    NSAttributedString *wordAttrText = [[NSAttributedString alloc] initWithString:wordString attributes:wordAttributes];
-    
-    // Sizes
-    CGFloat numberWidth = numberAttrText.size.width;
-    CGFloat numberHeight = numberAttrText.size.height;
-    CGFloat wordWidth = wordAttrText.size.width;
-    CGFloat wordHeight = wordAttrText.size.height;
-    CGFloat margin = kMarginBetweenNumberAndWord;
-    
-    // Draw number inside the circle
-    CGRect numberRect = CGRectMake((rect.size.width / 2.0) - (numberWidth / 2.0),
-                                   (rect.size.height / 2.0) - (numberHeight + margin + wordHeight) / 2.0,
-                                   numberWidth,
-                                   numberHeight);
-    [numberAttrText drawInRect:numberRect];
-    
-    // Draw word below the number
-    CGRect wordRect = CGRectMake((rect.size.width / 2.0) - (wordWidth / 2.0),
-                                   numberRect.origin.y + numberHeight / 2.0 + wordHeight + margin,
-                                   wordWidth,
-                                   wordHeight);
-    [wordAttrText drawInRect:wordRect];
 }
 
 @end

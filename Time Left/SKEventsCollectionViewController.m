@@ -41,7 +41,6 @@ static NSInteger kCellWeightHeight = 145;
 {
     [super viewDidLoad];
     [self registerForNotifications];
-    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
 
 //    [[SKDataManager sharedManager] deleteAllEvents];
 //    [[SKDataManager sharedManager] createDefaultEvents];
