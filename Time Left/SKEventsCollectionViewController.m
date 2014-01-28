@@ -21,9 +21,6 @@ static NSInteger kCellWeightHeight = 145;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
 
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
-
-
 - (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer;
 - (IBAction)deleteButton:(UIButton *)sender;
 
