@@ -12,10 +12,9 @@ static NSInteger kCircleRadius = 49;
 static NSInteger kCircleLineWidth = 12;
 
 static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kNumberInsideCircleFontSize = 35.0;
-static NSString *kWordInsideCircleFontName = @"DINAlternate-Bold";
-static CGFloat kWordInsideCircleFontSize = 12.0;
-static CGFloat kMarginBetweenNumberAndWord = 2.0;
+static NSString *kMetaTextFontName = @"DINAlternate-Bold";
+static CGFloat kMetaTextFontSizeDefault = 12.0;
+static CGFloat kMetaTextFontSizeSmall = 10.0;
 
 @implementation SKEventCellProgressView
 
@@ -30,12 +29,6 @@ static CGFloat kMarginBetweenNumberAndWord = 2.0;
 
 - (void)awakeFromNib
 {
-    // Determine our start and stop angles for the arc (in radians)
-    self.startAngle = M_PI * 1.5;
-    self.endAngle = self.startAngle + (M_PI * 2.0);
-    // Defaults
-    self.word = @"PRCNT";
-    self.number = lroundf(self.percentCircle);
     [self setupColors];
 }
 
@@ -44,7 +37,6 @@ static CGFloat kMarginBetweenNumberAndWord = 2.0;
     self.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:149.0/255.0 blue:0/255.0 alpha:1.0];
     self.circleBackgroundColor = [UIColor whiteColor];
     self.circleProgressColor = [UIColor colorWithRed:105.0/255.0 green:50.0/255.0 blue:0/255.0 alpha:1.0]; // dark orange
-    self.circleOuterColor = [UIColor whiteColor];
     self.textInsideCircleColor = [UIColor whiteColor];
     
 //        self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
@@ -57,91 +49,47 @@ static CGFloat kMarginBetweenNumberAndWord = 2.0;
 - (void)drawRect:(CGRect)rect
 {
     // Draw circles
-    [self drawInnerCircleBackgroundIn:rect];
-    [self drawInnerCircleProgress:self.percentCircle inRect:rect];
-    // Draw text
-    [self drawTextInsideCircleInRect:rect];
-}
-
-- (void)drawInnerCircleBackgroundIn:(CGRect)rect
-{
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
-    [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kCircleRadius
-                      startAngle:0
-                        endAngle:M_PI * 2.0
-                       clockwise:YES];
-    
-    bezierPath.lineWidth = kCircleLineWidth;
-    [self.circleBackgroundColor setStroke];
-    [bezierPath stroke];
-}
-
-- (void)drawInnerCircleProgress:(CGFloat)percent inRect:(CGRect)rect
-{
-//    NSLog(@"percent %f", percent);
+//    [self drawInnerCircleBackgroundIn:rect];
+//    if (self.percentCircle < 100) {
+//        [self drawInnerCircleProgress:self.percentCircle inRect:rect];
+//    }
     
     CGFloat startAngle = M_PI * 1.5;
-    CGFloat someAngle = startAngle + (M_PI * 2.0);
-    CGFloat endAngle = (someAngle - startAngle) * (percent / 100.0) + startAngle;
+    CGFloat endAngle = startAngle + (M_PI * 2.0);
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-
-    [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
+    // Draw background
+    UIBezierPath *backgroundBezierPath = [UIBezierPath bezierPath];
+    [backgroundBezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
                           radius:kCircleRadius
                       startAngle:startAngle
                         endAngle:endAngle
                        clockwise:YES];
-
-    bezierPath.lineWidth = kCircleLineWidth;
-    [self.circleProgressColor setStroke];
-    [bezierPath stroke];
+    backgroundBezierPath.lineWidth = kCircleLineWidth;
+    self.percentCircle < 100 ? [self.circleBackgroundColor setStroke] : [self.circleProgressColor setStroke];
+    [backgroundBezierPath stroke];
+    
+    // Draw progess
+    if (self.percentCircle < 100) {
+        UIBezierPath *progressBezierPath = [UIBezierPath bezierPath];
+        [progressBezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
+                                      radius:kCircleRadius
+                                  startAngle:startAngle
+                                    endAngle:(endAngle - startAngle) * (self.percentCircle / 100.0) + startAngle
+                                   clockwise:YES];
+        progressBezierPath.lineWidth = kCircleLineWidth;
+        [self.circleProgressColor setStroke];
+        [progressBezierPath stroke];
+    }
 }
 
-- (void)drawTextInsideCircleInRect:(CGRect)rect
+- (void)useSmallerFont
 {
-    NSString *numberString = [NSString stringWithFormat:@"%d", self.number];
-    NSString *wordString = self.word;
-    
-    UIFont *fontForNumber = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
-    UIFont *fontForWord = [UIFont fontWithName:kWordInsideCircleFontName size:kWordInsideCircleFontSize];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    NSDictionary *numberAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
-                                        NSFontAttributeName : fontForNumber,
-                                        NSParagraphStyleAttributeName : paragraphStyle};
-    
-    NSDictionary *wordAttributes = @{ NSForegroundColorAttributeName : self.textInsideCircleColor,
-                                      NSFontAttributeName : fontForWord,
-                                      NSParagraphStyleAttributeName : paragraphStyle};
-    
-    NSAttributedString *numberAttrText = [[NSAttributedString alloc] initWithString:numberString attributes:numberAttributes];
-    NSAttributedString *wordAttrText = [[NSAttributedString alloc] initWithString:wordString attributes:wordAttributes];
-    
-    // Sizes
-    CGFloat numberWidth = numberAttrText.size.width;
-    CGFloat numberHeight = numberAttrText.size.height;
-    CGFloat wordWidth = wordAttrText.size.width;
-    CGFloat wordHeight = wordAttrText.size.height;
-    CGFloat margin = kMarginBetweenNumberAndWord;
-    
-    // Draw number inside the circle
-    CGRect numberRect = CGRectMake((rect.size.width / 2.0) - (numberWidth / 2.0),
-                                   (rect.size.height / 2.0) - (numberHeight + margin + wordHeight) / 2.0,
-                                   numberWidth,
-                                   numberHeight);
-    [numberAttrText drawInRect:numberRect];
-    
-    // Draw word below the number
-    CGRect wordRect = CGRectMake((rect.size.width / 2.0) - (wordWidth / 2.0),
-                                 numberRect.origin.y + numberHeight / 2.0 + wordHeight + margin,
-                                 wordWidth,
-                                 wordHeight);
-    [wordAttrText drawInRect:wordRect];
+    self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeSmall];
+}
+
+- (void)useDefaultFont
+{
+    self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeDefault];
 }
 
 @end

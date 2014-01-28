@@ -140,14 +140,23 @@ static NSInteger kCellWeightHeight = 145;
     cell.name.text = event.name;
     cell.progressView.percentCircle = [event progress] * 100;
     
-    NSLog(@"at %ld is event %@", (long)indexPath.row, event);
+//    NSLog(@"at %ld is event %@", (long)indexPath.row, event);
     
     self.isEditing ? [cell startQuivering] : [cell stopQuivering];
     
     NSDictionary *options = [event bestNumberAndText];
-    cell.progressView.number = [[options valueForKey:@"number"] integerValue];
-    cell.progressView.word = [[options valueForKey:@"text"] description];
+    cell.progressView.progressLabel.text = [options valueForKey:@"number"];
+    cell.progressView.metaLabel.text = [options valueForKey:@"text"];
     
+    // for events that haven't yet started, use smaller text
+    if ([event progress] < 0) {
+        [cell.progressView useSmallerFont];
+    }
+    else {
+        [cell.progressView useDefaultFont];
+    }
+    
+    // don't redraw finished events
 //    if ([event progress] < 1.0) {
         [cell.progressView setNeedsDisplay];
 //    }

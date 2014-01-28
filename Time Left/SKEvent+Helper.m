@@ -8,10 +8,16 @@
 
 #import "SKEvent+Helper.h"
 
-static NSString *kDays = @"DAYS LEFT";
-static NSString *kHours = @"HRS LEFT";
-static NSString *kMinutes = @"MINS LEFT";
-static NSString *kSeconds = @"SECS LEFT";
+static NSString *kDaysLeft = @"DAYS LEFT";
+static NSString *kHoursLeft = @"HRS LEFT";
+static NSString *kMinutesLeft = @"MINS LEFT";
+static NSString *kSecondsLeft = @"SECS LEFT";
+
+static NSString *kDaysToStart = @"DAYS TO START";
+static NSString *kHoursToStart = @"HRS TO START";
+static NSString *kMinutesToStart = @"MINS TO START";
+static NSString *kSecondsToStart = @"SECS TO START";
+
 static NSString *kDone = @"DONE";
 
 @implementation SKEvent (Helper)
@@ -55,58 +61,57 @@ static NSString *kDone = @"DONE";
 
 - (NSDictionary *)bestNumberAndText
 {
-    NSNumber *number;
-    NSString *text;
+    NSString *progress;
+    NSString *metaText;
     
     if ([self.startDate compare:[NSDate date]] == NSOrderedDescending) {
         // Start date is in the future
-        NSLog(@"start date is in the future");
         if ([self daysLeftToDate:self.startDate] > 2) {
-            number = @([self daysLeftToDate:self.startDate]);
-            text = kDays;
+            progress = [@([self daysLeftToDate:self.startDate]) stringValue];
+            metaText = kDaysToStart;
         }
         else if ([self hoursLeftToDate:self.startDate] > 2) {
-            number = @([self hoursLeftToDate:self.startDate]);
-            text = kHours;
+            progress = [@([self hoursLeftToDate:self.startDate]) stringValue];
+            metaText = kHoursToStart;
         }
         else if ([self minutesLeftToDate:self.startDate] > 5) {
-            number = @([self minutesLeftToDate:self.startDate]);
-            text = kMinutes;
+            progress = [@([self minutesLeftToDate:self.startDate]) stringValue];
+            metaText = kMinutesToStart;
         }
         else if ([self secondsLeftToDate:self.startDate] >= 0) {
-            number = @([self secondsLeftToDate:self.startDate]);
-            text = kSeconds;
+            progress = [@([self secondsLeftToDate:self.startDate]) stringValue];
+            metaText = kSecondsToStart;
         }
         else {
-            number = @(0);
-            text = kDone;
+            progress = [@(0) stringValue];
+            metaText = kDone;
         }
     } else {
         // Start date is in the past
         if ([self daysLeftToDate:self.endDate] > 2) {
-            number = @([self daysLeftToDate:self.endDate]);
-            text = kDays;
+            progress = [@([self daysLeftToDate:self.endDate]) stringValue];
+            metaText = kDaysLeft;
         }
         else if ([self hoursLeftToDate:self.endDate] > 2) {
-            number = @([self hoursLeftToDate:self.endDate]);
-            text = kHours;
+            progress = [@([self hoursLeftToDate:self.endDate]) stringValue];
+            metaText = kHoursLeft;
         }
         else if ([self minutesLeftToDate:self.endDate] > 5) {
-            number = @([self minutesLeftToDate:self.endDate]);
-            text = kMinutes;
+            progress = [@([self minutesLeftToDate:self.endDate]) stringValue];
+            metaText = kMinutesLeft;
         }
         else if ([self secondsLeftToDate:self.endDate] >= 0) {
-            number = @([self secondsLeftToDate:self.endDate]);
-            text = kSeconds;
+            progress = [@([self secondsLeftToDate:self.endDate]) stringValue];
+            metaText = kSecondsLeft;
         }
         else {
-            number = @(0);
-            text = kDone;
+            progress = @"✓";
+            metaText = kDone;
         }
     }
     
-    return @{@"number": number,
-             @"text" : text};
+    return @{@"number": progress,
+             @"text" : metaText};
 }
 
 @end
