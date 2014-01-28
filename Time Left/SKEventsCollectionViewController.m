@@ -44,6 +44,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     [super viewDidLoad];
     [self registerForNotifications];
+    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
 
 //    [[SKDataManager sharedManager] deleteAllEvents];
 //    [[SKDataManager sharedManager] createDefaultEvents];
@@ -91,7 +92,9 @@ static NSInteger kCellWeightHeight = 145;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     [self updateView];
+    
     // setup timer to update view every second
     if ([self.fetchedEventsArray count]) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
@@ -112,9 +115,10 @@ static NSInteger kCellWeightHeight = 145;
 {
     NSLog(@"----------------------------------");
     NSLog(@"update view");
-    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+//    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+    
     // Update progress view of visible cells
-    [self.collectionView reloadData];
+//    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,8 +146,6 @@ static NSInteger kCellWeightHeight = 145;
     SKEvent *event = self.fetchedEventsArray[indexPath.row];
     cell.name.text = event.name;
     cell.progressView.percentCircle = [event progress] * 100;
-    
-//    NSLog(@"at %ld is event %@", (long)indexPath.row, event);
     
     self.isEditing ? [cell startQuivering] : [cell stopQuivering];
     
