@@ -11,6 +11,6 @@
 #import "SKEvent+Helper.h"
 #import "SKDataManager.h"
 
-@interface SKEventsCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SKEventsCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
 
 @end

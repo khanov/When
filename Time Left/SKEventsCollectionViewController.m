@@ -91,17 +91,24 @@ static NSInteger kCellWeightHeight = 145;
     [super viewWillAppear:animated];
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     [self updateView];
-    
-    // setup timer to update view every second
-    if ([self.fetchedEventsArray count]) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
-    }
+    [self startTimer];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    // stop timer
+    [self stopTimer];
+}
+
+- (void)startTimer
+{
+    if ([self.fetchedEventsArray count] && self.timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)stopTimer
+{
     if (self.timer) {
         [self.timer invalidate];
         self.timer = nil;
@@ -112,16 +119,25 @@ static NSInteger kCellWeightHeight = 145;
 {
     NSLog(@"----------------------------------");
     NSLog(@"update view");
-//    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
-    
-    // Update progress view of visible cells
-//    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self stopTimer];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self startTimer];
 }
 
 #pragma mark - UICollectionView Datasource
