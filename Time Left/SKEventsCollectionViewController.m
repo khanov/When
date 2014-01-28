@@ -43,10 +43,12 @@ static NSInteger kCellWeightHeight = 145;
     [self registerForNotifications];
 
 //    [[SKDataManager sharedManager] deleteAllEvents];
-//    [[SKDataManager sharedManager] createDefaultEvents];    
+//    [[SKDataManager sharedManager] createDefaultEvents];
 //    [[SKDataManager sharedManager] saveContext];
 
 }
+
+#pragma mark Model Notifications
 
 - (void)registerForNotifications
 {
@@ -64,10 +66,11 @@ static NSInteger kCellWeightHeight = 145;
 - (void)eventAdded:(NSNotification *)addedNotification
 {
     if ([[addedNotification.userInfo allKeys][0] isEqual:@"added"]) {
-        [self.fetchedEventsArray addObject:[addedNotification.userInfo objectForKey:@"added"]];
-        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.fetchedEventsArray.count-1 inSection:0]]];
+        SKEvent *eventToAdd = [addedNotification.userInfo objectForKey:@"added"];
+        self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+        NSInteger index = [self.fetchedEventsArray indexOfObject:eventToAdd];
+        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
     }
-    [self updateView];
 }
 
 - (void)eventDeleted:(NSNotification *)deletedNotification
@@ -75,18 +78,21 @@ static NSInteger kCellWeightHeight = 145;
     if ([[deletedNotification.userInfo allKeys][0] isEqual:@"deleted"]) {
         SKEvent *eventToDelete = [deletedNotification.userInfo objectForKey:@"deleted"];
         NSInteger index = [self.fetchedEventsArray indexOfObject:eventToDelete];
-        [self.fetchedEventsArray removeObject:eventToDelete];
+        self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
         [self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
     }
-    [self updateView];
 }
+
+#pragma mark Update View
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self updateView];
     // setup timer to update view every second
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
+    if ([self.fetchedEventsArray count]) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateView) userInfo:nil repeats:YES];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -101,9 +107,11 @@ static NSInteger kCellWeightHeight = 145;
 
 - (void)updateView
 {
+    NSLog(@"----------------------------------");
+    NSLog(@"update view");
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     // Update progress view of visible cells
-    [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,13 +140,17 @@ static NSInteger kCellWeightHeight = 145;
     cell.name.text = event.name;
     cell.progressView.percentCircle = [event progress] * 100;
     
+    NSLog(@"at %ld is event %@", (long)indexPath.row, event);
+    
     self.isEditing ? [cell startQuivering] : [cell stopQuivering];
     
     NSDictionary *options = [event bestNumberAndText];
     cell.progressView.number = [[options valueForKey:@"number"] integerValue];
     cell.progressView.word = [[options valueForKey:@"text"] description];
     
-    [cell.progressView setNeedsDisplay];
+//    if ([event progress] < 1.0) {
+        [cell.progressView setNeedsDisplay];
+//    }
     
     return cell;
 }

@@ -30,7 +30,7 @@ static NSString *kDone = @"DONE";
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"name '%@', startDate '%@', endDate '%@', desc '%@'", self.name, self.startDate, self.endDate, self.details];
+    return [NSString stringWithFormat:@"name '%@', startDate '%@', endDate '%@', desc '%@', created '%@'", self.name, self.startDate, self.endDate, self.details, self.createdDate];
 }
 
 - (NSInteger)daysLeftToDate:(NSDate *)date

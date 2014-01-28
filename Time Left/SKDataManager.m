@@ -212,8 +212,15 @@ static NSString *kEventEntityName = @"Event";
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *fetchedEvents = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    // Returning Fetched Events
-    return fetchedEvents;
+    // Sort events in descending order
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
+                                                                ascending:YES
+                                                               comparator:^NSComparisonResult(SKEvent *obj1, SKEvent *obj2) {
+                                                                   return [obj1.createdDate compare:obj2.createdDate];
+                                                               }];
+    
+    // Returning Sorted Fetched Events
+    return [fetchedEvents sortedArrayUsingDescriptors:@[sortDescriptor]];;
 }
 
 - (SKEvent *)createEventWithName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate details:(NSString *)details
@@ -223,12 +230,12 @@ static NSString *kEventEntityName = @"Event";
     newEvent.details = details;
     newEvent.startDate = startDate;
     newEvent.endDate = endDate;
+    newEvent.createdDate = [NSDate date];
     return newEvent;
 }
 
 - (void)deleteEvent:(SKEvent *)event
 {
-    NSLog(@"Deleted: %@", event);
     [self.managedObjectContext deleteObject:event];
 }
 
@@ -346,24 +353,30 @@ static NSString *kDeletedKey = @"deleted";
 {
     // Event inserted
     NSDictionary *insertedObjectIDs = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
-    for (NSManagedObjectID *objID in insertedObjectIDs) {
-        NSError *error = nil;
-        NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
-        if (!error) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kEventAddedNotificationName
-                                                                object:self
-                                                              userInfo:@{kAddedKey: object}];
+    if (insertedObjectIDs) {
+        for (NSManagedObjectID *objID in insertedObjectIDs) {
+            NSError *error = nil;
+            NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
+            if (!error) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kEventAddedNotificationName
+                                                                    object:self
+                                                                  userInfo:@{kAddedKey: object}];
+            }
         }
     }
+    
     // Event deleted
     NSDictionary *deletedObjectIDs = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
-    for (NSManagedObjectID *objID in deletedObjectIDs) {
-        NSError *error = nil;
-        NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
-        if (!error) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotificationName
-                                                                object:self
-                                                              userInfo:@{kDeletedKey: object}];
+    
+    if (deletedObjectIDs) {
+        for (NSManagedObjectID *objID in deletedObjectIDs) {
+            NSError *error = nil;
+            NSManagedObject *object = [self.managedObjectContext existingObjectWithID:objID error:&error];
+            if (!error) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotificationName
+                                                                    object:self
+                                                                  userInfo:@{kDeletedKey: object}];
+            }
         }
     }
 }
