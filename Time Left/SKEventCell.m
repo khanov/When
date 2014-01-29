@@ -25,29 +25,27 @@
 - (void)awakeFromNib
 {
     self.deleteButton.hidden = YES;
+    self.quiveringAnimation = nil;
 }
 
 - (void)startQuivering
 {
-    NSLog(@"Start quivering called.");
-    // do not create animation if it is already animated
     if (!self.quiveringAnimation) {
-        NSLog(@"Create cuivering animation.");
         self.deleteButton.hidden = NO;
     
         CABasicAnimation *quiverAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
         CGFloat startAngle = (-2) * M_PI/180.0;
         CGFloat stopAngle = -startAngle;
         quiverAnim.fromValue = [NSNumber numberWithFloat:startAngle];
-        quiverAnim.toValue = [NSNumber numberWithFloat:2 * stopAngle];
+        quiverAnim.toValue = [NSNumber numberWithFloat:3 * stopAngle];
         quiverAnim.autoreverses = YES;
-        quiverAnim.duration = 0.12;
+        quiverAnim.duration = 0.15;
         quiverAnim.repeatCount = HUGE_VALF;
         CGFloat timeOffset = (arc4random() % 100)/100.0 - 0.50;
         quiverAnim.timeOffset = timeOffset;
+        
         self.quiveringAnimation = quiverAnim;
     }
-    NSLog(@"Quivering animation added.");
     [self.layer addAnimation:self.quiveringAnimation forKey:@"quivering"];
 }
 
@@ -57,7 +55,6 @@
         self.quiveringAnimation = nil;
         self.deleteButton.hidden = YES;
         [self.layer removeAnimationForKey:@"quivering"];
-        NSLog(@"Quiverig animation removed");
     }
 }
 

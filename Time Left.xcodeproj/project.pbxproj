@@ -37,6 +37,7 @@
 		A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AF1891301500A3E4FB /* SKEventCell.m */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
 		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
+		A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */; };
 		CE5C0C021897E7CB00B8926A /* add-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C011897E7CB00B8926A /* add-icon@2x.png */; };
 		CE5C0C061897EA0300B8926A /* about-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C051897EA0300B8926A /* about-icon@2x.png */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,8 @@
 		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
 		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
 		A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCellProgressView.m; sourceTree = "<group>"; };
+		A6DEF62F1899263900070415 /* SKCustomCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCustomCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCustomCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		CE5C0C011897E7CB00B8926A /* add-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		CE5C0C051897EA0300B8926A /* about-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-icon@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -224,6 +227,8 @@
 		A6A3E8AD1891257C00A3E4FB /* Event Grid */ = {
 			isa = PBXGroup;
 			children = (
+				A6DEF62F1899263900070415 /* SKCustomCollectionViewFlowLayout.h */,
+				A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */,
 				A6A3E8AE1891301500A3E4FB /* SKEventCell.h */,
 				A6A3E8AF1891301500A3E4FB /* SKEventCell.m */,
 				A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */,
@@ -325,6 +330,7 @@
 				A62A08121892A30D0031AE7F /* AppModel.xcdatamodeld in Sources */,
 				A62A08181893E2860031AE7F /* SKDataManager.m in Sources */,
 				A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */,
+				A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */,
 				A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */,
 				A62A081E1893F3A10031AE7F /* SKEvent+Helper.m in Sources */,
 				A62A080C18928E8E0031AE7F /* SKInfoViewController.m in Sources */,

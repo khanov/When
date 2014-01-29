@@ -10,8 +10,9 @@
 #import "SKEventCell.h"
 #import "SKEventDetailsViewController.h"
 #import "SKAddEventTableViewController.h"
+#import "SKCustomCollectionViewFlowLayout.h"
 
-static NSInteger kMarginTopBottom = 0;
+static NSInteger kMarginTopBottom = 12;
 static NSInteger kMarginLeftRight = 10;
 static NSInteger kCellWeightHeight = 145;
 
@@ -42,10 +43,13 @@ static NSInteger kCellWeightHeight = 145;
     [super viewDidLoad];
     [self registerForNotifications];
 
-//    [[SKDataManager sharedManager] deleteAllEvents];
-//    [[SKDataManager sharedManager] createDefaultEvents];
-//    [[SKDataManager sharedManager] saveContext];
-
+    // Allocate and configure the layout.
+    SKCustomCollectionViewFlowLayout *layout = [[SKCustomCollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 10.f;
+    layout.minimumLineSpacing = 10.f;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.sectionInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
+    self.collectionView.collectionViewLayout = layout;
 }
 
 #pragma mark Model Notifications
@@ -116,8 +120,7 @@ static NSInteger kCellWeightHeight = 145;
 
 - (void)updateView
 {
-    NSLog(@"----------------------------------");
-    NSLog(@"update view");
+    NSLog(@"----------- update view");
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
 }
@@ -136,7 +139,9 @@ static NSInteger kCellWeightHeight = 145;
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self startTimer];
+    if (self.isEditing == NO) {
+        [self startTimer];
+    }
 }
 
 #pragma mark - UICollectionView Datasource
@@ -233,6 +238,7 @@ static NSInteger kCellWeightHeight = 145;
         // Start Editing mode
         NSLog(@"Start editing");
         self.editing = YES;
+        [self stopTimer];
         [self updateView];
     }
 }
@@ -254,6 +260,7 @@ static NSInteger kCellWeightHeight = 145;
     [self.navigationItem setRightBarButtonItem:add];
     // Stop Edit mode
     self.editing = NO;
+    [self startTimer];
     [self updateView];
 }
 
