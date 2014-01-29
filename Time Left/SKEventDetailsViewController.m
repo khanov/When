@@ -30,13 +30,16 @@
     return self;
 }
 
+#pragma mark - Setup View
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupLabels];
     [self setupColors];
+    [self setupProgressLabels];
     [self setupShareButton];
-    [self updateProgressView];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
 }
 
 - (void)setupColors
@@ -65,25 +68,23 @@
     [self.navigationItem setRightBarButtonItem:shareButton];
 }
 
-- (void)updateProgressView
+- (void)setupProgressLabels
 {
     // Set percent for progress indicator
     NSInteger currentProgressPercent = lroundf([self.event progress] * 100);
     self.progressView.percentInnerCircle = currentProgressPercent;
-        
+    
     // Set the best number and word to display
     NSDictionary *options = [self.event bestNumberAndText];
     self.progressView.progressLabel.text = [options valueForKey:@"number"];
     self.progressView.metaLabel.text = [options valueForKey:@"text"];
-    
-    // Redraw
-    [self.progressView setNeedsDisplay];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)updateProgressView
 {
-    [super viewWillAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
+    // Redraw
+    [self setupProgressLabels];
+    [self.progressView setNeedsDisplay];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

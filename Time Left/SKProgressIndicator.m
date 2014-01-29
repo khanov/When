@@ -65,7 +65,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
 - (void)drawInnerCircleBackgroundIn:(CGRect)rect
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
                           radius:kInnerCircleRadius
                       startAngle:0
@@ -83,7 +82,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
     CGFloat endAngle = startAngle + (M_PI * 2);
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
                           radius:kInnerCircleRadius
                       startAngle:startAngle
@@ -101,13 +99,11 @@ static NSString *kColorAnimationKey = @"strokeColor";
 - (void)drawOuterCircleBackgroundIn:(CGRect)rect
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
                           radius:kOuterCircleRadius
                       startAngle:0
                         endAngle:M_PI * 2
                        clockwise:YES];
-    
     bezierPath.lineWidth = kOuterCircleLineWidth;
     [self.circleOuterColor setStroke];
     [bezierPath stroke];
@@ -124,22 +120,24 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)progressOuterCircleAnimation
 {
-    NSLog(@"In-progress animation");
+    CFTimeInterval rotateAnimationDuration = 1.0;
+    CFTimeInterval rotateAnimationBeginTime = CACurrentMediaTime();
+    CFTimeInterval strokeAnimationDuration = 0.35;
+    CFTimeInterval strokeAnimationBeginTime = rotateAnimationBeginTime + (1.0 - strokeAnimationDuration);
     
+    // Creating shape layer takes some time.
+    // If the shape doesn't exist, create it and use different duration.
     if (self.outerCirclePathLayer == nil) {
-        NSLog(@"Animation doesn't exist. Create a new one.");
-        
+        // Create
+        CFTimeInterval start = CACurrentMediaTime();
         CGFloat startAngle = M_PI * 1.5;
         CGFloat endAngle = startAngle + (M_PI * 2);
-        CGFloat duration = 1.0;
-        
         UIBezierPath *bezierPath = [UIBezierPath bezierPath];
         [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
                               radius:kOuterCircleRadius
                           startAngle:startAngle
                             endAngle:endAngle
                            clockwise:YES];
-
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = bezierPath.CGPath;
         shapeLayer.strokeColor = self.circleProgressColor.CGColor;
@@ -148,51 +146,66 @@ static NSString *kColorAnimationKey = @"strokeColor";
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;
+        CFTimeInterval finish = CACurrentMediaTime();
         
-        CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:kRotationAnimationKey];
-        pathAnimation.duration = duration;
-        pathAnimation.repeatCount = INFINITY;
-        pathAnimation.fromValue = @(0.0f);
-        pathAnimation.toValue = @(1.0f);
-        pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        
-        [self.outerCirclePathLayer addAnimation:pathAnimation forKey:kRotationAnimationKey];
+        // Recalculate duration time
+        CFTimeInterval timeTook = finish - start;
+        CFTimeInterval timeLeft = 1.0 - timeTook;
+        rotateAnimationDuration = timeLeft;
+        rotateAnimationBeginTime = finish;
+        strokeAnimationBeginTime -= timeTook;
     }
+
+    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:kRotationAnimationKey];
+    rotateAnimation.duration = rotateAnimationDuration;
+    rotateAnimation.repeatCount = INFINITY;
+    rotateAnimation.fromValue = @(0.0f);
+    rotateAnimation.toValue = @(1.0f);
+    rotateAnimation.beginTime = rotateAnimationBeginTime;
+    rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    rotateAnimation.removedOnCompletion = YES;
+    
+    CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:kColorAnimationKey];
+    strokeAnimation.duration = strokeAnimationDuration;
+    strokeAnimation.repeatCount = 0;
+    strokeAnimation.autoreverses = NO;
+    strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    strokeAnimation.fromValue = (id)self.circleProgressColor.CGColor;
+    strokeAnimation.toValue = (id)self.circleBackgroundColor.CGColor;
+    strokeAnimation.beginTime = strokeAnimationBeginTime;
+    strokeAnimation.removedOnCompletion = YES;
+    
+    [self.outerCirclePathLayer addAnimation:rotateAnimation forKey:kRotationAnimationKey];
+    [self.outerCirclePathLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];
 }
 
 - (void)doneOuterCircleAnimation
 {
-    NSLog(@"Done animation");
-    
-    if ([self.outerCirclePathLayer animationForKey:kColorAnimationKey] == nil) {
-        NSLog(@"Animation doesn't exist. Create a new one.");
-        
-        // Remove old animation
-        [self.outerCirclePathLayer removeAnimationForKey:kRotationAnimationKey];
-        [self.outerCirclePathLayer removeFromSuperlayer];
-        
-        // Add new animation
+    if (self.outerCirclePathLayer == nil) {
         CGFloat startAngle = M_PI * 1.5;
         CGFloat endAngle = startAngle + (M_PI * 2);
-        CGFloat duration = 2.0;
-        
-        UIBezierPath *circleBezierPath = [UIBezierPath bezierPath];
-        
-        [circleBezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
+        UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+        [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
                               radius:kOuterCircleRadius
                           startAngle:startAngle
                             endAngle:endAngle
                            clockwise:YES];
-        
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-        shapeLayer.path = circleBezierPath.CGPath;
+        shapeLayer.path = bezierPath.CGPath;
         shapeLayer.strokeColor = self.circleProgressColor.CGColor;
         shapeLayer.fillColor = nil;
         shapeLayer.lineWidth = kOuterCircleLineWidth;
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;
+    }
+    
+    if ([self.outerCirclePathLayer animationForKey:kColorAnimationKey] == nil) {
         
+        [self.outerCirclePathLayer removeAllAnimations];
+        
+        // Add new animation
+        CGFloat duration = 2.0;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:kColorAnimationKey];
         strokeAnimation.duration = duration;
         strokeAnimation.repeatCount = INFINITY;
@@ -200,8 +213,9 @@ static NSString *kColorAnimationKey = @"strokeColor";
         strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         strokeAnimation.fromValue = (id)self.circleProgressColor.CGColor;
         strokeAnimation.toValue = (id)self.circleBackgroundColor.CGColor;
+        strokeAnimation.removedOnCompletion = NO;
         
-        [shapeLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];
+        [self.outerCirclePathLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];
     }
 }
 
