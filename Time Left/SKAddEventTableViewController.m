@@ -15,12 +15,17 @@ static NSInteger kDescriptionCellIndex = 1;
 static NSInteger kDatePickerSection = 1;
 static NSInteger kStartDatePickerIndex = 1;
 static NSInteger kEndDatePickerIndex = 3;
-static NSInteger kDatePickerCellHeight = 164;
+static NSInteger kDatePickerCellHeight = 216;
 
 static NSString *kEndsDateDefaultString = @"Choose...";
+
 static NSString *kErrorEmptyNameTitle = @"Empty Name";
 static NSString *kErrorEmptyNameMessage = @"Please give a name to the event.";
 static NSString *kErrorEmptyNameCancel = @"OK";
+
+static NSString *kErrorIncorrectEndDateTitle = @"Incorrect End Date";
+static NSString *kErrorIncorrectEndDateMessage = @"Please choose a date that is sometime in the future.";
+static NSString *kErrorIncorrectEndDateCancel = @"OK";
 
 @interface SKAddEventTableViewController ()
 
@@ -39,17 +44,20 @@ static NSString *kErrorEmptyNameCancel = @"OK";
     return self;
 }
 
+#pragma mark - Load and setup view
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupDateLabels];
-    [self setupDatePickers];
     [self signUpForKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.nameTextField becomeFirstResponder];
+    [self setupDatePickers];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,9 +81,27 @@ static NSString *kErrorEmptyNameCancel = @"OK";
 
 - (void)setupDatePickers
 {
+    // Load Start Date picker
+    self.startsDatePicker = [[UIDatePicker alloc] init];
     self.startsDatePicker.hidden = YES;
+    self.startsDatePicker.tag = 0;
+    [self.startsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
+    NSIndexPath *startDatePickerIndexPath = [NSIndexPath indexPathForRow:kStartDatePickerIndex inSection:kDatePickerSection];
+    UITableViewCell *startDatePickerCell = [self.tableView cellForRowAtIndexPath:startDatePickerIndexPath];
+    [startDatePickerCell.contentView addSubview:self.startsDatePicker];
+    
+    // Load End Date picker
+    self.endsDatePicker = [[UIDatePicker alloc] init];
     self.endsDatePicker.hidden = YES;
+    self.endsDatePicker.tag = 1;
+    [self.endsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
     self.endsDatePicker.minimumDate = [NSDate date];
+    NSIndexPath *endDatePickerIndexPath = [NSIndexPath indexPathForRow:kEndDatePickerIndex inSection:kDatePickerSection];
+    UITableViewCell *endDatePickerCell = [self.tableView cellForRowAtIndexPath:endDatePickerIndexPath];
+    [endDatePickerCell.contentView addSubview:self.endsDatePicker];
+    
+    // Reload cells with pickers in the table view
+    [self.tableView reloadRowsAtIndexPaths:@[startDatePickerIndexPath, endDatePickerIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)signUpForKeyboardNotifications {
@@ -90,9 +116,9 @@ static NSString *kErrorEmptyNameCancel = @"OK";
     CGFloat height = self.tableView.rowHeight;
     // Set height = 0 for hidden date pickers
     if (indexPath.section == kDatePickerSection && indexPath.row == kStartDatePickerIndex) {
-        height = self.startsDatePicker.isHidden ? 0 : kDatePickerCellHeight;
+        height = (self.startsDatePicker.isHidden || self.startsDatePicker == nil) ? 0 : kDatePickerCellHeight;
     } else if (indexPath.section == kDatePickerSection && indexPath.row == kEndDatePickerIndex) {
-        height =  self.endsDatePicker.isHidden ? 0 : kDatePickerCellHeight;
+        height =  (self.endsDatePicker.isHidden || self.endsDatePicker == nil) ? 0 : kDatePickerCellHeight;
     }
     return height;
 }
@@ -116,6 +142,8 @@ static NSString *kErrorEmptyNameCancel = @"OK";
         self.endsDatePicker.isHidden ? [self showCellForDatePicker:self.endsDatePicker] : [self hideCellForDatePicker:self.endsDatePicker];
     }
 }
+
+#pragma mark - Show/Hide date pickers
 
 - (void)showCellForDatePicker:(UIDatePicker *)datePicker
 {
@@ -181,13 +209,22 @@ static NSString *kErrorEmptyNameCancel = @"OK";
                                                   otherButtonTitles:nil];
         [alertView show];
     }
+    else if ([self.endsDatePicker.date compare:[NSDate date]] == NSOrderedAscending) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kErrorIncorrectEndDateTitle
+                                                            message:kErrorIncorrectEndDateMessage
+                                                           delegate:nil
+                                                  cancelButtonTitle:kErrorIncorrectEndDateCancel
+                                                  otherButtonTitles:nil];
+        [alertView show];
+
+    }
     else {
-        [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
+        SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
                                                  startDate:self.startsDatePicker.date
                                                    endDate:self.endsDatePicker.date
                                                    details:self.descriptionTextField.text];
         [[SKDataManager sharedManager] saveContext];
-        
+        NSLog(@"Saved: %@", newEvent);
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -212,6 +249,11 @@ static NSString *kErrorEmptyNameCancel = @"OK";
         [self hideCellForDatePicker:self.endsDatePicker];
     }
     return YES;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
