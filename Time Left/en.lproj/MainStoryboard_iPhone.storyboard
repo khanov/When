@@ -49,36 +49,54 @@
                                 <rect key="frame" x="20" y="144" width="280" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2d-bw-v8d" userLabel="Progress Label">
-                                        <rect key="frame" x="20" y="123" width="240" height="70"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2d-bw-v8d" userLabel="Progress Label">
+                                        <rect key="frame" x="20" y="91" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="Uz9-CV-E9N"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="70"/>
                                         <color key="textColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TIME LEFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zco-C8-snh" userLabel="Meta Label">
-                                        <rect key="frame" x="20" y="185" width="240" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME LEFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zco-C8-snh" userLabel="Meta Label">
+                                        <rect key="frame" x="20" y="155" width="240" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="LtO-B1-rne"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="zco-C8-snh" secondAttribute="trailing" constant="20" id="3gs-Ss-J2G"/>
+                                    <constraint firstAttribute="bottom" secondItem="zco-C8-snh" secondAttribute="bottom" constant="104" id="4Be-9O-Rlz"/>
+                                    <constraint firstItem="zco-C8-snh" firstAttribute="leading" secondItem="NtW-n1-HOL" secondAttribute="leading" constant="20" id="K0d-Bz-sfZ"/>
+                                    <constraint firstItem="N2d-bw-v8d" firstAttribute="leading" secondItem="NtW-n1-HOL" secondAttribute="leading" constant="20" symbolic="YES" id="Kja-Rb-oml"/>
+                                    <constraint firstItem="N2d-bw-v8d" firstAttribute="top" secondItem="NtW-n1-HOL" secondAttribute="top" constant="91" id="Xag-Ql-r2J"/>
+                                    <constraint firstAttribute="trailing" secondItem="N2d-bw-v8d" secondAttribute="trailing" constant="20" symbolic="YES" id="a3e-hA-bPS"/>
+                                    <constraint firstAttribute="height" constant="280" id="flO-Td-Hf4"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="metaLabel" destination="zco-C8-snh" id="RB1-Tz-cOp"/>
                                     <outlet property="progressLabel" destination="N2d-bw-v8d" id="ROz-hS-s5r"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
-                                <rect key="frame" x="20" y="29" width="280" height="50"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
+                                <rect key="frame" x="20" y="64" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="mXd-et-dbd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="37"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-rn-aMV">
-                                <rect key="frame" x="20" y="456" width="280" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-rn-aMV">
+                                <rect key="frame" x="20" y="527" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.99607843139999996" green="0.72549019609999998" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,10 +106,16 @@
                         <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="NtW-n1-HOL" secondAttribute="centerY" id="9E8-w8-P5A"/>
-                            <constraint firstAttribute="trailing" secondItem="NtW-n1-HOL" secondAttribute="trailing" constant="20" symbolic="YES" id="LkJ-Lh-bb6"/>
-                            <constraint firstItem="NtW-n1-HOL" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" constant="80" id="dbP-Yh-iwf"/>
+                            <constraint firstItem="q7r-qM-Cvc" firstAttribute="top" secondItem="DIu-rn-aMV" secondAttribute="bottom" constant="20" id="1JP-AP-BCA"/>
+                            <constraint firstItem="DIu-rn-aMV" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" id="Awl-qq-tK4"/>
+                            <constraint firstAttribute="trailing" secondItem="NtW-n1-HOL" secondAttribute="trailing" constant="20" id="D06-Lx-DGh"/>
+                            <constraint firstItem="NtW-n1-HOL" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="DfI-o8-zNj"/>
+                            <constraint firstAttribute="trailing" secondItem="FBd-in-lbD" secondAttribute="trailing" constant="20" id="Kh0-Vx-QJ2"/>
+                            <constraint firstItem="FBd-in-lbD" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" id="Kit-FH-Jdj"/>
+                            <constraint firstItem="FBd-in-lbD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" id="XHX-Aa-NPe"/>
+                            <constraint firstAttribute="centerX" secondItem="NtW-n1-HOL" secondAttribute="centerX" id="eCx-LL-hcI"/>
                             <constraint firstItem="NtW-n1-HOL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="fbP-2l-RcX"/>
+                            <constraint firstAttribute="trailing" secondItem="DIu-rn-aMV" secondAttribute="trailing" constant="20" id="r88-Su-rrI"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Snq-mk-sZs" appends="YES" id="mn5-SN-CFA"/>

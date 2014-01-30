@@ -39,7 +39,7 @@
     [self setupLabels];
     [self setupColors];
     [self setupProgressLabels];
-    [self setupShareButton];
+    [self setupNavigationButtons];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
 }
 
@@ -65,10 +65,13 @@
     }
 }
 
-- (void)setupShareButton
+- (void)setupNavigationButtons
 {
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareBurronPressed)];
     [self.navigationItem setRightBarButtonItem:shareButton];
+    // Back button
+    UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
 }
 
 - (void)setupProgressLabels
