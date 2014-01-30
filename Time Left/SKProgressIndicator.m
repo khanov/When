@@ -19,6 +19,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 @interface SKProgressIndicator ()
 @property (nonatomic, weak) CAShapeLayer *outerCirclePathLayer;
+@property (nonatomic, weak) CAGradientLayer *outerCircleGradientLayer;
 @end
 
 @implementation SKProgressIndicator
@@ -48,12 +49,6 @@ static NSString *kColorAnimationKey = @"strokeColor";
     self.outerCircleBackgroundColor = [colors objectForKey:@"outerCircleBackground"];
     self.outerCircleProgressColor = [colors objectForKey:@"outerCircleProgress"];
     self.textInsideCircleColor = [colors objectForKey:@"tint"];
-
-//    self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
-//    self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//    self.circleProgressColor = [UIColor colorWithRed:80/255.0 green:54/255.0 blue:101/255.0 alpha:1.0]; // night version
-//    self.circleOuterColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//    self.textInsideCircleColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
 }
 
 - (void)drawRect:(CGRect)rect
@@ -86,15 +81,16 @@ static NSString *kColorAnimationKey = @"strokeColor";
     CGFloat startAngle = M_PI * 1.5;
     CGFloat endAngle = startAngle + (M_PI * 2);
     
+    if (percent > 100) {
+        percent = 100;
+    }
+    
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
                           radius:kInnerCircleRadius
                       startAngle:startAngle
                         endAngle:(endAngle - startAngle) * (percent / 100.0) + startAngle
                        clockwise:YES];
-    
-    // TODO: Gradients
-    // http://stackoverflow.com/questions/20630653/apply-gradient-color-to-arc-created-with-uibezierpath
     
     bezierPath.lineWidth = kInnnerCircleLineWidth;
     [self.innerCircleProgressColor setStroke];
@@ -116,7 +112,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)drawOuterCircleProgress:(CGFloat)percent inRect:(CGRect)rect
 {
-    if (percent <= 100) {
+    if (percent >= 100) {
         [self doneOuterCircleAnimation];
     } else {
         [self progressOuterCircleAnimation];
@@ -125,16 +121,10 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)progressOuterCircleAnimation
 {
-    CFTimeInterval rotateAnimationDuration = 1.0;
-    CFTimeInterval rotateAnimationBeginTime = CACurrentMediaTime();
-    CFTimeInterval strokeAnimationDuration = 0.35;
-    CFTimeInterval strokeAnimationBeginTime = rotateAnimationBeginTime + (1.0 - strokeAnimationDuration);
-    
-    // Creating shape layer takes some time.
-    // If the shape doesn't exist, create it and use different duration.
+    // If the shape layer doesn't exist, create it
     if (self.outerCirclePathLayer == nil) {
-        // Create
-        CFTimeInterval start = CACurrentMediaTime();
+        
+        // Create path
         CGFloat startAngle = M_PI * 1.5;
         CGFloat endAngle = startAngle + (M_PI * 2);
         UIBezierPath *bezierPath = [UIBezierPath bezierPath];
@@ -143,6 +133,8 @@ static NSString *kColorAnimationKey = @"strokeColor";
                           startAngle:startAngle
                             endAngle:endAngle
                            clockwise:YES];
+        
+        // Shape layer setup
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = bezierPath.CGPath;
         shapeLayer.strokeColor = self.outerCircleProgressColor.CGColor;
@@ -151,37 +143,30 @@ static NSString *kColorAnimationKey = @"strokeColor";
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;
-        CFTimeInterval finish = CACurrentMediaTime();
         
-        // Recalculate duration time
-        CFTimeInterval timeTook = finish - start;
-        CFTimeInterval timeLeft = 1.0 - timeTook;
-        rotateAnimationDuration = timeLeft;
-        rotateAnimationBeginTime = finish;
-        strokeAnimationBeginTime -= timeTook;
-    }
+        // Gradient layer
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = self.bounds;
+        gradientLayer.colors = @[(__bridge id)self.outerCircleProgressColor.CGColor,
+                                 (__bridge id)self.innerCircleBackgroundColor.CGColor,
+                                 (__bridge id)self.innerCircleBackgroundColor.CGColor,
+                                 (__bridge id)self.innerCircleBackgroundColor.CGColor];
+        gradientLayer.startPoint = CGPointMake(0,0.5);
+        gradientLayer.endPoint = CGPointMake(1,0.5);
+        [self.layer addSublayer:gradientLayer];
+        gradientLayer.mask = self.outerCirclePathLayer;
+        self.outerCircleGradientLayer = gradientLayer;
 
-    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:kRotationAnimationKey];
-    rotateAnimation.duration = rotateAnimationDuration;
-    rotateAnimation.repeatCount = INFINITY;
-    rotateAnimation.fromValue = @(0.0f);
-    rotateAnimation.toValue = @(1.0f);
-    rotateAnimation.beginTime = rotateAnimationBeginTime;
-    rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    rotateAnimation.removedOnCompletion = YES;
-    
-    CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:kColorAnimationKey];
-    strokeAnimation.duration = strokeAnimationDuration;
-    strokeAnimation.repeatCount = 0;
-    strokeAnimation.autoreverses = NO;
-    strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    strokeAnimation.fromValue = (id)self.outerCircleProgressColor.CGColor;
-    strokeAnimation.toValue = (id)self.backgroundColor.CGColor;
-    strokeAnimation.beginTime = strokeAnimationBeginTime;
-    strokeAnimation.removedOnCompletion = YES;
-    
-    [self.outerCirclePathLayer addAnimation:rotateAnimation forKey:kRotationAnimationKey];
-    [self.outerCirclePathLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];
+        // Animation
+        CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        rotateAnimation.duration = 1.2;
+        rotateAnimation.repeatCount = INFINITY;
+        rotateAnimation.fromValue = @(0.0f);
+        rotateAnimation.toValue = @((360*M_PI)/180);
+        rotateAnimation.removedOnCompletion = NO;
+        
+        [gradientLayer addAnimation:rotateAnimation forKey:@"transform.rotation"];
+    }
 }
 
 - (void)doneOuterCircleAnimation
@@ -208,14 +193,15 @@ static NSString *kColorAnimationKey = @"strokeColor";
     if ([self.outerCirclePathLayer animationForKey:kColorAnimationKey] == nil) {
         
         [self.outerCirclePathLayer removeAllAnimations];
+        [self.outerCircleGradientLayer removeFromSuperlayer];
         
         // Add new animation
-        CGFloat duration = 0.8;
+        CGFloat duration = 1.5;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:kColorAnimationKey];
         strokeAnimation.duration = duration;
         strokeAnimation.repeatCount = INFINITY;
         strokeAnimation.autoreverses = YES;
-        strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
         strokeAnimation.fromValue = (id)self.outerCircleProgressColor.CGColor;
         strokeAnimation.toValue = (id)self.outerCircleBackgroundColor.CGColor;
         strokeAnimation.removedOnCompletion = NO;

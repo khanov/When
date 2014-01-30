@@ -59,7 +59,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        self.descriptionLabel.text = [dateFormatter stringFromDate:self.event.endDate];
+        self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
     } else {
         self.descriptionLabel.text = self.event.details;
     }
