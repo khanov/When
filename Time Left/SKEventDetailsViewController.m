@@ -7,6 +7,7 @@
 //
 
 #import "SKEventDetailsViewController.h"
+#import "SKAppDelegate.h"
 
 @interface SKEventDetailsViewController ()
 
@@ -44,9 +45,11 @@
 
 - (void)setupColors
 {
-    UIColor *dayColor = [UIColor colorWithRed:255/255.0 green:149/255.0 blue:0/255.0 alpha:1.0];
-    self.view.backgroundColor = dayColor;
-    self.navigationController.navigationBar.backgroundColor = dayColor;
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    self.view.backgroundColor = [colors objectForKey:@"background"];
+    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
+    self.nameLabel.textColor = [colors objectForKey:@"tint"];
 }
 
 - (void)setupLabels

@@ -59,4 +59,20 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - Themes
+
+- (NSDictionary *)currentTheme
+{
+    NSDictionary *colors;
+    
+    colors = @{@"background"            : [UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:32.0/255.0 alpha:1.0],
+               @"tint"                  : [UIColor colorWithRed:254.0/255.0 green:185.0/255.0 blue:52.0/255.0 alpha:1.0],
+               @"outerCircleProgress"   : [UIColor colorWithRed:241.0/255.0 green:176.0/255.0 blue:51.0/255.0 alpha:1.0],
+               @"outerCircleBackground" : [UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:32.0/255.0 alpha:1.0],
+               @"innerCircleProgress"   : [UIColor colorWithRed:234.0/255.0 green:129.0/255.0 blue:37.0/255.0 alpha:1.0],
+               @"innerCircleBackground" : [UIColor colorWithRed:82.0/255.0 green:82.0/255.0 blue:82.0/255.0 alpha:1.0]};
+    
+    return colors;
+}
+
 @end

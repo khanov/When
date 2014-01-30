@@ -7,6 +7,7 @@
 //
 
 #import "SKProgressIndicator.h"
+#import "SKAppDelegate.h"
 
 static NSInteger kInnerCircleRadius = 117;
 static NSInteger kInnnerCircleLineWidth = 22;
@@ -38,11 +39,15 @@ static NSString *kColorAnimationKey = @"strokeColor";
 
 - (void)setupColors
 {
-    self.backgroundColor = [UIColor colorWithRed:255/255.0 green:149/255.0 blue:0/255.0 alpha:1.0];
-    self.circleBackgroundColor = [UIColor whiteColor];
-    self.circleProgressColor = [UIColor colorWithRed:105/255.0 green:50/255.0 blue:0/255.0 alpha:1.0]; // dark orange
-    self.circleOuterColor = [UIColor whiteColor];
-    self.textInsideCircleColor = [UIColor whiteColor];
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    
+    self.backgroundColor = [colors objectForKey:@"background"];
+    self.innerCircleBackgroundColor = [colors objectForKey:@"innerCircleBackground"];
+    self.innerCircleProgressColor = [colors objectForKey:@"innerCircleProgress"];
+    self.outerCircleBackgroundColor = [colors objectForKey:@"outerCircleBackground"];
+    self.outerCircleProgressColor = [colors objectForKey:@"outerCircleProgress"];
+    self.textInsideCircleColor = [colors objectForKey:@"tint"];
 
 //    self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
 //    self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
@@ -72,7 +77,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
                        clockwise:YES];
     
     bezierPath.lineWidth = kInnnerCircleLineWidth;
-    [self.circleBackgroundColor setStroke];
+    [self.innerCircleBackgroundColor setStroke];
     [bezierPath stroke];
 }
 
@@ -92,7 +97,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
     // http://stackoverflow.com/questions/20630653/apply-gradient-color-to-arc-created-with-uibezierpath
     
     bezierPath.lineWidth = kInnnerCircleLineWidth;
-    [self.circleProgressColor setStroke];
+    [self.innerCircleProgressColor setStroke];
     [bezierPath stroke];
 }
 
@@ -105,13 +110,13 @@ static NSString *kColorAnimationKey = @"strokeColor";
                         endAngle:M_PI * 2
                        clockwise:YES];
     bezierPath.lineWidth = kOuterCircleLineWidth;
-    [self.circleOuterColor setStroke];
+    [self.outerCircleBackgroundColor setStroke];
     [bezierPath stroke];
 }
 
 - (void)drawOuterCircleProgress:(CGFloat)percent inRect:(CGRect)rect
 {
-    if (percent >= 100) {
+    if (percent <= 100) {
         [self doneOuterCircleAnimation];
     } else {
         [self progressOuterCircleAnimation];
@@ -140,7 +145,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
                            clockwise:YES];
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = bezierPath.CGPath;
-        shapeLayer.strokeColor = self.circleProgressColor.CGColor;
+        shapeLayer.strokeColor = self.outerCircleProgressColor.CGColor;
         shapeLayer.fillColor = nil;
         shapeLayer.lineWidth = kOuterCircleLineWidth;
         shapeLayer.lineJoin = kCALineJoinRound;
@@ -170,8 +175,8 @@ static NSString *kColorAnimationKey = @"strokeColor";
     strokeAnimation.repeatCount = 0;
     strokeAnimation.autoreverses = NO;
     strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    strokeAnimation.fromValue = (id)self.circleProgressColor.CGColor;
-    strokeAnimation.toValue = (id)self.circleBackgroundColor.CGColor;
+    strokeAnimation.fromValue = (id)self.outerCircleProgressColor.CGColor;
+    strokeAnimation.toValue = (id)self.backgroundColor.CGColor;
     strokeAnimation.beginTime = strokeAnimationBeginTime;
     strokeAnimation.removedOnCompletion = YES;
     
@@ -192,7 +197,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
                            clockwise:YES];
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = bezierPath.CGPath;
-        shapeLayer.strokeColor = self.circleProgressColor.CGColor;
+        shapeLayer.strokeColor = self.outerCircleProgressColor.CGColor;
         shapeLayer.fillColor = nil;
         shapeLayer.lineWidth = kOuterCircleLineWidth;
         shapeLayer.lineJoin = kCALineJoinRound;
@@ -205,14 +210,14 @@ static NSString *kColorAnimationKey = @"strokeColor";
         [self.outerCirclePathLayer removeAllAnimations];
         
         // Add new animation
-        CGFloat duration = 2.0;
+        CGFloat duration = 0.8;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:kColorAnimationKey];
         strokeAnimation.duration = duration;
         strokeAnimation.repeatCount = INFINITY;
         strokeAnimation.autoreverses = YES;
         strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        strokeAnimation.fromValue = (id)self.circleProgressColor.CGColor;
-        strokeAnimation.toValue = (id)self.circleBackgroundColor.CGColor;
+        strokeAnimation.fromValue = (id)self.outerCircleProgressColor.CGColor;
+        strokeAnimation.toValue = (id)self.outerCircleBackgroundColor.CGColor;
         strokeAnimation.removedOnCompletion = NO;
         
         [self.outerCirclePathLayer addAnimation:strokeAnimation forKey:kColorAnimationKey];

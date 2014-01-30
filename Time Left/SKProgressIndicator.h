@@ -13,9 +13,10 @@
 @property (assign, nonatomic) NSInteger percentInnerCircle;
 @property (assign, nonatomic) CGFloat percentOuterCircle;
 
-@property (strong, nonatomic) UIColor *circleBackgroundColor;
-@property (strong, nonatomic) UIColor *circleProgressColor;
-@property (strong, nonatomic) UIColor *circleOuterColor;
+@property (strong, nonatomic) UIColor *innerCircleBackgroundColor;
+@property (strong, nonatomic) UIColor *innerCircleProgressColor;
+@property (strong, nonatomic) UIColor *outerCircleBackgroundColor;
+@property (strong, nonatomic) UIColor *outerCircleProgressColor;
 @property (strong, nonatomic) UIColor *textInsideCircleColor;
 
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
