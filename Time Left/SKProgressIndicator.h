@@ -10,7 +10,7 @@
 
 @interface SKProgressIndicator : UIView
 
-@property (assign, nonatomic) NSInteger percentInnerCircle;
+@property (assign, nonatomic) CGFloat percentInnerCircle;
 @property (assign, nonatomic) CGFloat percentOuterCircle;
 
 @property (strong, nonatomic) UIColor *innerCircleBackgroundColor;

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UILabel *startsDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endsDateLabel;
+
 @property (strong, nonatomic) UIDatePicker *startsDatePicker;
 @property (strong, nonatomic) UIDatePicker *endsDatePicker;
 

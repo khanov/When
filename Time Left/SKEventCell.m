@@ -7,6 +7,7 @@
 //
 
 #import "SKEventCell.h"
+#import "SKAppDelegate.h"
 
 @interface SKEventCell ()
 @property (strong, nonatomic) CAAnimation *quiveringAnimation;
@@ -26,6 +27,15 @@
 {
     self.deleteButton.hidden = YES;
     self.quiveringAnimation = nil;
+    [self setupColors];
+}
+
+- (void)setupColors
+{
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    self.backgroundColor = [colors objectForKey:@"background"];
+    self.name.textColor = [colors objectForKey:@"tint"];
 }
 
 - (void)startQuivering

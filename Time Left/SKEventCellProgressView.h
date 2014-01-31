@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) UIColor *circleBackgroundColor;
 @property (strong, nonatomic) UIColor *circleProgressColor;
-@property (strong, nonatomic) UIColor *textInsideCircleColor;
 
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metaLabel;

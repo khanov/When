@@ -7,14 +7,16 @@
 //
 
 #import "SKEventCellProgressView.h"
+#import "SKAppDelegate.h"
 
-static NSInteger kCircleRadius = 49;
-static NSInteger kCircleLineWidth = 12;
+static NSInteger kCircleRadius = 54;
+static NSInteger kCircleLineWidth = 3;
 
-static NSString *kNumberInsideCircleFontName = @"DINAlternate-Bold";
-static NSString *kMetaTextFontName = @"DINAlternate-Bold";
+static NSString *kNumberInsideCircleFontName = @"HelveticaNeue-Thin";
+static CGFloat kNumberInsideCircleFontSize = 35.0;
+static NSString *kMetaTextFontName = @"HelveticaNeue-Light";
 static CGFloat kMetaTextFontSizeDefault = 12.0;
-static CGFloat kMetaTextFontSizeSmall = 10.0;
+static CGFloat kMetaTextFontSizeSmall = 11.0;
 
 @implementation SKEventCellProgressView
 
@@ -34,26 +36,17 @@ static CGFloat kMetaTextFontSizeSmall = 10.0;
 
 - (void)setupColors
 {
-    self.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:149.0/255.0 blue:0/255.0 alpha:1.0];
-    self.circleBackgroundColor = [UIColor whiteColor];
-    self.circleProgressColor = [UIColor colorWithRed:105.0/255.0 green:50.0/255.0 blue:0/255.0 alpha:1.0]; // dark orange
-    self.textInsideCircleColor = [UIColor whiteColor];
-    
-//        self.backgroundColor = [UIColor colorWithRed:36/255.0 green:15/255.0 blue:46/255.0 alpha:1.0]; // night version
-//        self.circleBackgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//        self.circleProgressColor = [UIColor colorWithRed:80/255.0 green:54/255.0 blue:101/255.0 alpha:1.0]; // night version
-//        self.circleOuterColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
-//        self.textInsideCircleColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0]; // night version
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    self.backgroundColor = [colors objectForKey:@"background"];
+    self.circleBackgroundColor = [colors objectForKey:@"innerCircleBackground"];
+    self.circleProgressColor = [colors objectForKey:@"innerCircleProgress"];
+    self.progressLabel.textColor = [colors objectForKey:@"colorText"];
+    self.metaLabel.textColor = [colors objectForKey:@"colorText"];
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    // Draw circles
-//    [self drawInnerCircleBackgroundIn:rect];
-//    if (self.percentCircle < 100) {
-//        [self drawInnerCircleProgress:self.percentCircle inRect:rect];
-//    }
-    
     CGFloat startAngle = M_PI * 1.5;
     CGFloat endAngle = startAngle + (M_PI * 2.0);
     
@@ -68,7 +61,7 @@ static CGFloat kMetaTextFontSizeSmall = 10.0;
     self.percentCircle < 100 ? [self.circleBackgroundColor setStroke] : [self.circleProgressColor setStroke];
     [backgroundBezierPath stroke];
     
-    // Draw progess
+    // Draw progress
     if (self.percentCircle < 100) {
         UIBezierPath *progressBezierPath = [UIBezierPath bezierPath];
         [progressBezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
@@ -84,11 +77,13 @@ static CGFloat kMetaTextFontSizeSmall = 10.0;
 
 - (void)useSmallerFont
 {
+    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
     self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeSmall];
 }
 
 - (void)useDefaultFont
 {
+    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
     self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeDefault];
 }
 

@@ -49,7 +49,8 @@
     NSDictionary *colors = [delegate currentTheme];
     self.view.backgroundColor = [colors objectForKey:@"background"];
     self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
-    self.nameLabel.textColor = [colors objectForKey:@"tint"];
+    self.nameLabel.textColor = [colors objectForKey:@"colorText"];
+    self.descriptionLabel.textColor = [colors objectForKey:@"colorText"];
 }
 
 - (void)setupLabels
@@ -77,8 +78,7 @@
 - (void)setupProgressLabels
 {
     // Set percent for progress indicator
-    NSInteger currentProgressPercent = lroundf([self.event progress] * 100);
-    self.progressView.percentInnerCircle = currentProgressPercent;
+    self.progressView.percentInnerCircle = [self.event progress] * 100;
     
     // Set the best number and word to display
     NSDictionary *options = [self.event bestNumberAndText];

@@ -11,6 +11,7 @@
 #import "SKEventDetailsViewController.h"
 #import "SKAddEventTableViewController.h"
 #import "SKCustomCollectionViewFlowLayout.h"
+#import "SKAppDelegate.h"
 
 static NSInteger kMarginTopBottom = 12;
 static NSInteger kMarginLeftRight = 10;
@@ -41,6 +42,7 @@ static NSInteger kCellWeightHeight = 145;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupColors];
     [self registerForNotifications];
 
     // Allocate and configure the layout.
@@ -50,6 +52,16 @@ static NSInteger kCellWeightHeight = 145;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.sectionInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
     self.collectionView.collectionViewLayout = layout;
+}
+
+- (void)setupColors
+{
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    self.collectionView.backgroundColor = [colors objectForKey:@"background"];
+    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
+    self.navigationController.navigationBar.tintColor = [colors objectForKey:@"tint"];
+
 }
 
 #pragma mark Model Notifications
@@ -122,7 +134,7 @@ static NSInteger kCellWeightHeight = 145;
 {
     NSLog(@"----------- update view");
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
-    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

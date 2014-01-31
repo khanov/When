@@ -7,6 +7,7 @@
 //
 
 #import "SKAddEventTableViewController.h"
+#import "SKAppDelegate.h"
 
 static NSInteger kTextFieldSection = 0;
 static NSInteger kNameCellIndex = 0;
@@ -17,19 +18,18 @@ static NSInteger kStartDatePickerIndex = 1;
 static NSInteger kEndDatePickerIndex = 3;
 static NSInteger kDatePickerCellHeight = 216;
 
+static NSString *kNameTextFieldPlaceholder = @"Name";
+static NSString *kDescriptionTextFieldTextFieldPlaceholder = @"Description (optional)";
 static NSString *kEndsDateDefaultString = @"Choose...";
 
 static NSString *kErrorEmptyNameTitle = @"Empty Name";
 static NSString *kErrorEmptyNameMessage = @"Please give a name to the event.";
 static NSString *kErrorEmptyNameCancel = @"OK";
 
-static NSString *kErrorIncorrectEndDateTitle = @"Incorrect End Date";
-static NSString *kErrorIncorrectEndDateMessage = @"Please choose a date that is sometime in the future.";
-static NSString *kErrorIncorrectEndDateCancel = @"OK";
-
 @interface SKAddEventTableViewController ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
+@property (strong, nonatomic) UIColor *cellBackgroundColor;
 
 @end
 
@@ -51,6 +51,7 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
     [super viewDidLoad];
     [self setupDateLabels];
     [self signUpForKeyboardNotifications];
+    [self setupColors];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,6 +64,32 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)setupColors
+{
+    SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *colors = [delegate currentTheme];
+    // Table
+    self.tableView.backgroundColor = [colors objectForKey:@"background"];
+    self.tableView.tintColor = [colors objectForKey:@"tint"];
+    self.cellBackgroundColor = [colors objectForKey:@"cellBackground"];
+    self.startsDateLabel.textColor = [colors objectForKey:@"tint"];
+    self.endsDateLabel.textColor = [colors objectForKey:@"tint"];
+    // Nav bar
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin" size:21.0],
+                                                                    NSForegroundColorAttributeName : [colors objectForKey:@"colorText"]};
+    self.navigationController.navigationBar.barTintColor = [colors objectForKey:@"background"];
+
+    // Text fields
+    self.nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:kNameTextFieldPlaceholder
+                                                                               attributes:@{NSForegroundColorAttributeName : [colors objectForKey:@"background"]}];
+    
+    self.descriptionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:kDescriptionTextFieldTextFieldPlaceholder
+                                                                               attributes:@{NSForegroundColorAttributeName : [colors objectForKey:@"background"]}];
+    self.nameTextField.textColor = [colors objectForKey:@"tint"];
+    self.descriptionTextField.textColor = [colors objectForKey:@"tint"];
+
 }
 
 - (void)setupDateLabels
@@ -85,6 +112,7 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
     self.startsDatePicker = [[UIDatePicker alloc] init];
     self.startsDatePicker.hidden = YES;
     self.startsDatePicker.tag = 0;
+    self.startsDatePicker.date = [NSDate date];
     [self.startsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
     NSIndexPath *startDatePickerIndexPath = [NSIndexPath indexPathForRow:kStartDatePickerIndex inSection:kDatePickerSection];
     UITableViewCell *startDatePickerCell = [self.tableView cellForRowAtIndexPath:startDatePickerIndexPath];
@@ -95,7 +123,8 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
     self.endsDatePicker.hidden = YES;
     self.endsDatePicker.tag = 1;
     [self.endsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
-    self.endsDatePicker.minimumDate = [NSDate date];
+    self.endsDatePicker.minimumDate = [[NSDate date] dateByAddingTimeInterval:60]; // add +60sec
+    self.endsDatePicker.date = self.startsDatePicker.date;
     NSIndexPath *endDatePickerIndexPath = [NSIndexPath indexPathForRow:kEndDatePickerIndex inSection:kDatePickerSection];
     UITableViewCell *endDatePickerCell = [self.tableView cellForRowAtIndexPath:endDatePickerIndexPath];
     [endDatePickerCell.contentView addSubview:self.endsDatePicker];
@@ -143,6 +172,10 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.contentView.backgroundColor = self.cellBackgroundColor;
+}
+
 #pragma mark - Show/Hide date pickers
 
 - (void)showCellForDatePicker:(UIDatePicker *)datePicker
@@ -180,7 +213,8 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
     if (sender.tag == 0) {
         // Start Date Picker Changed
         self.startsDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
-        self.endsDatePicker.minimumDate = [self.startsDatePicker.date laterDate:[NSDate date]];
+        NSDate *laterDate = [self.startsDatePicker.date laterDate:[NSDate date]];
+        self.endsDatePicker.minimumDate = [laterDate dateByAddingTimeInterval:60]; // add +30sec
     } else if (sender.tag == 1) {
         // End Date Picker Changed
         if (self.endsDateLabel.text.length == 0) {
@@ -193,6 +227,8 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
         self.endsDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
     }
 }
+
+#pragma mark - Cancel / Save
 
 - (IBAction)cancelButton:(id)sender
 {
@@ -208,15 +244,6 @@ static NSString *kErrorIncorrectEndDateCancel = @"OK";
                                                   cancelButtonTitle:kErrorEmptyNameCancel
                                                   otherButtonTitles:nil];
         [alertView show];
-    }
-    else if ([self.endsDatePicker.date compare:[NSDate date]] == NSOrderedAscending) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kErrorIncorrectEndDateTitle
-                                                            message:kErrorIncorrectEndDateMessage
-                                                           delegate:nil
-                                                  cancelButtonTitle:kErrorIncorrectEndDateCancel
-                                                  otherButtonTitles:nil];
-        [alertView show];
-
     }
     else {
         SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
