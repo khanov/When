@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.3" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="URi-zq-5RL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="URi-zq-5RL">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Info View Controller-->
@@ -14,20 +14,33 @@
                         <viewControllerLayoutGuide type="bottom" id="NXH-7N-m6W"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l8f-na-HSH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KEg-Vh-8R1">
-                                <rect key="frame" x="0.0" y="52" width="320" height="460"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEg-Vh-8R1">
+                                <rect key="frame" x="20" y="55" width="280" height="393"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">The app shows how much time left until specified events happen. Hold to enter edit mode Tap on detail view to see.
+
+When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="KEg-Vh-8R1" id="6Sm-vB-bgJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ax-Yx-Q6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,7 +202,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMe-xq-T7r" userLabel="Delete Button">
                                             <rect key="frame" x="6" y="0.0" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="delete-button"/>
+                                            <state key="normal" image="delete-icon"/>
                                             <connections>
                                                 <action selector="deleteButton:" destination="cjh-Jl-h0H" eventType="touchUpInside" id="rUo-6u-7B3"/>
                                             </connections>
@@ -204,14 +217,13 @@
                                     <outlet property="deleteButton" destination="IMe-xq-T7r" id="KqV-RU-6lo"/>
                                     <outlet property="name" destination="zfQ-S7-rSb" id="OjO-xc-F9y"/>
                                     <outlet property="progressView" destination="fVT-H1-iuK" id="Hef-3C-0Xf"/>
-                                    <segue destination="2" kind="push" identifier="showEventView" id="o8B-nz-D0K"/>
+                                    <segue destination="2" kind="push" identifier="showEventDetailsView" id="o8B-nz-D0K"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="cjh-Jl-h0H" id="2Q3-Bg-slH"/>
                             <outlet property="delegate" destination="cjh-Jl-h0H" id="13z-7E-WZB"/>
-                            <outletCollection property="gestureRecognizers" destination="SMq-KN-H2g" appends="YES" id="VFt-fG-Z8S"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="bXW-m9-cJb">
@@ -220,11 +232,11 @@
                                 <rect key="frame" x="16" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="about-icon.png">
+                                <state key="normal" image="about-icon">
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="dDx-Jq-qrM" kind="modal" identifier="showInfoView" modalTransitionStyle="partialCurl" id="g9E-Tm-D2d"/>
+                                    <segue destination="dDx-Jq-qrM" kind="push" identifier="showInfoView" id="g9E-Tm-D2d"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -233,7 +245,7 @@
                                 <rect key="frame" x="280" y="10" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="add-icon.png">
+                                <state key="normal" image="add-icon">
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -244,11 +256,6 @@
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrd-SI-Ipu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="SMq-KN-H2g">
-                    <connections>
-                        <action selector="longPressGesture:" destination="cjh-Jl-h0H" id="v3y-zB-gUp"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1279" y="-435"/>
         </scene>
@@ -467,9 +474,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="about-icon.png" width="22" height="22"/>
-        <image name="add-icon.png" width="24" height="24"/>
-        <image name="delete-button" width="512" height="512"/>
+        <image name="about-icon" width="22" height="22"/>
+        <image name="add-icon" width="24" height="24"/>
+        <image name="delete-icon" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

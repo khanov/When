@@ -55,6 +55,12 @@ static NSInteger kCellWeightHeight = 145;
     // Set navigation bar font
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
+    // Long press gesture recognizer
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
+    gestureRecognizer.minimumPressDuration = 0.5; //seconds
+    gestureRecognizer.delegate = self;
+    gestureRecognizer.delaysTouchesBegan = YES;
+    [self.collectionView addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)setupColors
@@ -183,17 +189,6 @@ static NSInteger kCellWeightHeight = 145;
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: Select Item
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: Deselect item
-}
-
 #pragma mark – UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -211,7 +206,7 @@ static NSInteger kCellWeightHeight = 145;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"showEventView"]) {
+    if ([segue.identifier isEqualToString:@"showEventDetailsView"]) {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         
         SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
@@ -226,7 +221,7 @@ static NSInteger kCellWeightHeight = 145;
 
 #pragma mark - Edit mode
 
-- (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer
+- (void)longPressGesture:(UIGestureRecognizer *)recognizer
 {
     if ([recognizer state] == UIGestureRecognizerStateBegan) {
         // Replace Add button to Done

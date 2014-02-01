@@ -46,7 +46,7 @@
         SKEvent *eventToAdd = [addedNotification.userInfo objectForKey:@"added"];
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = eventToAdd.endDate;
-        localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now", eventToAdd.name];
+        localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", eventToAdd.name];
         localNotification.timeZone = [NSTimeZone systemTimeZone];
         localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
         localNotification.soundName = UILocalNotificationDefaultSoundName;
