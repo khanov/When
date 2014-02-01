@@ -52,6 +52,9 @@ static NSInteger kCellWeightHeight = 145;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.sectionInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
     self.collectionView.collectionViewLayout = layout;
+    // Set navigation bar font
+    UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
 }
 
 - (void)setupColors
@@ -190,10 +193,7 @@ static NSInteger kCellWeightHeight = 145;
         [cell.progressView useDefaultFont];
     }
     
-    // don't redraw finished events
-//    if ([event progress] < 1.0) {
-        [cell.progressView setNeedsDisplay];
-//    }
+    [cell.progressView setNeedsDisplay];
     
     return cell;
 }
@@ -268,7 +268,10 @@ static NSInteger kCellWeightHeight = 145;
 {
     NSLog(@"Done editing");
     // Replace Add button to Done
-    UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddEventView)];
+    UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add-icon"]
+                                                            style:UIBarButtonItemStyleBordered
+                                                           target:self
+                                                           action:@selector(showAddEventView)];
     [self.navigationItem setRightBarButtonItem:add];
     // Stop Edit mode
     self.editing = NO;

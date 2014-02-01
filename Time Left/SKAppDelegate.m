@@ -7,6 +7,8 @@
 //
 
 #import "SKAppDelegate.h"
+#import "SKConstants.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation SKAppDelegate
 
@@ -18,8 +20,14 @@
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
                                       forBarPosition:UIBarPositionAny
                                           barMetrics:UIBarMetricsDefault];
-    
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    // Create push notifications manager
+    self.pushManager = [[SKPushManager alloc] init];
+    [self.pushManager registerForModelUpdateNotifications];
+    
+    // Crashlytics
+    [Crashlytics startWithAPIKey:crashlyticsAPIKey];
     
     return YES;
 }
