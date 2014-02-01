@@ -7,7 +7,6 @@
 //
 
 #import "SKAppDelegate.h"
-#import "SKConstants.h"
 #import <Crashlytics/Crashlytics.h>
 
 @implementation SKAppDelegate
