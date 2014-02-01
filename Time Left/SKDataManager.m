@@ -340,7 +340,7 @@ static NSString *kDeletedKey = @"deleted";
     }
     // Event deleted
     if ([notification.userInfo objectForKey:NSDeletedObjectsKey]) {
-        for (id object in [notification.userInfo objectForKey:NSInsertedObjectsKey]) {
+        for (id object in [notification.userInfo objectForKey:NSDeletedObjectsKey]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotificationName
                                                                 object:self
                                                               userInfo:@{kDeletedKey: object}];

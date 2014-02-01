@@ -46,14 +46,14 @@
         SKEvent *eventToAdd = [addedNotification.userInfo objectForKey:@"added"];
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = eventToAdd.endDate;
-        localNotification.alertBody = [NSString stringWithFormat:@"%@ is done", eventToAdd.name];
+        localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now", eventToAdd.name];
         localNotification.timeZone = [NSTimeZone systemTimeZone];
         localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
         localNotification.soundName = UILocalNotificationDefaultSoundName;
-        localNotification.userInfo = @{@"event" : eventToAdd};
+        localNotification.userInfo = @{@"eventHash" : @([eventToAdd hash])};
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         [self.notifications addObject:localNotification];
-        
+
         NSLog(@"Scheduled notification for %@ at %@ (now = %@)", eventToAdd.name, localNotification.fireDate, [NSDate date]);
     }
 }
@@ -61,17 +61,18 @@
 - (void)eventDeleted:(NSNotification *)deletedNotification
 {
     if ([[deletedNotification.userInfo allKeys][0] isEqual:@"deleted"]) {
-        
         SKEvent *eventToDelete = [deletedNotification.userInfo objectForKey:@"deleted"];
-
-        UILocalNotification *notificationToCancel;
-        [self.notifications enumerateObjectsUsingBlock:^(UILocalNotification obj, NSUInteger idx, BOOL *stop) {
-            if ([[obj.userInfo objectForKey:@"event"] isEqual:eventToDelete]) {
-                stop = YES;
+        // Find notification to cancel
+        [self.notifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSInteger eventHash = [[((UILocalNotification *)obj).userInfo objectForKey:@"eventHash"] integerValue];
+            if (eventHash == [eventToDelete hash]) {
+                [[UIApplication sharedApplication] cancelLocalNotification:(UILocalNotification *)obj];
+                [self.notifications removeObject:obj];
+                *stop = YES;
+                
+                NSLog(@"Cancelled notification for %@ at %@ (now = %@)", eventToDelete.name, ((UILocalNotification *)obj).fireDate, [NSDate date]);
             }
         }];
-        
-        [[UIApplication sharedApplication] cancelLocalNotification:<#(UILocalNotification *)#>]
     }
 }
 
