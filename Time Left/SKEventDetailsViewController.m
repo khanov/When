@@ -59,8 +59,13 @@
     if (self.event.details.length == 0) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        if ([self.event progress] < 1.0) {
+            self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
+        } else {
+            self.descriptionLabel.text = [NSString stringWithFormat:@"Ended on %@", [dateFormatter stringFromDate:self.event.endDate]];
+        }
+        
     } else {
         self.descriptionLabel.text = self.event.details;
     }

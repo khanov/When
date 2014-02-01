@@ -7,6 +7,7 @@
 //
 
 #import "SKAppDelegate.h"
+#import "SKDataManager.h"
 #import <Crashlytics/Crashlytics.h>
 
 @implementation SKAppDelegate
@@ -20,6 +21,18 @@
                                       forBarPosition:UIBarPositionAny
                                           barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    // Create Default events if needed
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
+        // app already launched, proceed
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        // This is the first launch ever. Create some events
+        NSLog(@"First launch. Create default events.");
+        [[SKDataManager sharedManager] createDefaultEvents];
+        [[SKDataManager sharedManager] saveContext];
+    }
     
     // Create push notifications manager
     self.pushManager = [[SKPushManager alloc] init];

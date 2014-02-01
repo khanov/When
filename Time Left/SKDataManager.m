@@ -241,32 +241,68 @@ static NSString *kEventEntityName = @"Event";
 
 - (void)createDefaultEvents
 {
-    NSString *start1 = @"06-08-2013 12:30:00";
-    NSString *end1 = @"17-12-2013 19:10:00";
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
     
-    NSString *start2 = @"23-12-2013 00:00:00";
-    NSString *end2 = @"23-12-2015 00:00:00";
+    //
+    // New Year
+    [comps setYear:[[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:[NSDate date]] year] + 1]; // current year + 1 = next year
+    [comps setMonth:1];
+    [comps setDay:1];
+    [comps setHour:0];
+    [comps setMinute:0];
+    [comps setSecond:0];
+    NSDate *nextYear = [gregorianCalendar dateFromComponents:comps];
+    // Current year
+    [comps setYear:[[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:[NSDate date]] year]]; // current year
+    [comps setMonth:1];
+    [comps setDay:1];
+    [comps setHour:0];
+    [comps setMinute:0];
+    [comps setSecond:0];
+    NSDate *firstDayOfTheYear = [gregorianCalendar dateFromComponents:comps];
+
+    firstDayOfTheYear = [NSDate dateWithTimeInterval:[[NSTimeZone localTimeZone] secondsFromGMT] sinceDate:firstDayOfTheYear]; // time zone offset
+    nextYear = [NSDate dateWithTimeInterval:[[NSTimeZone localTimeZone] secondsFromGMT] sinceDate:nextYear]; // time zone offset
     
-    NSString *start3 = @"22-01-2014 21:00:00";
-    NSString *end3 = @"24-01-2014 00:00:00";
+    [self createEventWithName:@"New Year"
+                    startDate:firstDayOfTheYear
+                      endDate:nextYear
+                      details:[NSString stringWithFormat:@"Time Left Until 1st Jan, %d", [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:nextYear] year]]];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
     
-    [self createEventWithName:@"Global UGRAD"
-                    startDate:[dateFormatter dateFromString:start1]
-                      endDate:[dateFormatter dateFromString:end1]
-                      details:@"United States of America"];
+    //
+    // Next Sunday
+    NSDate *now = [NSDate date];
+    NSDateComponents *dateComponents = [gregorianCalendar components:NSWeekdayCalendarUnit | NSHourCalendarUnit fromDate:now];
+    NSInteger weekday = [dateComponents weekday];
     
-    [self createEventWithName:@"Home Residence"
-                    startDate:[dateFormatter dateFromString:start2]
-                      endDate:[dateFormatter dateFromString:end2]
-                      details:@"2 Year Home Residence Rule"];
+    NSDate *nextSunday = nil;
+    if (weekday == 1 && [dateComponents hour] < 12) {
+        // Sunday is today. Find next.
+        NSInteger daysTillNextSunday = 8;
+        int secondsInDay = 86400; // 24 * 60 * 60
+        nextSunday = [now dateByAddingTimeInterval:secondsInDay * daysTillNextSunday];
+    }
+    else {
+        NSInteger daysTillNextSunday = 8 - weekday;
+        int secondsInDay = 86400; // 24 * 60 * 60
+        nextSunday = [now dateByAddingTimeInterval:secondsInDay * daysTillNextSunday];
+    }
+        
+    [self createEventWithName:@"Fun With Friends"
+                    startDate:now
+                      endDate:nextSunday
+                      details:@"It's going to be fun!"];
     
-    [self createEventWithName:@"Weekend"
-                    startDate:[dateFormatter dateFromString:start3]
-                      endDate:[dateFormatter dateFromString:end3]
-                      details:@"Until the Weekend"];
+    
+    //
+    // Installed the app
+    [self createEventWithName:@"Install This App"
+                    startDate:firstDayOfTheYear
+                      endDate:[NSDate date]
+                      details:@""];
+    
 }
 
 - (void)deleteAllEvents
