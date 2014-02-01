@@ -14,22 +14,19 @@
 		A62A081E1893F3A10031AE7F /* SKEvent+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A081D1893F3A10031AE7F /* SKEvent+Helper.m */; };
 		A62A0834189504380031AE7F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62A0833189504380031AE7F /* Media.xcassets */; };
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
-		A636CB56179D842600526D7A /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB55179D842600526D7A /* noise.png */; };
 		A636CB58179DB0C600526D7A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB57179DB0C600526D7A /* Icon.png */; };
 		A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB59179DB0C900526D7A /* Icon@2x.png */; };
 		A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5B179DB0CF00526D7A /* Icon-72.png */; };
 		A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5D179DB0D200526D7A /* Icon-72@2x.png */; };
 		A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */; };
 		A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */; };
+		A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
 		A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6693561179D31E200E5A40F /* CoreGraphics.framework */; };
 		A6693568179D31E200E5A40F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6693566179D31E200E5A40F /* InfoPlist.strings */; };
 		A669356A179D31E200E5A40F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6693569179D31E200E5A40F /* main.m */; };
 		A669356E179D31E200E5A40F /* SKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A669356D179D31E200E5A40F /* SKAppDelegate.m */; };
-		A6693570179D31E200E5A40F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A669356F179D31E200E5A40F /* Default.png */; };
-		A6693572179D31E200E5A40F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6693571179D31E200E5A40F /* Default@2x.png */; };
-		A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6693573179D31E200E5A40F /* Default-568h@2x.png */; };
 		A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */; };
 		A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */; };
 		A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */; };
@@ -38,6 +35,7 @@
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
 		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
 		A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */; };
+		A6DEF634189BE11000070415 /* SKPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEF633189BE11000070415 /* SKPushManager.m */; };
 		CE5C0C021897E7CB00B8926A /* add-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C011897E7CB00B8926A /* add-icon@2x.png */; };
 		CE5C0C061897EA0300B8926A /* about-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C0C051897EA0300B8926A /* about-icon@2x.png */; };
 /* End PBXBuildFile section */
@@ -55,7 +53,6 @@
 		A62A0833189504380031AE7F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
-		A636CB55179D842600526D7A /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		A636CB57179DB0C600526D7A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A636CB59179DB0C900526D7A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		A636CB5B179DB0CF00526D7A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
@@ -64,6 +61,7 @@
 		A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsViewController.m; sourceTree = "<group>"; };
 		A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKProgressIndicator.h; sourceTree = "<group>"; };
 		A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKProgressIndicator.m; sourceTree = "<group>"; };
+		A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "Time Left/Crashlytics.framework"; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -74,9 +72,6 @@
 		A669356B179D31E200E5A40F /* Time Left-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Time Left-Prefix.pch"; sourceTree = "<group>"; };
 		A669356C179D31E200E5A40F /* SKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAppDelegate.h; sourceTree = "<group>"; };
 		A669356D179D31E200E5A40F /* SKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAppDelegate.m; sourceTree = "<group>"; };
-		A669356F179D31E200E5A40F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		A6693571179D31E200E5A40F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		A6693573179D31E200E5A40F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A6693576179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A6693579179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -91,6 +86,8 @@
 		A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCellProgressView.m; sourceTree = "<group>"; };
 		A6DEF62F1899263900070415 /* SKCustomCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCustomCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCustomCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		A6DEF632189BE11000070415 /* SKPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPushManager.h; sourceTree = "<group>"; };
+		A6DEF633189BE11000070415 /* SKPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPushManager.m; sourceTree = "<group>"; };
 		CE5C0C011897E7CB00B8926A /* add-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		CE5C0C051897EA0300B8926A /* about-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-icon@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -104,6 +101,7 @@
 				A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */,
 				A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */,
 				A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */,
+				A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */,
 				A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +138,7 @@
 		A669355C179D31E200E5A40F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */,
 				A62A080E1892A2A90031AE7F /* CoreData.framework */,
 				A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */,
 				A669355D179D31E200E5A40F /* UIKit.framework */,
@@ -158,6 +157,8 @@
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
 				A62A08161893E2860031AE7F /* SKDataManager.h */,
 				A62A08171893E2860031AE7F /* SKDataManager.m */,
+				A6DEF632189BE11000070415 /* SKPushManager.h */,
+				A6DEF633189BE11000070415 /* SKPushManager.m */,
 				A6A3E8AD1891257C00A3E4FB /* Event Grid */,
 				A6A3E8AC1891256800A3E4FB /* Add Event */,
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
@@ -179,10 +180,6 @@
 				A6693566179D31E200E5A40F /* InfoPlist.strings */,
 				A6693569179D31E200E5A40F /* main.m */,
 				A669356B179D31E200E5A40F /* Time Left-Prefix.pch */,
-				A669356F179D31E200E5A40F /* Default.png */,
-				A6693571179D31E200E5A40F /* Default@2x.png */,
-				A6693573179D31E200E5A40F /* Default-568h@2x.png */,
-				A636CB55179D842600526D7A /* noise.png */,
 				A636CB5D179DB0D200526D7A /* Icon-72@2x.png */,
 				A636CB5B179DB0CF00526D7A /* Icon-72.png */,
 				A636CB59179DB0C900526D7A /* Icon@2x.png */,
@@ -249,6 +246,7 @@
 				A6693556179D31E200E5A40F /* Sources */,
 				A6693557179D31E200E5A40F /* Frameworks */,
 				A6693558179D31E200E5A40F /* Resources */,
+				A663AE0C189BEBA900CF3AFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -302,14 +300,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6693568179D31E200E5A40F /* InfoPlist.strings in Resources */,
-				A6693570179D31E200E5A40F /* Default.png in Resources */,
 				A62A0834189504380031AE7F /* Media.xcassets in Resources */,
 				CE5C0C021897E7CB00B8926A /* add-icon@2x.png in Resources */,
-				A6693572179D31E200E5A40F /* Default@2x.png in Resources */,
-				A6693574179D31E200E5A40F /* Default-568h@2x.png in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
 				A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */,
-				A636CB56179D842600526D7A /* noise.png in Resources */,
 				A636CB58179DB0C600526D7A /* Icon.png in Resources */,
 				A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */,
 				A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */,
@@ -319,6 +313,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A663AE0C189BEBA900CF3AFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 082c35275c8e0190668e584b9baaeb1b1c9bb403";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A6693556179D31E200E5A40F /* Sources */ = {
@@ -339,6 +349,7 @@
 				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,
 				A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */,
 				A636CB54179D60D300526D7A /* SKEvent.m in Sources */,
+				A6DEF634189BE11000070415 /* SKPushManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +447,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/khanov/Developer/Time-Left/Time\\ Left",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
@@ -453,6 +468,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/khanov/Developer/Time-Left/Time\\ Left",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";

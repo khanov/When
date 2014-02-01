@@ -27,7 +27,7 @@
     [self.pushManager registerForModelUpdateNotifications];
     
     // Crashlytics
-    [Crashlytics startWithAPIKey:crashlyticsAPIKey];
+    [Crashlytics startWithAPIKey:@"082c35275c8e0190668e584b9baaeb1b1c9bb403"];
     
     return YES;
 }
