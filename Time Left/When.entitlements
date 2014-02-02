@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>$(TeamIdentifierPrefix)com.khanov.Time-Left</string>
+		<string>$(TeamIdentifierPrefix)com.khanov.When</string>
 	</array>
 </dict>
 </plist>

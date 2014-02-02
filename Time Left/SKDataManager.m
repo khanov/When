@@ -140,7 +140,7 @@ static NSString *kEventEntityName = @"Event";
     NSURL *iCloud = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier: nil];
     
     if (iCloud) {
-        [options setObject:@"6P9PN587KS~com~khanov~Time-Left" forKey:NSPersistentStoreUbiquitousContentNameKey];
+        [options setObject:@"6P9PN587KS~com~khanov~When" forKey:NSPersistentStoreUbiquitousContentNameKey];
     }
     
     NSURL *documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory

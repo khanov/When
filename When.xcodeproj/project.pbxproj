@@ -47,7 +47,7 @@
 		A62A08171893E2860031AE7F /* SKDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDataManager.m; sourceTree = "<group>"; };
 		A62A081C1893F3A10031AE7F /* SKEvent+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKEvent+Helper.h"; sourceTree = "<group>"; };
 		A62A081D1893F3A10031AE7F /* SKEvent+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEvent+Helper.m"; sourceTree = "<group>"; };
-		A62A081F18940BC60031AE7F /* Time Left.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Time Left.entitlements"; sourceTree = "<group>"; };
+		A62A081F18940BC60031AE7F /* When.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = When.entitlements; sourceTree = "<group>"; };
 		A62A0833189504380031AE7F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
@@ -66,14 +66,14 @@
 		A65DE88C189E36AC009F7AFE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A65DE88E189E41FA009F7AFE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "Time Left/Crashlytics.framework"; sourceTree = "<group>"; };
-		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A669355A179D31E200E5A40F /* When.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = When.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A6693561179D31E200E5A40F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A6693565179D31E200E5A40F /* Time Left-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Time Left-Info.plist"; sourceTree = "<group>"; };
+		A6693565179D31E200E5A40F /* When-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "When-Info.plist"; sourceTree = "<group>"; };
 		A6693567179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6693569179D31E200E5A40F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A669356B179D31E200E5A40F /* Time Left-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Time Left-Prefix.pch"; sourceTree = "<group>"; };
+		A669356B179D31E200E5A40F /* When-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "When-Prefix.pch"; sourceTree = "<group>"; };
 		A669356C179D31E200E5A40F /* SKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAppDelegate.h; sourceTree = "<group>"; };
 		A669356D179D31E200E5A40F /* SKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAppDelegate.m; sourceTree = "<group>"; };
 		A6693576179D31E200E5A40F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		A6693551179D31E200E5A40F = {
 			isa = PBXGroup;
 			children = (
-				A6693563179D31E200E5A40F /* Time Left */,
+				A6693563179D31E200E5A40F /* When */,
 				A669355C179D31E200E5A40F /* Frameworks */,
 				A669355B179D31E200E5A40F /* Products */,
 			);
@@ -149,7 +149,7 @@
 		A669355B179D31E200E5A40F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A669355A179D31E200E5A40F /* Time Left.app */,
+				A669355A179D31E200E5A40F /* When.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,11 +171,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A6693563179D31E200E5A40F /* Time Left */ = {
+		A6693563179D31E200E5A40F /* When */ = {
 			isa = PBXGroup;
 			children = (
 				A62A0833189504380031AE7F /* Media.xcassets */,
-				A62A081F18940BC60031AE7F /* Time Left.entitlements */,
+				A62A081F18940BC60031AE7F /* When.entitlements */,
 				A669356C179D31E200E5A40F /* SKAppDelegate.h */,
 				A669356D179D31E200E5A40F /* SKAppDelegate.m */,
 				A62A08161893E2860031AE7F /* SKDataManager.h */,
@@ -192,16 +192,17 @@
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
 			);
+			name = When;
 			path = "Time Left";
 			sourceTree = "<group>";
 		};
 		A6693564179D31E200E5A40F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A6693565179D31E200E5A40F /* Time Left-Info.plist */,
+				A6693565179D31E200E5A40F /* When-Info.plist */,
 				A6693566179D31E200E5A40F /* InfoPlist.strings */,
 				A6693569179D31E200E5A40F /* main.m */,
-				A669356B179D31E200E5A40F /* Time Left-Prefix.pch */,
+				A669356B179D31E200E5A40F /* When-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -257,9 +258,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A6693559179D31E200E5A40F /* Time Left */ = {
+		A6693559179D31E200E5A40F /* When */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6693580179D31E200E5A40F /* Build configuration list for PBXNativeTarget "Time Left" */;
+			buildConfigurationList = A6693580179D31E200E5A40F /* Build configuration list for PBXNativeTarget "When" */;
 			buildPhases = (
 				A6693556179D31E200E5A40F /* Sources */,
 				A6693557179D31E200E5A40F /* Frameworks */,
@@ -270,9 +271,9 @@
 			);
 			dependencies = (
 			);
-			name = "Time Left";
+			name = When;
 			productName = "Time Left";
-			productReference = A669355A179D31E200E5A40F /* Time Left.app */;
+			productReference = A669355A179D31E200E5A40F /* When.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -295,7 +296,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A6693555179D31E200E5A40F /* Build configuration list for PBXProject "Time Left" */;
+			buildConfigurationList = A6693555179D31E200E5A40F /* Build configuration list for PBXProject "When" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -307,7 +308,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A6693559179D31E200E5A40F /* Time Left */,
+				A6693559179D31E200E5A40F /* When */,
 			);
 		};
 /* End PBXProject section */
@@ -458,23 +459,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "Time Left/When.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/khanov/Developer/Time-Left/Time\\ Left",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
-				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
+				GCC_PREFIX_HEADER = "Time Left/When-Prefix.pch";
+				INFOPLIST_FILE = "Time Left/When-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/khanov/Developer/Time-Left",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
+				PRODUCT_NAME = When;
+				PROVISIONING_PROFILE = "9E2FBF9B-D4AD-47E1-B552-175ED0B4AF64";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -485,23 +486,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "Time Left/When.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Salavat Khanov (6P9PN587KS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Salavat Khanov (6P9PN587KS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/khanov/Developer/Time-Left/Time\\ Left",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
-				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
+				GCC_PREFIX_HEADER = "Time Left/When-Prefix.pch";
+				INFOPLIST_FILE = "Time Left/When-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/khanov/Developer/Time-Left",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
+				PRODUCT_NAME = When;
+				PROVISIONING_PROFILE = "E3092739-4603-4596-B51A-3B3DD20E4EC4";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -510,7 +511,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6693555179D31E200E5A40F /* Build configuration list for PBXProject "Time Left" */ = {
+		A6693555179D31E200E5A40F /* Build configuration list for PBXProject "When" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A669357E179D31E200E5A40F /* Debug */,
@@ -519,7 +520,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6693580179D31E200E5A40F /* Build configuration list for PBXNativeTarget "Time Left" */ = {
+		A6693580179D31E200E5A40F /* Build configuration list for PBXNativeTarget "When" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6693581179D31E200E5A40F /* Debug */,
