@@ -12,10 +12,12 @@
 #import "SKAddEventTableViewController.h"
 #import "SKCustomCollectionViewFlowLayout.h"
 #import "SKAppDelegate.h"
+#import "GAIDictionaryBuilder.h"
 
 static NSInteger kMarginTopBottom = 12;
 static NSInteger kMarginLeftRight = 10;
 static NSInteger kCellWeightHeight = 145;
+static NSString *kEventsScreenName = @"Events Grid";
 
 @interface SKEventsCollectionViewController ()
 
@@ -23,7 +25,6 @@ static NSInteger kCellWeightHeight = 145;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
 
-- (IBAction)longPressGesture:(UIGestureRecognizer *)recognizer;
 - (IBAction)deleteButton:(UIButton *)sender;
 
 @end
@@ -61,6 +62,14 @@ static NSInteger kCellWeightHeight = 145;
     gestureRecognizer.delegate = self;
     gestureRecognizer.delaysTouchesBegan = YES;
     [self.collectionView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)setupColors
@@ -185,7 +194,6 @@ static NSInteger kCellWeightHeight = 145;
     // for events that haven't yet started, use smaller text
     [event progress] < 0 ? [cell.progressView useSmallerFont] : [cell.progressView useDefaultFont];
     
-    
     [cell.progressView setNeedsDisplay];
     
     return cell;
@@ -234,6 +242,15 @@ static NSInteger kCellWeightHeight = 145;
         self.editing = YES;
         [self stopTimer];
         [self updateView];
+
+        // GA
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:kEventsScreenName];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                              action:@"touch"
+                                                               label:@"Start Editing"
+                                                               value:nil] build]];
+        [tracker set:kGAIScreenName value:nil];
     }
 }
 
@@ -244,6 +261,15 @@ static NSInteger kCellWeightHeight = 145;
     [[SKDataManager sharedManager] saveContext];
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"Delete"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
 }
 
 - (void)doneEditing
@@ -259,6 +285,15 @@ static NSInteger kCellWeightHeight = 145;
     self.editing = NO;
     [self startTimer];
     [self updateView];
+    
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"Done Editing"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
 }
 
 @end

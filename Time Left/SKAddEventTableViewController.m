@@ -8,6 +8,7 @@
 
 #import "SKAddEventTableViewController.h"
 #import "SKAppDelegate.h"
+#import "GAIDictionaryBuilder.h"
 
 static NSInteger kTextFieldSection = 0;
 static NSInteger kNameCellIndex = 0;
@@ -25,6 +26,9 @@ static NSString *kEndsDateDefaultString = @"Choose...";
 static NSString *kErrorEmptyNameTitle = @"Empty Name";
 static NSString *kErrorEmptyNameMessage = @"Please give a name to the event.";
 static NSString *kErrorEmptyNameCancel = @"OK";
+
+static NSString *kAddEventScreenName = @"Add Event";
+
 
 @interface SKAddEventTableViewController ()
 
@@ -59,6 +63,10 @@ static NSString *kErrorEmptyNameCancel = @"OK";
     [super viewDidAppear:animated];
     [self.nameTextField becomeFirstResponder];
     [self setupDatePickers];
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kAddEventScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -233,6 +241,14 @@ static NSString *kErrorEmptyNameCancel = @"OK";
 - (IBAction)cancelButton:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kAddEventScreenName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"Cancel"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
 }
 
 - (IBAction)saveButton:(id)sender
@@ -244,6 +260,15 @@ static NSString *kErrorEmptyNameCancel = @"OK";
                                                   cancelButtonTitle:kErrorEmptyNameCancel
                                                   otherButtonTitles:nil];
         [alertView show];
+        
+        // GA
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:kAddEventScreenName];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                              action:@"touch"
+                                                               label:@"Save (Empty Name Error)"
+                                                               value:nil] build]];
+        [tracker set:kGAIScreenName value:nil];
     }
     else {
         SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
@@ -253,6 +278,15 @@ static NSString *kErrorEmptyNameCancel = @"OK";
         [[SKDataManager sharedManager] saveContext];
         NSLog(@"Saved: %@", newEvent);
         [self dismissViewControllerAnimated:YES completion:nil];
+        
+        // GA
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:kAddEventScreenName];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                              action:@"touch"
+                                                               label:@"Save"
+                                                               value:nil] build]];
+        [tracker set:kGAIScreenName value:nil];
     }
 }
 

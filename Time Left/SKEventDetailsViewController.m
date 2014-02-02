@@ -8,6 +8,9 @@
 
 #import "SKEventDetailsViewController.h"
 #import "SKAppDelegate.h"
+#import "GAIDictionaryBuilder.h"
+
+static NSString *kEventDetailsScreenName = @"Event Details";
 
 @interface SKEventDetailsViewController ()
 
@@ -29,6 +32,14 @@
 
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventDetailsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 #pragma mark - Setup View
@@ -127,7 +138,15 @@
 - (void)shareBurronPressed
 {
     // prepare string
-    NSString *shareString = [NSString stringWithFormat: @"%@ (%@) — ", self.nameLabel.text, self.descriptionLabel.text];
+    NSString *shareString;
+    if (self.event.details.length == 0) {
+        shareString = [NSString stringWithFormat: @"%@ (%@)", self.nameLabel.text, self.descriptionLabel.text];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        shareString = [NSString stringWithFormat: @"%@ (%@): %@", self.nameLabel.text, [dateFormatter stringFromDate:self.event.endDate], self.descriptionLabel.text];
+    }
     
     // prepare image
     CGFloat verticalOffset = 130.0;
@@ -136,13 +155,21 @@
     UIActivityViewController *avc = [[UIActivityViewController alloc] initWithActivityItems:@[shareString, finalImage] applicationActivities:nil];
     avc.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeSaveToCameraRoll, UIActivityTypeAirDrop];
 	[self presentViewController:avc animated:YES completion:NULL];
+    
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventDetailsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"Share"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
 }
 
 #pragma mark — Screenshot
 
-- (UIImage *) screenshot
+- (UIImage *)screenshot
 {
-    
     CGSize imageSize = CGSizeZero;
     
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -183,8 +210,8 @@
     return image;
 }
 
-- (UIImage *) cropImage: (UIImage *) image byOffset: (CGFloat) verticalOffset {
-
+- (UIImage *)cropImage:(UIImage *)image byOffset:(CGFloat) verticalOffset
+{
     CGRect cropRect = CGRectMake(0, verticalOffset, image.size.width * 2.0, image.size.height * 2.0 - verticalOffset);
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];

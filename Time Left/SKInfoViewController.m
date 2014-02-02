@@ -8,10 +8,12 @@
 
 #import "SKInfoViewController.h"
 #import "SKAppDelegate.h"
+#import "GAIDictionaryBuilder.h"
+
+static NSString *kInfoScreenName = @"Info";
 
 @interface SKInfoViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
 @end
 
 @implementation SKInfoViewController
@@ -30,6 +32,14 @@
     [super viewDidLoad];
     [self setupColors];
     self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kInfoScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)setupColors

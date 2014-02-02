@@ -16,6 +16,10 @@
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
 		A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */; };
 		A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */; };
+		A65DE889189E365B009F7AFE /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE888189E365B009F7AFE /* libGoogleAnalyticsServices.a */; };
+		A65DE88B189E369E009F7AFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */; };
+		A65DE88D189E36AC009F7AFE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88C189E36AC009F7AFE /* libz.dylib */; };
+		A65DE88F189E41FA009F7AFE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88E189E41FA009F7AFE /* AdSupport.framework */; };
 		A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
@@ -51,6 +55,16 @@
 		A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsViewController.m; sourceTree = "<group>"; };
 		A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKProgressIndicator.h; sourceTree = "<group>"; };
 		A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKProgressIndicator.m; sourceTree = "<group>"; };
+		A65DE881189E354F009F7AFE /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		A65DE882189E354F009F7AFE /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		A65DE883189E354F009F7AFE /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		A65DE884189E354F009F7AFE /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		A65DE885189E354F009F7AFE /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		A65DE886189E354F009F7AFE /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		A65DE888189E365B009F7AFE /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A65DE88C189E36AC009F7AFE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A65DE88E189E41FA009F7AFE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "Time Left/Crashlytics.framework"; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* Time Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -85,9 +99,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A65DE88F189E41FA009F7AFE /* AdSupport.framework in Frameworks */,
+				A65DE88D189E36AC009F7AFE /* libz.dylib in Frameworks */,
+				A65DE88B189E369E009F7AFE /* SystemConfiguration.framework in Frameworks */,
 				A62A080F1892A2A90031AE7F /* CoreData.framework in Frameworks */,
 				A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */,
 				A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */,
+				A65DE889189E365B009F7AFE /* libGoogleAnalyticsServices.a in Frameworks */,
 				A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */,
 				A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */,
 				A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */,
@@ -104,6 +122,19 @@
 				A62A080B18928E8E0031AE7F /* SKInfoViewController.m */,
 			);
 			name = Info;
+			sourceTree = "<group>";
+		};
+		A65DE887189E355C009F7AFE /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				A65DE881189E354F009F7AFE /* GAI.h */,
+				A65DE882189E354F009F7AFE /* GAIDictionaryBuilder.h */,
+				A65DE883189E354F009F7AFE /* GAIFields.h */,
+				A65DE884189E354F009F7AFE /* GAILogger.h */,
+				A65DE885189E354F009F7AFE /* GAITrackedViewController.h */,
+				A65DE886189E354F009F7AFE /* GAITracker.h */,
+			);
+			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		A6693551179D31E200E5A40F = {
@@ -126,6 +157,10 @@
 		A669355C179D31E200E5A40F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A65DE88E189E41FA009F7AFE /* AdSupport.framework */,
+				A65DE88C189E36AC009F7AFE /* libz.dylib */,
+				A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */,
+				A65DE888189E365B009F7AFE /* libGoogleAnalyticsServices.a */,
 				A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */,
 				A62A080E1892A2A90031AE7F /* CoreData.framework */,
 				A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */,
@@ -152,6 +187,7 @@
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
 				A62A080D18928E930031AE7F /* Info */,
 				A6A3E8A6188EC41300A3E4FB /* Model */,
+				A65DE887189E355C009F7AFE /* Google Analytics */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
 				A6693578179D31E200E5A40F /* MainStoryboard_iPad.storyboard */,
 				A6693564179D31E200E5A40F /* Supporting Files */,
@@ -250,7 +286,7 @@
 				ORGANIZATIONNAME = "Salavat Khanov";
 				TargetAttributes = {
 					A6693559179D31E200E5A40F = {
-						DevelopmentTeam = ZT95237CCP;
+						DevelopmentTeam = 6P9PN587KS;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -423,7 +459,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -433,6 +469,10 @@
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/khanov/Developer/Time-Left",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -446,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,6 +496,10 @@
 				GCC_PREFIX_HEADER = "Time Left/Time Left-Prefix.pch";
 				INFOPLIST_FILE = "Time Left/Time Left-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/khanov/Developer/Time-Left",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E0544AFB-9A45-47C4-AA39-FF3EB9DFEEC9";
 				TARGETED_DEVICE_FAMILY = 1;

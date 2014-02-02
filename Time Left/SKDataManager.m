@@ -292,7 +292,7 @@ static NSString *kEventEntityName = @"Event";
     [self createEventWithName:@"Fun With Friends"
                     startDate:now
                       endDate:nextSunday
-                      details:@"It's going to be fun!"];
+                      details:@"Next Sunday is going to be fun!"];
     
     
     //
