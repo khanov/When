@@ -14,6 +14,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Crashlytics
+    [Crashlytics startWithAPIKey:@"082c35275c8e0190668e584b9baaeb1b1c9bb403"];
+    
     self.window.tintColor = [UIColor whiteColor];
     
     // Remove 1pt underline under the navbar
@@ -21,6 +24,10 @@
                                       forBarPosition:UIBarPositionAny
                                           barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    // Create push notifications manager
+    self.pushManager = [[SKPushManager alloc] init];
+    [self.pushManager registerForModelUpdateNotifications];
     
     // Create Default events if needed
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
@@ -33,14 +40,7 @@
         [[SKDataManager sharedManager] createDefaultEvents];
         [[SKDataManager sharedManager] saveContext];
     }
-    
-    // Create push notifications manager
-    self.pushManager = [[SKPushManager alloc] init];
-    [self.pushManager registerForModelUpdateNotifications];
-    
-    // Crashlytics
-    [Crashlytics startWithAPIKey:@"082c35275c8e0190668e584b9baaeb1b1c9bb403"];
-    
+
     return YES;
 }
 

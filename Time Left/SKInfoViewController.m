@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     [self setupColors];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)setupColors

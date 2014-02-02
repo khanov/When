@@ -17,6 +17,8 @@ static CGFloat kNumberInsideCircleFontSize = 35.0;
 static NSString *kMetaTextFontName = @"HelveticaNeue-Light";
 static CGFloat kMetaTextFontSizeDefault = 12.0;
 static CGFloat kMetaTextFontSizeSmall = 11.0;
+static NSString *kSymbolFontName = @"AppleSDGothicNeo-Regular";
+static CGFloat kSymbolFontSize = 45.0;
 
 @implementation SKEventCellProgressView
 
@@ -79,6 +81,11 @@ static CGFloat kMetaTextFontSizeSmall = 11.0;
 {
     self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
     self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeSmall];
+}
+
+- (void)useFontForSymbol
+{
+    self.progressLabel.font = [UIFont fontWithName:kSymbolFontName size:kSymbolFontSize];
 }
 
 - (void)useDefaultFont

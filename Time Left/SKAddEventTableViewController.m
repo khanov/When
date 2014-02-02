@@ -247,9 +247,9 @@ static NSString *kErrorEmptyNameCancel = @"OK";
     }
     else {
         SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
-                                                 startDate:self.startsDatePicker.date
-                                                   endDate:self.endsDatePicker.date
-                                                   details:self.descriptionTextField.text];
+                                                                     startDate:self.startsDatePicker.date
+                                                                       endDate:self.endsDatePicker.date
+                                                                       details:self.descriptionTextField.text];
         [[SKDataManager sharedManager] saveContext];
         NSLog(@"Saved: %@", newEvent);
         [self dismissViewControllerAnimated:YES completion:nil];

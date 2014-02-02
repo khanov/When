@@ -48,7 +48,11 @@
     SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSDictionary *colors = [delegate currentTheme];
     self.view.backgroundColor = [colors objectForKey:@"background"];
-    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
+//    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
+    // Transparent nav bar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
     self.nameLabel.textColor = [colors objectForKey:@"colorText"];
     self.descriptionLabel.textColor = [colors objectForKey:@"colorText"];
 }

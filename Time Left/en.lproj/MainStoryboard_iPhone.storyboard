@@ -14,29 +14,175 @@
                         <viewControllerLayoutGuide type="bottom" id="NXH-7N-m6W"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l8f-na-HSH">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEg-Vh-8R1">
-                                <rect key="frame" x="20" y="55" width="280" height="393"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KEg-Vh-8R1">
+                                <rect key="frame" x="35" y="103" width="250" height="361"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">The app shows how much time left until specified events happen. Hold to enter edit mode Tap on detail view to see.
+                                        <string key="content">The app shows how much time left until specified events happen. 
 
-When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
+</string>
                                         <attributes>
                                             <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="◉">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HiraKakuProN-W3"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> Long press to start removing events.
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="◉">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HiraKakuProN-W3"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> Tap on an event to see more details.
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72661952554744524" blue="0.20586222627737225" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="◉">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HiraKakuProN-W3"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> Get notified via push notifications.
+
+To suggest a feature please email me at </string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="dev@khanov.com">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <url key="NSLink" string="mailto:dev@khanov.com?Subject=When%20App"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">.
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Thanks for downloading, you really are awesome.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1B-8O-Ne6">
+                                <rect key="frame" x="40" y="472" width="240" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="gTL-8x-hON"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="When">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843139999996" green="0.72661952549999997" blue="0.20586222630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> 1.0 for iPhone
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843139999996" green="0.72661952549999997" blue="0.20586222630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Created by ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Salavat Khanov">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <url key="NSLink" string="http://khanov.me"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=".">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99607843137254903" green="0.72549019607843135" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="M1B-8O-Ne6" secondAttribute="trailing" constant="40" id="21r-2O-mM3"/>
+                            <constraint firstItem="M1B-8O-Ne6" firstAttribute="top" secondItem="KEg-Vh-8R1" secondAttribute="bottom" constant="8" id="2Hd-U6-FOu"/>
+                            <constraint firstItem="NXH-7N-m6W" firstAttribute="top" secondItem="M1B-8O-Ne6" secondAttribute="bottom" constant="20" id="IhQ-GW-0rE"/>
+                            <constraint firstItem="KEg-Vh-8R1" firstAttribute="leading" secondItem="l8f-na-HSH" secondAttribute="leading" constant="35" id="bf3-FC-i2U"/>
+                            <constraint firstItem="KEg-Vh-8R1" firstAttribute="top" secondItem="vdV-Zh-Bvw" secondAttribute="bottom" constant="39" id="fZ8-25-whj"/>
+                            <constraint firstItem="M1B-8O-Ne6" firstAttribute="leading" secondItem="l8f-na-HSH" secondAttribute="leading" constant="40" id="hk0-0J-NQ2"/>
+                            <constraint firstAttribute="trailing" secondItem="KEg-Vh-8R1" secondAttribute="trailing" constant="35" id="ihz-2O-cAx"/>
+                            <constraint firstItem="KEg-Vh-8R1" firstAttribute="top" secondItem="vdV-Zh-Bvw" secondAttribute="bottom" constant="39" id="s9E-cv-xMP"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="textView" destination="KEg-Vh-8R1" id="6Sm-vB-bgJ"/>
@@ -59,7 +205,7 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtW-n1-HOL" customClass="SKProgressIndicator">
-                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <rect key="frame" x="20" y="186" width="280" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2d-bw-v8d" userLabel="Progress Label">
@@ -99,7 +245,7 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
                                 </connections>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
-                                <rect key="frame" x="20" y="69" width="280" height="50"/>
+                                <rect key="frame" x="31" y="75" width="258" height="93"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="37"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,15 +263,17 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="q7r-qM-Cvc" firstAttribute="top" secondItem="DIu-rn-aMV" secondAttribute="bottom" constant="20" id="1JP-AP-BCA"/>
-                            <constraint firstItem="NtW-n1-HOL" firstAttribute="top" secondItem="FBd-in-lbD" secondAttribute="bottom" constant="25" id="A2W-KC-HIO"/>
+                            <constraint firstItem="NtW-n1-HOL" firstAttribute="top" secondItem="FBd-in-lbD" secondAttribute="bottom" constant="18" id="A2W-KC-HIO"/>
                             <constraint firstItem="DIu-rn-aMV" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" id="Awl-qq-tK4"/>
                             <constraint firstAttribute="trailing" secondItem="NtW-n1-HOL" secondAttribute="trailing" constant="20" id="D06-Lx-DGh"/>
-                            <constraint firstItem="NtW-n1-HOL" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="DfI-o8-zNj"/>
-                            <constraint firstAttribute="trailing" secondItem="FBd-in-lbD" secondAttribute="trailing" constant="20" id="Kh0-Vx-QJ2"/>
-                            <constraint firstItem="FBd-in-lbD" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" constant="5" id="Kit-FH-Jdj"/>
-                            <constraint firstItem="FBd-in-lbD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" id="XHX-Aa-NPe"/>
+                            <constraint firstItem="NtW-n1-HOL" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" constant="42" id="DfI-o8-zNj"/>
+                            <constraint firstAttribute="centerY" secondItem="NtW-n1-HOL" secondAttribute="centerY" constant="-42" id="Jvi-LA-uEO"/>
+                            <constraint firstAttribute="trailing" secondItem="FBd-in-lbD" secondAttribute="trailing" constant="31" id="Kh0-Vx-QJ2"/>
+                            <constraint firstItem="FBd-in-lbD" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" constant="11" id="Kit-FH-Jdj"/>
+                            <constraint firstItem="FBd-in-lbD" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="31" id="XHX-Aa-NPe"/>
                             <constraint firstAttribute="centerX" secondItem="NtW-n1-HOL" secondAttribute="centerX" id="eCx-LL-hcI"/>
                             <constraint firstItem="NtW-n1-HOL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="fbP-2l-RcX"/>
+                            <constraint firstItem="FBd-in-lbD" firstAttribute="top" secondItem="2Yt-va-7E6" secondAttribute="bottom" constant="11" id="oFe-8T-w0P"/>
                             <constraint firstAttribute="trailing" secondItem="DIu-rn-aMV" secondAttribute="trailing" constant="20" id="r88-Su-rrI"/>
                         </constraints>
                         <connections>
@@ -153,14 +301,14 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="cjh-Jl-h0H" customClass="SKEventsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="3ZP-2q-OY7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <collectionViewLayout key="collectionViewLayout" id="7c1-Hk-SOS" customClass="SKCustomCollectionViewFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="aRY-3T-9ec" customClass="SKEventCell">
-                                <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+                                <rect key="frame" x="0.0" y="64" width="145" height="145"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
@@ -177,10 +325,10 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
                                             <rect key="frame" x="17" y="6" width="111" height="111"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXR-uD-2Xa" userLabel="Progress Label">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXR-uD-2Xa" userLabel="Progress Label">
                                                     <rect key="frame" x="0.0" y="31" width="111" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="35"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="35"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -430,11 +578,11 @@ When 1.0 for iPhone. Thanks for downloading, you really are awesome.</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="URi-zq-5RL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GaV-pa-KhS">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="GaV-pa-KhS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5si-d8-amL">

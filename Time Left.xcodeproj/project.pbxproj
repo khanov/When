@@ -14,10 +14,6 @@
 		A62A081E1893F3A10031AE7F /* SKEvent+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A081D1893F3A10031AE7F /* SKEvent+Helper.m */; };
 		A62A0834189504380031AE7F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62A0833189504380031AE7F /* Media.xcassets */; };
 		A636CB54179D60D300526D7A /* SKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A636CB53179D60D300526D7A /* SKEvent.m */; };
-		A636CB58179DB0C600526D7A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB57179DB0C600526D7A /* Icon.png */; };
-		A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB59179DB0C900526D7A /* Icon@2x.png */; };
-		A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5B179DB0CF00526D7A /* Icon-72.png */; };
-		A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A636CB5D179DB0D200526D7A /* Icon-72@2x.png */; };
 		A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */; };
 		A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A64EEE63188D9EFD00EB237B /* SKProgressIndicator.m */; };
 		A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */; };
@@ -51,10 +47,6 @@
 		A62A0833189504380031AE7F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		A636CB52179D60D300526D7A /* SKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEvent.h; sourceTree = "<group>"; };
 		A636CB53179D60D300526D7A /* SKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEvent.m; sourceTree = "<group>"; };
-		A636CB57179DB0C600526D7A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
-		A636CB59179DB0C900526D7A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
-		A636CB5B179DB0CF00526D7A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
-		A636CB5D179DB0D200526D7A /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
 		A64EEE5F188D953E00EB237B /* SKEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventDetailsViewController.h; sourceTree = "<group>"; };
 		A64EEE60188D953E00EB237B /* SKEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventDetailsViewController.m; sourceTree = "<group>"; };
 		A64EEE62188D9EFD00EB237B /* SKProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKProgressIndicator.h; sourceTree = "<group>"; };
@@ -174,10 +166,6 @@
 				A6693566179D31E200E5A40F /* InfoPlist.strings */,
 				A6693569179D31E200E5A40F /* main.m */,
 				A669356B179D31E200E5A40F /* Time Left-Prefix.pch */,
-				A636CB5D179DB0D200526D7A /* Icon-72@2x.png */,
-				A636CB5B179DB0CF00526D7A /* Icon-72.png */,
-				A636CB59179DB0C900526D7A /* Icon@2x.png */,
-				A636CB57179DB0C600526D7A /* Icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,10 +285,6 @@
 				A62A0834189504380031AE7F /* Media.xcassets in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
 				A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */,
-				A636CB58179DB0C600526D7A /* Icon.png in Resources */,
-				A636CB5A179DB0C900526D7A /* Icon@2x.png in Resources */,
-				A636CB5C179DB0CF00526D7A /* Icon-72.png in Resources */,
-				A636CB5E179DB0D200526D7A /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +420,8 @@
 		A6693581179D31E200E5A40F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -457,6 +443,8 @@
 		A6693582179D31E200E5A40F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Time Left/Time Left.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

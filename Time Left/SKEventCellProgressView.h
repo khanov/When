@@ -20,5 +20,6 @@
 
 - (void)useSmallerFont;
 - (void)useDefaultFont;
+- (void)useFontForSymbol;
 
 @end

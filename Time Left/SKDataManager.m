@@ -263,7 +263,6 @@ static NSString *kEventEntityName = @"Event";
     NSDate *firstDayOfTheYear = [gregorianCalendar dateFromComponents:comps];
 
     firstDayOfTheYear = [NSDate dateWithTimeInterval:[[NSTimeZone localTimeZone] secondsFromGMT] sinceDate:firstDayOfTheYear]; // time zone offset
-    nextYear = [NSDate dateWithTimeInterval:[[NSTimeZone localTimeZone] secondsFromGMT] sinceDate:nextYear]; // time zone offset
     
     [self createEventWithName:@"New Year"
                     startDate:firstDayOfTheYear
@@ -302,6 +301,8 @@ static NSString *kEventEntityName = @"Event";
                     startDate:firstDayOfTheYear
                       endDate:[NSDate date]
                       details:@""];
+    
+    [self saveContext];
     
 }
 

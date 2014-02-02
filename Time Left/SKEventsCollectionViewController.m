@@ -68,8 +68,12 @@ static NSInteger kCellWeightHeight = 145;
     SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSDictionary *colors = [delegate currentTheme];
     self.collectionView.backgroundColor = [colors objectForKey:@"background"];
-    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
-    self.navigationController.navigationBar.tintColor = [colors objectForKey:@"tint"];
+//    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
+//    self.navigationController.navigationBar.tintColor = [colors objectForKey:@"tint"];
+    // Transparent nav bar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
 
 }
 
@@ -176,13 +180,11 @@ static NSInteger kCellWeightHeight = 145;
     cell.progressView.progressLabel.text = [options valueForKey:@"number"];
     cell.progressView.metaLabel.text = [options valueForKey:@"text"];
     
+    // for events that have finished, use special font to display symbol
+    [event progress] > 1.0 ? [cell.progressView useFontForSymbol] : [cell.progressView useDefaultFont];
     // for events that haven't yet started, use smaller text
-    if ([event progress] < 0) {
-        [cell.progressView useSmallerFont];
-    }
-    else {
-        [cell.progressView useDefaultFont];
-    }
+    [event progress] < 0 ? [cell.progressView useSmallerFont] : [cell.progressView useDefaultFont];
+    
     
     [cell.progressView setNeedsDisplay];
     
