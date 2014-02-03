@@ -9,7 +9,6 @@
 #import "SKEventsCollectionViewController.h"
 #import "SKEventCell.h"
 #import "SKEventDetailsViewController.h"
-#import "SKAddEventTableViewController.h"
 #import "SKCustomCollectionViewFlowLayout.h"
 #import "SKAppDelegate.h"
 #import "GAIDictionaryBuilder.h"
@@ -22,7 +21,6 @@ static NSString *kEventsScreenName = @"Events Grid";
 @interface SKEventsCollectionViewController ()
 
 @property (strong, nonatomic) NSTimer *timer;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
 
 - (IBAction)deleteButton:(UIButton *)sender;
@@ -40,22 +38,26 @@ static NSString *kEventsScreenName = @"Events Grid";
     return self;
 }
 
+#pragma mark - Configure View
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupColors];
     [self registerForNotifications];
-
-    // Allocate and configure the layout.
+    
+    // Allocate and configure the layout
     SKCustomCollectionViewFlowLayout *layout = [[SKCustomCollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 10.f;
     layout.minimumLineSpacing = 10.f;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.sectionInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
     self.collectionView.collectionViewLayout = layout;
+    
     // Set navigation bar font
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
+    
     // Long press gesture recognizer
     UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
     gestureRecognizer.minimumPressDuration = 0.5; //seconds
@@ -64,35 +66,33 @@ static NSString *kEventsScreenName = @"Events Grid";
     [self.collectionView addGestureRecognizer:gestureRecognizer];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:kEventsScreenName];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
 - (void)setupColors
 {
     SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSDictionary *colors = [delegate currentTheme];
     self.collectionView.backgroundColor = [colors objectForKey:@"background"];
-//    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
-//    self.navigationController.navigationBar.tintColor = [colors objectForKey:@"tint"];
     // Transparent nav bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-
+    
 }
 
-#pragma mark Model Notifications
+
+#pragma mark Notifications
 
 - (void)registerForNotifications
 {
+    // Model Changed Notification: event added
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(eventAdded:)
                                                  name:@"EventAdded"
+                                               object:nil];
+    
+    // Stop edit mode after loosing focus
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResign)
+                                                 name:UIApplicationWillResignActiveNotification
                                                object:nil];
 }
 
@@ -106,14 +106,29 @@ static NSString *kEventsScreenName = @"Events Grid";
     }
 }
 
+- (void)applicationWillResign
+{
+    [self doneEditing];
+}
+
+
 #pragma mark Update View
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+    [self doneEditing]; // if needed
     [self updateView];
     [self startTimer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -149,6 +164,7 @@ static NSString *kEventsScreenName = @"Events Grid";
     [super didReceiveMemoryWarning];
 }
 
+
 #pragma mark - UIScrollView Delegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -162,6 +178,7 @@ static NSString *kEventsScreenName = @"Events Grid";
         [self startTimer];
     }
 }
+
 
 #pragma mark - UICollectionView Datasource
 
@@ -199,6 +216,7 @@ static NSString *kEventsScreenName = @"Events Grid";
     return cell;
 }
 
+
 #pragma mark – UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -211,14 +229,14 @@ static NSString *kEventsScreenName = @"Events Grid";
     return UIEdgeInsetsMake(kMarginTopBottom, kMarginLeftRight, kMarginTopBottom, kMarginLeftRight);
 }
 
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
-    // Pass the selected object to the new view controller.
+    // Pass the selected event to the details view controller.
     if ([segue.identifier isEqualToString:@"showEventDetailsView"]) {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-        
         SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.fetchedEventsArray objectAtIndex:indexPath.row];
     }
@@ -229,12 +247,13 @@ static NSString *kEventsScreenName = @"Events Grid";
     [self performSegueWithIdentifier:@"showAddEventView" sender:nil];
 }
 
+
 #pragma mark - Edit mode
 
 - (void)longPressGesture:(UIGestureRecognizer *)recognizer
 {
     if ([recognizer state] == UIGestureRecognizerStateBegan) {
-        // Replace Add button to Done
+        // Replace Add button to Done in the navbar
         UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing)];
         [self.navigationItem setRightBarButtonItem:done];
         // Start Editing mode
@@ -274,26 +293,28 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 - (void)doneEditing
 {
-    NSLog(@"Done editing");
-    // Replace Add button to Done
-    UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add-icon"]
-                                                            style:UIBarButtonItemStyleBordered
-                                                           target:self
-                                                           action:@selector(showAddEventView)];
-    [self.navigationItem setRightBarButtonItem:add];
-    // Stop Edit mode
-    self.editing = NO;
-    [self startTimer];
-    [self updateView];
-    
-    // GA
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:kEventsScreenName];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
-                                                          action:@"touch"
-                                                           label:@"Done Editing"
-                                                           value:nil] build]];
-    [tracker set:kGAIScreenName value:nil];
+    if (self.isEditing) {
+        NSLog(@"Done editing");
+        // Replace Add button to Done
+        UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add-icon"]
+                                                                style:UIBarButtonItemStyleBordered
+                                                               target:self
+                                                               action:@selector(showAddEventView)];
+        [self.navigationItem setRightBarButtonItem:add];
+        // Stop Edit mode
+        self.editing = NO;
+        [self startTimer];
+        [self updateView];
+        
+        // GA
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:kEventsScreenName];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                              action:@"touch"
+                                                               label:@"Done Editing"
+                                                               value:nil] build]];
+        [tracker set:kGAIScreenName value:nil];
+    }
 }
 
 @end

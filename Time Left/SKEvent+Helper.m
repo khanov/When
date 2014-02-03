@@ -74,7 +74,7 @@ static NSString *kDone = @"DONE";
             progress = [@([self hoursLeftToDate:self.startDate]) stringValue];
             metaText = kHoursToStart;
         }
-        else if ([self minutesLeftToDate:self.startDate] > 5) {
+        else if ([self minutesLeftToDate:self.startDate] > 2) {
             progress = [@([self minutesLeftToDate:self.startDate]) stringValue];
             metaText = kMinutesToStart;
         }
@@ -96,7 +96,7 @@ static NSString *kDone = @"DONE";
             progress = [@([self hoursLeftToDate:self.endDate]) stringValue];
             metaText = kHoursLeft;
         }
-        else if ([self minutesLeftToDate:self.endDate] > 5) {
+        else if ([self minutesLeftToDate:self.endDate] > 2) {
             progress = [@([self minutesLeftToDate:self.endDate]) stringValue];
             metaText = kMinutesLeft;
         }

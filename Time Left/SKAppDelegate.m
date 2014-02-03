@@ -34,7 +34,7 @@
 - (void)setupGoogleAnalytics
 {
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelWarning];
     [GAI sharedInstance].dispatchInterval = 20;
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-47720523-1"];
     
@@ -72,7 +72,7 @@
 {
     self.window.tintColor = [UIColor whiteColor];
     
-    // Remove 1pt underline under the navbar
+    // Remove the 1pt underline under the navbar
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
                                       forBarPosition:UIBarPositionAny
                                           barMetrics:UIBarMetricsDefault];

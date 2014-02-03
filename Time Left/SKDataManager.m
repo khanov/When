@@ -219,7 +219,7 @@ static NSString *kEventEntityName = @"Event";
                                                                    return [obj1.createdDate compare:obj2.createdDate];
                                                                }];
     
-    // Returning Sorted Fetched Events
+    // Return Sorted Fetched Events
     return [fetchedEvents sortedArrayUsingDescriptors:@[sortDescriptor]];;
 }
 

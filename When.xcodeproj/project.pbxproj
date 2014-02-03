@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A62A080C18928E8E0031AE7F /* SKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A080B18928E8E0031AE7F /* SKInfoViewController.m */; };
 		A62A080F1892A2A90031AE7F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62A080E1892A2A90031AE7F /* CoreData.framework */; };
 		A62A08121892A30D0031AE7F /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A62A08101892A30D0031AE7F /* AppModel.xcdatamodeld */; };
 		A62A08181893E2860031AE7F /* SKDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A08171893E2860031AE7F /* SKDataManager.m */; };
@@ -39,8 +38,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A62A080A18928E8E0031AE7F /* SKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKInfoViewController.h; sourceTree = "<group>"; };
-		A62A080B18928E8E0031AE7F /* SKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKInfoViewController.m; sourceTree = "<group>"; };
 		A62A080E1892A2A90031AE7F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A62A08111892A30D0031AE7F /* AppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppModel.xcdatamodel; sourceTree = "<group>"; };
 		A62A08161893E2860031AE7F /* SKDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDataManager.h; sourceTree = "<group>"; };
@@ -115,15 +112,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A62A080D18928E930031AE7F /* Info */ = {
-			isa = PBXGroup;
-			children = (
-				A62A080A18928E8E0031AE7F /* SKInfoViewController.h */,
-				A62A080B18928E8E0031AE7F /* SKInfoViewController.m */,
-			);
-			name = Info;
-			sourceTree = "<group>";
-		};
 		A65DE887189E355C009F7AFE /* Google Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +173,6 @@
 				A6A3E8AD1891257C00A3E4FB /* Event Grid */,
 				A6A3E8AC1891256800A3E4FB /* Add Event */,
 				A6A3E8A5188EC02100A3E4FB /* Event Details */,
-				A62A080D18928E930031AE7F /* Info */,
 				A6A3E8A6188EC41300A3E4FB /* Model */,
 				A65DE887189E355C009F7AFE /* Google Analytics */,
 				A6693575179D31E200E5A40F /* MainStoryboard_iPhone.storyboard */,
@@ -356,7 +343,6 @@
 				A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */,
 				A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */,
 				A62A081E1893F3A10031AE7F /* SKEvent+Helper.m in Sources */,
-				A62A080C18928E8E0031AE7F /* SKInfoViewController.m in Sources */,
 				A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */,
 				A64EEE61188D953E00EB237B /* SKEventDetailsViewController.m in Sources */,
 				A64EEE64188D9EFD00EB237B /* SKProgressIndicator.m in Sources */,
@@ -502,7 +488,7 @@
 					"/Users/khanov/Developer/Time-Left",
 				);
 				PRODUCT_NAME = When;
-				PROVISIONING_PROFILE = "E3092739-4603-4596-B51A-3B3DD20E4EC4";
+				PROVISIONING_PROFILE = "354732A3-6CE7-47B6-A549-4F0657235632";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
