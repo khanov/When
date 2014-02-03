@@ -18,8 +18,10 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet SKProgressIndicator *progressView;
 @property (strong, nonatomic) NSTimer *timer;
+@property (assign, nonatomic) NSInteger tapCounter;
 
-- (IBAction)swipeGesture:(id)sender;
+- (IBAction)tapGesture:(UITapGestureRecognizer *)sender;
+
 
 @end
 
@@ -52,6 +54,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     [self setupProgressLabels];
     [self setupNavigationButtons];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
+    self.tapCounter = 0;
 }
 
 - (void)setupColors
@@ -59,7 +62,6 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSDictionary *colors = [delegate currentTheme];
     self.view.backgroundColor = [colors objectForKey:@"background"];
-//    self.navigationController.navigationBar.backgroundColor = [colors objectForKey:@"background"];
     // Transparent nav bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -70,20 +72,104 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 
 - (void)setupLabels
 {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
     self.nameLabel.text = self.event.name;
-    if (self.event.details.length == 0) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        if ([self.event progress] < 1.0) {
-            self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
-        } else {
-            self.descriptionLabel.text = [NSString stringWithFormat:@"Ended on %@", [dateFormatter stringFromDate:self.event.endDate]];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.nameLabel.alpha = 1.0;
+    }];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.progressView.alpha = 1.0;
+    }];
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        self.descriptionLabel.alpha = 0.0;
+    }];
+    
+    if ([self.event progress] < 0) {
+        /*
+         * Event not yet started
+         * Cases:
+         * 1) Starts Date
+         * 2) Description (if available)
+         * 3) Ends Date
+         */
+        switch (self.tapCounter % 3) {
+            case 0:
+                self.descriptionLabel.text = [NSString stringWithFormat:@"Starts on %@", [dateFormatter stringFromDate:self.event.startDate]];
+                break;
+            case 1:
+                if (self.event.details.length) {
+                    self.descriptionLabel.text = self.event.details;
+                    break;
+                } else {
+                    self.tapCounter++;
+                }
+            default:
+                self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
+                break;
         }
         
-    } else {
-        self.descriptionLabel.text = self.event.details;
+    } else if ([self.event progress] >= 0 && [self.event progress] <= 1.0) {
+        /*
+         * Event in-progress
+         * Cases:
+         * 1) Description (if available)
+         * 2) Ends Date
+         */
+        switch (self.tapCounter % 2) {
+            case 0:
+                if (self.event.details.length) {
+                    self.descriptionLabel.text = self.event.details;
+                    break;
+                } else {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
+                    break;
+                }
+            default:
+                if (self.event.details.length) {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Ends on %@", [dateFormatter stringFromDate:self.event.endDate]];
+                    break;
+                } else {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Started on %@", [dateFormatter stringFromDate:self.event.startDate]];
+                    break;
+                }
+        }
+        
+    } else if ([self.event progress] > 1.0) {
+        /*
+         * Event done
+         * Cases:
+         * 1) Description (if available)
+         * 2) Ended Date
+         */
+        switch (self.tapCounter % 2) {
+            case 0:
+                if (self.event.details.length) {
+                    self.descriptionLabel.text = self.event.details;
+                    break;
+                } else {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Ended on %@", [dateFormatter stringFromDate:self.event.endDate]];
+                    break;
+                }
+            default:
+                if (self.event.details.length) {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Ended on %@", [dateFormatter stringFromDate:self.event.endDate]];
+                    break;
+                } else {
+                    self.descriptionLabel.text = [NSString stringWithFormat:@"Started on %@", [dateFormatter stringFromDate:self.event.startDate]];
+                    break;
+                }
+        }
     }
+    
+    // Animate fade-in
+    [UIView animateWithDuration:0.6 animations:^{
+        self.descriptionLabel.alpha =  0.65;
+    }];
 }
 
 - (void)setupNavigationButtons
@@ -128,10 +214,12 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)swipeGesture:(id)sender
+- (IBAction)tapGesture:(UITapGestureRecognizer *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.tapCounter++;
+    [self setupLabels];
 }
+
 
 #pragma mark - Sharing
 
@@ -219,5 +307,6 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     
     return croppedImage;
 }
+
 
 @end

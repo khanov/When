@@ -82,7 +82,6 @@
 		A6A3E8AF1891301500A3E4FB /* SKEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCell.m; sourceTree = "<group>"; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
-		A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventDelegate.h; sourceTree = "<group>"; };
 		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
 		A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCellProgressView.m; sourceTree = "<group>"; };
 		A6DEF62F1899263900070415 /* SKCustomCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCustomCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -222,7 +221,6 @@
 			children = (
 				A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */,
 				A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */,
-				A6B8E09F188D5AD5007E857F /* SKAddEventDelegate.h */,
 			);
 			name = "Add Event";
 			sourceTree = "<group>";

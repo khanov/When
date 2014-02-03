@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtW-n1-HOL" customClass="SKProgressIndicator">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtW-n1-HOL" customClass="SKProgressIndicator">
                                 <rect key="frame" x="20" y="186" width="280" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -57,7 +57,7 @@
                                     <outlet property="progressLabel" destination="N2d-bw-v8d" id="ROz-hS-s5r"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="FBd-in-lbD">
                                 <rect key="frame" x="31" y="75" width="258" height="93"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="37"/>
@@ -90,7 +90,7 @@
                             <constraint firstAttribute="trailing" secondItem="DIu-rn-aMV" secondAttribute="trailing" constant="20" id="r88-Su-rrI"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="Snq-mk-sZs" appends="YES" id="mn5-SN-CFA"/>
+                            <outletCollection property="gestureRecognizers" destination="uFI-wN-15G" appends="YES" id="ZhI-wu-gqV"/>
                         </connections>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -101,11 +101,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="Snq-mk-sZs">
+                <tapGestureRecognizer id="uFI-wN-15G">
                     <connections>
-                        <action selector="swipeGesture:" destination="2" id="fYY-wk-PPJ"/>
+                        <action selector="tapGesture:" destination="2" id="8ZV-2S-8FV"/>
                     </connections>
-                </swipeGestureRecognizer>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1890" y="-435"/>
         </scene>
