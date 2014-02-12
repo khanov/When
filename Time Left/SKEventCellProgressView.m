@@ -9,11 +9,13 @@
 #import "SKEventCellProgressView.h"
 #import "SKAppDelegate.h"
 
-static NSInteger kCircleRadius = 54;
+static NSInteger kCircleRadiusiPhone = 54;
+static NSInteger kCircleRadiusiPad = 80;
 static NSInteger kCircleLineWidth = 3;
 
 static NSString *kNumberInsideCircleFontName = @"HelveticaNeue-Thin";
-static CGFloat kNumberInsideCircleFontSize = 35.0;
+static CGFloat kNumberInsideCircleFontSizeiPhone = 35.0;
+static CGFloat kNumberInsideCircleFontSizeiPad = 50.0;
 static NSString *kMetaTextFontName = @"HelveticaNeue-Light";
 static CGFloat kMetaTextFontSizeDefault = 12.0;
 static CGFloat kMetaTextFontSizeSmall = 11.0;
@@ -55,7 +57,7 @@ static CGFloat kSymbolFontSize = 45.0;
     // Draw background
     UIBezierPath *backgroundBezierPath = [UIBezierPath bezierPath];
     [backgroundBezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kCircleRadius
+                                    radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kCircleRadiusiPhone : kCircleRadiusiPad
                       startAngle:startAngle
                         endAngle:endAngle
                        clockwise:YES];
@@ -67,7 +69,7 @@ static CGFloat kSymbolFontSize = 45.0;
     if (self.percentCircle < 100) {
         UIBezierPath *progressBezierPath = [UIBezierPath bezierPath];
         [progressBezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                                      radius:kCircleRadius
+                                      radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kCircleRadiusiPhone : kCircleRadiusiPad
                                   startAngle:startAngle
                                     endAngle:(endAngle - startAngle) * (self.percentCircle / 100.0) + startAngle
                                    clockwise:YES];
@@ -79,7 +81,7 @@ static CGFloat kSymbolFontSize = 45.0;
 
 - (void)useSmallerFont
 {
-    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
+    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kNumberInsideCircleFontSizeiPhone : kNumberInsideCircleFontSizeiPad];
     self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeSmall];
 }
 
@@ -90,7 +92,7 @@ static CGFloat kSymbolFontSize = 45.0;
 
 - (void)useDefaultFont
 {
-    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:kNumberInsideCircleFontSize];
+    self.progressLabel.font = [UIFont fontWithName:kNumberInsideCircleFontName size:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kNumberInsideCircleFontSizeiPhone : kNumberInsideCircleFontSizeiPad];
     self.metaLabel.font = [UIFont fontWithName:kMetaTextFontName size:kMetaTextFontSizeDefault];
 }
 

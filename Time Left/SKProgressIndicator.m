@@ -9,10 +9,15 @@
 #import "SKProgressIndicator.h"
 #import "SKAppDelegate.h"
 
-static NSInteger kInnerCircleRadius = 117;
-static NSInteger kInnnerCircleLineWidth = 22;
-static NSInteger kOuterCircleRadius = 138;
-static CGFloat kOuterCircleLineWidth = 2.5;
+static NSInteger kInnerCircleRadiusiPhone = 117;
+static NSInteger kInnerCircleRadiusiPad = 167;
+static NSInteger kInnnerCircleLineWidthiPhone = 22;
+static NSInteger kInnnerCircleLineWidthiPad = 22;
+
+static NSInteger kOuterCircleRadiusiPhone = 138;
+static NSInteger kOuterCircleRadiusiPad = 188;
+static CGFloat kOuterCircleLineWidthiPhone = 2.5;
+static CGFloat kOuterCircleLineWidthiPad = 2.5;
 
 static NSString *kRotationAnimationKey = @"strokeEnd";
 static NSString *kColorAnimationKey = @"strokeColor";
@@ -66,12 +71,12 @@ static NSString *kColorAnimationKey = @"strokeColor";
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kInnerCircleRadius
+                          radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kInnerCircleRadiusiPhone : kInnerCircleRadiusiPad
                       startAngle:0
                         endAngle:M_PI * 2
                        clockwise:YES];
     
-    bezierPath.lineWidth = kInnnerCircleLineWidth;
+    bezierPath.lineWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kInnnerCircleLineWidthiPhone : kInnnerCircleLineWidthiPad;
     [self.innerCircleBackgroundColor setStroke];
     [bezierPath stroke];
 }
@@ -87,12 +92,12 @@ static NSString *kColorAnimationKey = @"strokeColor";
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kInnerCircleRadius
+                          radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kInnerCircleRadiusiPhone : kInnerCircleRadiusiPad
                       startAngle:startAngle
                         endAngle:(endAngle - startAngle) * (percent / 100.0) + startAngle
                        clockwise:YES];
     
-    bezierPath.lineWidth = kInnnerCircleLineWidth;
+    bezierPath.lineWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kInnnerCircleLineWidthiPhone : kInnnerCircleLineWidthiPad;
     [self.innerCircleProgressColor setStroke];
     [bezierPath stroke];
 }
@@ -101,11 +106,11 @@ static NSString *kColorAnimationKey = @"strokeColor";
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:kOuterCircleRadius
+                          radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleRadiusiPhone : kOuterCircleRadiusiPad
                       startAngle:0
                         endAngle:M_PI * 2
                        clockwise:YES];
-    bezierPath.lineWidth = kOuterCircleLineWidth;
+    bezierPath.lineWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleLineWidthiPhone : kOuterCircleLineWidthiPad;
     [self.outerCircleBackgroundColor setStroke];
     [bezierPath stroke];
 }
@@ -129,7 +134,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
         CGFloat endAngle = startAngle + (M_PI * 2);
         UIBezierPath *bezierPath = [UIBezierPath bezierPath];
         [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
-                              radius:kOuterCircleRadius
+                              radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleRadiusiPhone : kOuterCircleRadiusiPad
                           startAngle:startAngle
                             endAngle:endAngle
                            clockwise:YES];
@@ -139,7 +144,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
         shapeLayer.path = bezierPath.CGPath;
         shapeLayer.strokeColor = self.outerCircleProgressColor.CGColor;
         shapeLayer.fillColor = nil;
-        shapeLayer.lineWidth = kOuterCircleLineWidth;
+        shapeLayer.lineWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleLineWidthiPhone : kOuterCircleLineWidthiPad;
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;
@@ -176,7 +181,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
         CGFloat endAngle = startAngle + (M_PI * 2);
         UIBezierPath *bezierPath = [UIBezierPath bezierPath];
         [bezierPath addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
-                              radius:kOuterCircleRadius
+                              radius:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleRadiusiPhone : kOuterCircleRadiusiPad
                           startAngle:startAngle
                             endAngle:endAngle
                            clockwise:YES];
@@ -184,7 +189,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
         shapeLayer.path = bezierPath.CGPath;
         shapeLayer.strokeColor = self.outerCircleProgressColor.CGColor;
         shapeLayer.fillColor = nil;
-        shapeLayer.lineWidth = kOuterCircleLineWidth;
+        shapeLayer.lineWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kOuterCircleLineWidthiPhone : kOuterCircleLineWidthiPad;;
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;

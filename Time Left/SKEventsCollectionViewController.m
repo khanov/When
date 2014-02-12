@@ -15,13 +15,15 @@
 
 static NSInteger kMarginTopBottom = 12;
 static NSInteger kMarginLeftRight = 10;
-static NSInteger kCellWeightHeight = 145;
+static NSInteger kCellWeightHeightiPhone = 145;
+static NSInteger kCellWeightHeightiPad = 242;
 static NSString *kEventsScreenName = @"Events Grid";
 
 @interface SKEventsCollectionViewController ()
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 - (IBAction)deleteButton:(UIButton *)sender;
 
@@ -221,7 +223,13 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kCellWeightHeight, kCellWeightHeight);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        return CGSizeMake(kCellWeightHeightiPhone, kCellWeightHeightiPhone);
+    }
+    else {
+        return CGSizeMake(kCellWeightHeightiPad, kCellWeightHeightiPad);
+    }
+    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -239,6 +247,11 @@ static NSString *kEventsScreenName = @"Events Grid";
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.fetchedEventsArray objectAtIndex:indexPath.row];
+    } else if ([segue.identifier isEqualToString:@"showAddEventView"] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIPopoverController *popover = [(UIStoryboardPopoverSegue *)segue popoverController];
+        SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        NSDictionary *colors = [delegate currentTheme];
+        popover.backgroundColor = [colors objectForKey:@"background"];
     }
 }
 
@@ -296,11 +309,7 @@ static NSString *kEventsScreenName = @"Events Grid";
     if (self.isEditing) {
         NSLog(@"Done editing");
         // Replace Add button to Done
-        UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add-icon"]
-                                                                style:UIBarButtonItemStyleBordered
-                                                               target:self
-                                                               action:@selector(showAddEventView)];
-        [self.navigationItem setRightBarButtonItem:add];
+        [self.navigationItem setRightBarButtonItem:self.addButton];
         // Stop Edit mode
         self.editing = NO;
         [self startTimer];
