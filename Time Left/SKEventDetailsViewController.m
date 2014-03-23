@@ -37,20 +37,11 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:kEventDetailsScreenName];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
 #pragma mark - Setup View
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupLabels];
     [self setupColors];
     [self setupProgressLabels];
     [self setupNavigationButtons];
@@ -224,6 +215,26 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     // Redraw
     [self setupProgressLabels];
     [self.progressView setNeedsDisplay];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setupLabels];
+    [self updateProgressView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (!self.timer) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
+    }
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventDetailsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

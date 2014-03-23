@@ -10,11 +10,15 @@
 #import "SKEventCell.h"
 #import "SKEventDetailsViewController.h"
 #import "SKCustomCollectionViewFlowLayout.h"
+#import "SKAddEventTableViewController.h"
 #import "SKAppDelegate.h"
 #import "GAIDictionaryBuilder.h"
 
-static NSInteger kMarginTopBottom = 12;
-static NSInteger kMarginLeftRight = 10;
+static NSInteger kMarginTopBottomiPhone = 12;
+static NSInteger kMarginTopBottomiPad = 10;
+static NSInteger kMarginLeftRightiPhone = 10;
+static NSInteger kMarginLeftRightiPad = 10;
+
 static NSInteger kCellWeightHeightiPhone = 145;
 static NSInteger kCellWeightHeightiPad = 242;
 static NSString *kEventsScreenName = @"Events Grid";
@@ -225,8 +229,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         return CGSizeMake(kCellWeightHeightiPhone, kCellWeightHeightiPhone);
-    }
-    else {
+    } else {
         return CGSizeMake(kCellWeightHeightiPad, kCellWeightHeightiPad);
     }
     
@@ -234,7 +237,11 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(kMarginTopBottom, kMarginLeftRight, kMarginTopBottom, kMarginLeftRight);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        return UIEdgeInsetsMake(kMarginTopBottomiPhone, kMarginLeftRightiPhone, kMarginTopBottomiPhone, kMarginLeftRightiPhone);
+    } else {
+        return UIEdgeInsetsMake(kMarginTopBottomiPad, kMarginLeftRightiPad, kMarginTopBottomiPad, kMarginLeftRightiPad);
+    }
 }
 
 
@@ -252,6 +259,8 @@ static NSString *kEventsScreenName = @"Events Grid";
         SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
         NSDictionary *colors = [delegate currentTheme];
         popover.backgroundColor = [colors objectForKey:@"background"];
+        SKAddEventTableViewController *addEventController = (SKAddEventTableViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
+        addEventController.popover = popover;
     }
 }
 

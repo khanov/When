@@ -148,6 +148,11 @@ static NSString *kColorAnimationKey = @"strokeColor";
         shapeLayer.lineJoin = kCALineJoinRound;
         [self.layer addSublayer:shapeLayer];
         self.outerCirclePathLayer = shapeLayer;
+    }
+    
+    if (self.outerCircleGradientLayer.superlayer == nil) {
+        
+        [self.outerCirclePathLayer removeAllAnimations];
         
         // Gradient layer
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -161,7 +166,7 @@ static NSString *kColorAnimationKey = @"strokeColor";
         [self.layer addSublayer:gradientLayer];
         gradientLayer.mask = self.outerCirclePathLayer;
         self.outerCircleGradientLayer = gradientLayer;
-
+        
         // Animation
         CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
         rotateAnimation.duration = 1.2;
