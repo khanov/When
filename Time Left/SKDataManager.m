@@ -239,6 +239,7 @@ NSString *const kDeletedKey = @"deleted";
     newEvent.startDate = startDate;
     newEvent.endDate = endDate;
     newEvent.createdDate = [NSDate date];
+    newEvent.uuid = [[NSUUID UUID] UUIDString];
     return newEvent;
 }
 

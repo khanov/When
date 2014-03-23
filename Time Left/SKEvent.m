@@ -10,6 +10,7 @@
 
 @implementation SKEvent
 
+@dynamic uuid;
 @dynamic name;
 @dynamic details;
 @dynamic startDate;
