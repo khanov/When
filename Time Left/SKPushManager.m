@@ -7,6 +7,7 @@
 //
 
 #import "SKPushManager.h"
+#import "SKDataManager.h"
 
 @interface SKPushManager ()
 @property (strong, nonatomic) NSMutableArray *notifications;
@@ -30,27 +31,26 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(eventAdded:)
-                                                 name:@"EventAdded"
+                                                 name:kEventAddedNotificationName
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(eventUpdated:)
+                                                 name:kEventDeletedNotificationName
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(eventDeleted:)
-                                                 name:@"EventDeleted"
+                                                 name:kEventUpdatedNotificationName
                                                object:nil];
 }
 
 - (void)eventAdded:(NSNotification *)addedNotification
 {
-    if ([[addedNotification.userInfo allKeys][0] isEqual:@"added"]) {
+    if ([[addedNotification.userInfo allKeys][0] isEqual:kAddedKey]) {
         
-        SKEvent *eventToAdd = [addedNotification.userInfo objectForKey:@"added"];
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = eventToAdd.endDate;
-        localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", eventToAdd.name];
-        localNotification.timeZone = [NSTimeZone systemTimeZone];
-        localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        localNotification.userInfo = @{@"eventHash" : @([eventToAdd hash])};
+        SKEvent *eventToAdd = [addedNotification.userInfo objectForKey:kAddedKey];
+        UILocalNotification *localNotification = [self createNotificationForEvent:eventToAdd];
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         [self.notifications addObject:localNotification];
 
@@ -58,10 +58,32 @@
     }
 }
 
+- (void)eventUpdated:(NSNotification *)updatedNotification
+{
+    if ([[updatedNotification.userInfo allKeys][0] isEqual:kUpdatedKey]) {
+        SKEvent *updatedEvent = [updatedNotification.userInfo objectForKey:kUpdatedKey];
+        // Find notification to cancel
+        [self.notifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSInteger eventHash = [[((UILocalNotification *)obj).userInfo objectForKey:@"eventHash"] integerValue];
+            if (eventHash == [updatedEvent hash]) {
+                [[UIApplication sharedApplication] cancelLocalNotification:(UILocalNotification *)obj];
+                [self.notifications removeObject:obj];
+                
+                UILocalNotification *newNotification = [self createNotificationForEvent:updatedEvent];
+                [[UIApplication sharedApplication] scheduleLocalNotification:newNotification];
+                [self.notifications addObject:newNotification];
+                *stop = YES;
+                
+                NSLog(@"Updated notification for %@ at %@ (now = %@)", updatedEvent.name, ((UILocalNotification *)obj).fireDate, [NSDate date]);
+            }
+        }];
+    }
+}
+
 - (void)eventDeleted:(NSNotification *)deletedNotification
 {
-    if ([[deletedNotification.userInfo allKeys][0] isEqual:@"deleted"]) {
-        SKEvent *eventToDelete = [deletedNotification.userInfo objectForKey:@"deleted"];
+    if ([[deletedNotification.userInfo allKeys][0] isEqual:kDeletedKey]) {
+        SKEvent *eventToDelete = [deletedNotification.userInfo objectForKey:kDeletedKey];
         // Find notification to cancel
         [self.notifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSInteger eventHash = [[((UILocalNotification *)obj).userInfo objectForKey:@"eventHash"] integerValue];
@@ -74,6 +96,18 @@
             }
         }];
     }
+}
+
+- (UILocalNotification *)createNotificationForEvent:(SKEvent *)event
+{
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = event.endDate;
+    localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", event.name];
+    localNotification.timeZone = [NSTimeZone systemTimeZone];
+    localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.userInfo = @{@"eventHash" : @([event hash])};
+    return localNotification;
 }
 
 @end

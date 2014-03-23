@@ -10,6 +10,14 @@
 #import "SKEvent.h"
 #import "SKEvent+Helper.h"
 
+extern NSString *const kEventAddedNotificationName;
+extern NSString *const kEventUpdatedNotificationName;
+extern NSString *const kEventDeletedNotificationName;
+
+extern NSString *const kAddedKey;
+extern NSString *const kUpdatedKey;
+extern NSString *const kDeletedKey;
+
 @interface SKDataManager : NSObject
 
 + (SKDataManager *)sharedManager;
