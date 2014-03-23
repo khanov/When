@@ -31,6 +31,7 @@
 		A6A3E8A8188F931700A3E4FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */; };
 		A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */; };
 		A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AF1891301500A3E4FB /* SKEventCell.m */; };
+		A6B4C85118DF48B900586587 /* notification-sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = A6B4C85018DF48B900586587 /* notification-sound.caf */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
 		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
 		A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */; };
@@ -80,6 +81,7 @@
 		A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventsCollectionViewController.m; sourceTree = "<group>"; };
 		A6A3E8AE1891301500A3E4FB /* SKEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCell.h; sourceTree = "<group>"; };
 		A6A3E8AF1891301500A3E4FB /* SKEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCell.m; sourceTree = "<group>"; };
+		A6B4C85018DF48B900586587 /* notification-sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "notification-sound.caf"; sourceTree = "<group>"; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
 		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				A6693566179D31E200E5A40F /* InfoPlist.strings */,
 				A6693569179D31E200E5A40F /* main.m */,
 				A669356B179D31E200E5A40F /* When-Prefix.pch */,
+				A6B4C85018DF48B900586587 /* notification-sound.caf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6693568179D31E200E5A40F /* InfoPlist.strings in Resources */,
+				A6B4C85118DF48B900586587 /* notification-sound.caf in Resources */,
 				A62A0834189504380031AE7F /* Media.xcassets in Resources */,
 				A6693577179D31E200E5A40F /* MainStoryboard_iPhone.storyboard in Resources */,
 				A669357A179D31E200E5A40F /* MainStoryboard_iPad.storyboard in Resources */,

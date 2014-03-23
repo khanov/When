@@ -105,7 +105,7 @@
     localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", event.name];
     localNotification.timeZone = [NSTimeZone systemTimeZone];
     localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.soundName = @"notification-sound.caf";
     localNotification.userInfo = @{@"eventHash" : @([event hash])};
     return localNotification;
 }
