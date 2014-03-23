@@ -15,7 +15,7 @@
 #import "GAIDictionaryBuilder.h"
 
 static NSInteger kMarginTopBottomiPhone = 12;
-static NSInteger kMarginTopBottomiPad = 10;
+static NSInteger kMarginTopBottomiPad = 30;
 static NSInteger kMarginLeftRightiPhone = 10;
 static NSInteger kMarginLeftRightiPad = 10;
 
@@ -65,11 +65,17 @@ static NSString *kEventsScreenName = @"Events Grid";
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
     
     // Long press gesture recognizer
-    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
-    gestureRecognizer.minimumPressDuration = 0.5; //seconds
-    gestureRecognizer.delegate = self;
-    gestureRecognizer.delaysTouchesBegan = YES;
-    [self.collectionView addGestureRecognizer:gestureRecognizer];
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
+    longPressGestureRecognizer.minimumPressDuration = 0.5; //seconds
+    longPressGestureRecognizer.delegate = self;
+    longPressGestureRecognizer.delaysTouchesBegan = YES;
+    [self.collectionView addGestureRecognizer:longPressGestureRecognizer];
+    
+    // Tap gesture recognizer
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGestureRecognizer.delegate = self;
+    tapGestureRecognizer.delaysTouchesBegan = YES;
+    [self.collectionView addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (void)setupColors
@@ -247,6 +253,15 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 #pragma mark - Navigation
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:@"showEventDetailsView"] && self.editing) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
     // Pass the selected event to the details view controller.
@@ -275,24 +290,65 @@ static NSString *kEventsScreenName = @"Events Grid";
 - (void)longPressGesture:(UIGestureRecognizer *)recognizer
 {
     if ([recognizer state] == UIGestureRecognizerStateBegan) {
-        // Replace Add button to Done in the navbar
-        UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing)];
-        [self.navigationItem setRightBarButtonItem:done];
-        // Start Editing mode
-        NSLog(@"Start editing");
-        self.editing = YES;
-        [self stopTimer];
-        [self updateView];
-
-        // GA
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:kEventsScreenName];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
-                                                              action:@"touch"
-                                                               label:@"Start Editing"
-                                                               value:nil] build]];
-        [tracker set:kGAIScreenName value:nil];
+        
+        UICollectionViewCell *cellAtTapPoint = [self collectionViewCellForTapAtPoint:[recognizer locationInView:self.collectionView]];
+        
+        // If there's cell, where long tap was performed, start editing mode
+        if (cellAtTapPoint && !self.editing) {
+            // Replace Add button to Done in the navbar
+            UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing)];
+            [self.navigationItem setRightBarButtonItem:done];
+            // Start Editing mode
+            NSLog(@"Start editing");
+            self.editing = YES;
+            [self stopTimer];
+            [self updateView];
+            
+            // GA
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker set:kGAIScreenName value:kEventsScreenName];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                                  action:@"touch"
+                                                                   label:@"Start Editing"
+                                                                   value:nil] build]];
+            [tracker set:kGAIScreenName value:nil];
+        }
+        else {
+            [self doneEditing];
+        }
     }
+}
+
+- (void)tapGesture:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer state] == UIGestureRecognizerStateEnded) {
+        
+        UICollectionViewCell *cellAtTapPoint = [self collectionViewCellForTapAtPoint:[recognizer locationInView:self.collectionView]];
+        
+        // If there's no cell, where tap was performed, and editing mode is ON, then stop editing mode
+        if (!cellAtTapPoint && self.editing) {
+            [self doneEditing];
+        }
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([gestureRecognizer class] == [UITapGestureRecognizer class] && ![self collectionViewCellForTapAtPoint:[touch locationInView:self.collectionView]]) {
+        return YES;
+    }
+    
+    if ([gestureRecognizer class] == [UILongPressGestureRecognizer class]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (UICollectionViewCell *)collectionViewCellForTapAtPoint:(CGPoint)tapPoint
+{
+    NSIndexPath *indexPathForTapPoint = [self.collectionView indexPathForItemAtPoint:tapPoint];
+    return [self.collectionView cellForItemAtIndexPath:indexPathForTapPoint];
 }
 
 - (IBAction)deleteButton:(UIButton *)sender
