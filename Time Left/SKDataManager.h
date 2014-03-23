@@ -22,6 +22,7 @@
 // Events
 - (NSArray *)getAllEvents;
 - (SKEvent *)createEventWithName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate details:(NSString *)details;
+- (SKEvent *)updateEvent:(SKEvent *)event withName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate details:(NSString *)details;
 - (void)deleteEvent:(SKEvent *)event;
 
 // Notifications

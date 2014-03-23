@@ -19,6 +19,10 @@
 @property (strong, nonatomic) UIDatePicker *startsDatePicker;
 @property (strong, nonatomic) UIDatePicker *endsDatePicker;
 
+@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) SKEvent *event;
+@property (assign, nonatomic, getter = isEventEditMode) BOOL eventEditMode;
+
 - (IBAction)cancelButton:(id)sender;
 - (IBAction)saveButton:(id)sender;
 

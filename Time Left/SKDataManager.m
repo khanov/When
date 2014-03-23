@@ -234,6 +234,15 @@ static NSString *kEventEntityName = @"Event";
     return newEvent;
 }
 
+- (SKEvent *)updateEvent:(SKEvent *)event withName:(NSString *)name startDate:(NSDate *)startDate endDate:(NSDate *)endDate details:(NSString *)details
+{
+    event.name = name;
+    event.startDate = startDate;
+    event.endDate = endDate;
+    event.details = details;
+    return event;
+}
+
 - (void)deleteEvent:(SKEvent *)event
 {
     [self.managedObjectContext deleteObject:event];
@@ -267,7 +276,7 @@ static NSString *kEventEntityName = @"Event";
     [self createEventWithName:@"New Year"
                     startDate:firstDayOfTheYear
                       endDate:nextYear
-                      details:[NSString stringWithFormat:@"Time Left Until 1st Jan, %d", [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:nextYear] year]]];
+                      details:[NSString stringWithFormat:@"Time Left Until 1st Jan, %ld", (long)[[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:nextYear] year]]];
     
     
     //

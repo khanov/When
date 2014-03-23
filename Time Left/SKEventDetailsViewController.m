@@ -9,6 +9,7 @@
 #import "SKEventDetailsViewController.h"
 #import "SKAppDelegate.h"
 #import "GAIDictionaryBuilder.h"
+#import "SKAddEventTableViewController.h"
 
 static NSString *kEventDetailsScreenName = @"Event Details";
 
@@ -174,8 +175,34 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 
 - (void)setupNavigationButtons
 {
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareBurronPressed)];
-    [self.navigationItem setRightBarButtonItem:shareButton];
+    CGSize barButtonSize = CGSizeMake(35.0f, 35.0f);
+    UIView *rightButtonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barButtonSize.width * 2 + 5, barButtonSize.height)];
+    
+    // Edit button
+    UIButton *editButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    editButton.backgroundColor = [UIColor clearColor];
+    editButton.frame = CGRectMake(0, 0, barButtonSize.width, barButtonSize.height);
+    [editButton setImage:[UIImage imageNamed:@"settings-icon"] forState:UIControlStateNormal];
+    editButton.tintColor = [UIColor whiteColor];
+    editButton.autoresizesSubviews = YES;
+    editButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    [editButton addTarget:self action:@selector(editButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [rightButtonsView addSubview:editButton];
+    
+    // Share button
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    shareButton.backgroundColor = [UIColor clearColor];
+    shareButton.frame = CGRectMake(editButton.frame.size.width + 5, 0, barButtonSize.width, barButtonSize.height - 5);
+    [shareButton setImage:[UIImage imageNamed:@"share-icon"] forState:UIControlStateNormal];
+    shareButton.tintColor = [UIColor whiteColor];
+    shareButton.autoresizesSubviews = YES;
+    shareButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    [shareButton addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [rightButtonsView addSubview:shareButton];
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonsView];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
     // Back button
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
@@ -221,9 +248,35 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 }
 
 
+#pragma mark - Editing
+
+- (void)editButtonPressed
+{
+    [self performSegueWithIdentifier:@"showEditEventView" sender:self];
+    
+    // GA
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:kEventDetailsScreenName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"Edit"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showEditEventView"]) {
+        SKAddEventTableViewController *editEventViewController = (SKAddEventTableViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
+        editEventViewController.eventEditMode = YES;
+        editEventViewController.event = _event;
+    }
+}
+
+
 #pragma mark - Sharing
 
-- (void)shareBurronPressed
+- (void)shareButtonPressed
 {
     // prepare string
     NSString *shareString;

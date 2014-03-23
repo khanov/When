@@ -10,24 +10,25 @@
 #import "SKAppDelegate.h"
 #import "GAIDictionaryBuilder.h"
 
-static NSInteger kTextFieldSection = 0;
-static NSInteger kNameCellIndex = 0;
-static NSInteger kDescriptionCellIndex = 1;
+static NSInteger const kTextFieldSection = 0;
+static NSInteger const kNameCellIndex = 0;
+static NSInteger const kDescriptionCellIndex = 1;
 
-static NSInteger kDatePickerSection = 1;
-static NSInteger kStartDatePickerIndex = 1;
-static NSInteger kEndDatePickerIndex = 3;
-static NSInteger kDatePickerCellHeight = 216;
+static NSInteger const kDatePickerSection = 1;
+static NSInteger const kStartDatePickerIndex = 1;
+static NSInteger const kEndDatePickerIndex = 3;
+static NSInteger const kDatePickerCellHeight = 216;
 
-static NSString *kNameTextFieldPlaceholder = @"Name";
-static NSString *kDescriptionTextFieldTextFieldPlaceholder = @"Description (optional)";
-static NSString *kEndsDateDefaultString = @"Choose...";
+static NSString *const kNameTextFieldPlaceholder = @"Name";
+static NSString *const kDescriptionTextFieldTextFieldPlaceholder = @"Description (optional)";
+static NSString *const kEndsDateDefaultString = @"Choose...";
 
-static NSString *kErrorEmptyNameTitle = @"Empty Name";
-static NSString *kErrorEmptyNameMessage = @"Please give a name to the event.";
-static NSString *kErrorEmptyNameCancel = @"OK";
+static NSString *const kErrorEmptyNameTitle = @"Empty Name";
+static NSString *const kErrorEmptyNameMessage = @"Please give a name to the event.";
+static NSString *const kErrorEmptyNameCancel = @"OK";
 
-static NSString *kAddEventScreenName = @"Add Event";
+static NSString *const kAddEventScreenName = @"Add Event";
+static NSString *const kEditEventScreenName = @"Edit Event";
 
 
 @interface SKAddEventTableViewController ()
@@ -53,9 +54,10 @@ static NSString *kAddEventScreenName = @"Add Event";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupDateLabels];
+    [self setupLabels];
     [self signUpForKeyboardNotifications];
     [self setupColors];
+    self.navigationItem.rightBarButtonItem.enabled = self.isEventEditMode;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,7 +67,7 @@ static NSString *kAddEventScreenName = @"Add Event";
     [self setupDatePickers];
     // GA
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:kAddEventScreenName];
+    [tracker set:kGAIScreenName value: self.isEventEditMode ? kEditEventScreenName : kAddEventScreenName];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
@@ -100,42 +102,56 @@ static NSString *kAddEventScreenName = @"Add Event";
 
 }
 
-- (void)setupDateLabels
+- (void)setupLabels
 {
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    NSDate *now = [NSDate date];
-    self.startsDateLabel.text = [self.dateFormatter stringFromDate:now];
-    self.startsDateLabel.textColor = [self.tableView tintColor];
+    if (self.isEventEditMode) {
+        
+        self.navigationItem.title = @"Edit Event";
+        _nameTextField.text = _event.name;
+        if (_event.details.length != 0) {
+            _descriptionTextField.text = _event.details;
+        }
+        
+        _startsDateLabel.text = [_dateFormatter stringFromDate:_event.startDate];
+        _endsDateLabel.text = [_dateFormatter stringFromDate:_event.endDate];
+        
+    } else {
+        
+        NSDate *now = [NSDate date];
+        _startsDateLabel.text = [self.dateFormatter stringFromDate:now];
+        _endsDateLabel.text = kEndsDateDefaultString;
+    }
     
-    self.endsDateLabel.text = kEndsDateDefaultString;
-    self.endsDateLabel.textColor = [self.tableView tintColor];
+    _startsDateLabel.textColor = [self.tableView tintColor];
+    _endsDateLabel.textColor = [self.tableView tintColor];
 }
 
 - (void)setupDatePickers
 {
     // Load Start Date picker
     self.startsDatePicker = [[UIDatePicker alloc] init];
-    self.startsDatePicker.hidden = YES;
-    self.startsDatePicker.tag = 0;
-    self.startsDatePicker.date = [NSDate date];
-    [self.startsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
+    _startsDatePicker.hidden = YES;
+    _startsDatePicker.tag = 0;
+    _startsDatePicker.date = (self.isEventEditMode) ? _event.startDate : [NSDate date];
+    [_startsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
     NSIndexPath *startDatePickerIndexPath = [NSIndexPath indexPathForRow:kStartDatePickerIndex inSection:kDatePickerSection];
     UITableViewCell *startDatePickerCell = [self.tableView cellForRowAtIndexPath:startDatePickerIndexPath];
-    [startDatePickerCell.contentView addSubview:self.startsDatePicker];
+    [startDatePickerCell.contentView addSubview:_startsDatePicker];
     
     // Load End Date picker
     self.endsDatePicker = [[UIDatePicker alloc] init];
-    self.endsDatePicker.hidden = YES;
-    self.endsDatePicker.tag = 1;
-    [self.endsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
-    self.endsDatePicker.minimumDate = [[NSDate date] dateByAddingTimeInterval:60]; // add +60sec
-    self.endsDatePicker.date = self.startsDatePicker.date;
+    _endsDatePicker.hidden = YES;
+    _endsDatePicker.tag = 1;
+    [_endsDatePicker addTarget:self action:@selector(pickerDateChanged:) forControlEvents:UIControlEventValueChanged];
+    _endsDatePicker.minimumDate = (self.isEventEditMode) ? [_event.startDate dateByAddingTimeInterval:60] : [_startsDatePicker.date dateByAddingTimeInterval:60]; // add +60sec
+    _endsDatePicker.date = (self.isEventEditMode) ? _event.endDate : _endsDatePicker.minimumDate;
     NSIndexPath *endDatePickerIndexPath = [NSIndexPath indexPathForRow:kEndDatePickerIndex inSection:kDatePickerSection];
     UITableViewCell *endDatePickerCell = [self.tableView cellForRowAtIndexPath:endDatePickerIndexPath];
-    [endDatePickerCell.contentView addSubview:self.endsDatePicker];
+    [endDatePickerCell.contentView addSubview:_endsDatePicker];
     
     // Reload cells with pickers in the table view
     [self.tableView reloadRowsAtIndexPaths:@[startDatePickerIndexPath, endDatePickerIndexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -220,21 +236,31 @@ static NSString *kAddEventScreenName = @"Add Event";
 {
     if (sender.tag == 0) {
         // Start Date Picker Changed
-        self.startsDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
-        NSDate *laterDate = [self.startsDatePicker.date laterDate:[NSDate date]];
-        self.endsDatePicker.minimumDate = [laterDate dateByAddingTimeInterval:60]; // add +30sec
+        _startsDateLabel.text = [_dateFormatter stringFromDate:sender.date];
+        NSDate *laterDate = [_startsDatePicker.date laterDate:[NSDate date]];
+        _endsDatePicker.minimumDate = [laterDate dateByAddingTimeInterval:60]; // add +60sec
     } else if (sender.tag == 1) {
         // End Date Picker Changed
-        if (self.endsDateLabel.text.length == 0) {
-            self.endsDateLabel.alpha = 0.0f;
+        if (_endsDateLabel.text.length == 0) {
+            _endsDateLabel.alpha = 0.0f;
             [UIView animateWithDuration:0.25
                              animations:^{
-                                 self.endsDateLabel.alpha = 1.0f;
+                                 _endsDateLabel.alpha = 1.0f;
                              }];
         }
-        self.endsDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
     }
+    _endsDateLabel.text = [_dateFormatter stringFromDate:_endsDatePicker.date];
 }
+
+
+#pragma mark - Show / Hide Save button
+
+- (IBAction)nameTextFieldEditingChaged:(UITextField *)sender
+{
+    self.navigationItem.rightBarButtonItem.enabled = (sender.text.length == 0) ? NO : YES;
+}
+
+
 
 #pragma mark - Cancel / Save
 
@@ -271,13 +297,26 @@ static NSString *kAddEventScreenName = @"Add Event";
         [tracker set:kGAIScreenName value:nil];
     }
     else {
-        SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:self.nameTextField.text
-                                                                     startDate:self.startsDatePicker.date
-                                                                       endDate:self.endsDatePicker.date
-                                                                       details:self.descriptionTextField.text];
-        [[SKDataManager sharedManager] saveContext];
-        NSLog(@"Saved: %@", newEvent);
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        if (self.isEventEditMode) {
+            SKEvent *updatedEvent = [[SKDataManager sharedManager] updateEvent:_event
+                                                                      withName:_nameTextField.text
+                                                                     startDate:_startsDatePicker.date
+                                                                       endDate:_endsDatePicker.date
+                                                                       details:_descriptionTextField.text];
+            [[SKDataManager sharedManager] saveContext];
+            NSLog(@"Saved updated event: %@", updatedEvent);
+        } else {
+            SKEvent *newEvent = [[SKDataManager sharedManager] createEventWithName:_nameTextField.text
+                                                                         startDate:_startsDatePicker.date
+                                                                           endDate:_endsDatePicker.date
+                                                                           details:_descriptionTextField.text];
+            
+            [[SKDataManager sharedManager] saveContext];
+            NSLog(@"Saved new event: %@", newEvent);
+        }
+        
+        (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? [self dismissViewControllerAnimated:YES completion:nil] : [self.popover dismissPopoverAnimated:YES];
         
         // GA
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
