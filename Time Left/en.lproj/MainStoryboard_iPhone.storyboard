@@ -98,7 +98,7 @@
                         <outlet property="descriptionLabel" destination="DIu-rn-aMV" id="POB-LM-L57"/>
                         <outlet property="nameLabel" destination="FBd-in-lbD" id="3Yk-e0-isH"/>
                         <outlet property="progressView" destination="NtW-n1-HOL" id="8Nj-BA-1mh"/>
-                        <segue destination="7kO-RI-vHG" kind="modal" identifier="showEditEventView" id="s2d-3L-Wk0"/>
+                        <outlet property="rightBarButton" destination="ir8-Dg-EjH" id="xb5-tc-lqK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -107,6 +107,11 @@
                         <action selector="tapGesture:" destination="2" id="8ZV-2S-8FV"/>
                     </connections>
                 </tapGestureRecognizer>
+                <barButtonItem title="Item" id="ir8-Dg-EjH">
+                    <connections>
+                        <segue destination="7kO-RI-vHG" kind="modal" identifier="showEditEventView" id="fRn-hN-UwH"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1890" y="-213"/>
         </scene>
@@ -436,6 +441,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="s2d-3L-Wk0"/>
+        <segue reference="fRn-hN-UwH"/>
     </inferredMetricsTieBreakers>
 </document>

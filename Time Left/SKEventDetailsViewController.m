@@ -17,6 +17,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *rightBarButton;
 @property (weak, nonatomic) IBOutlet SKProgressIndicator *progressView;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger tapCounter;
@@ -167,12 +168,12 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 - (void)setupNavigationButtons
 {
     CGSize barButtonSize = CGSizeMake(35.0f, 35.0f);
-    UIView *rightButtonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barButtonSize.width * 2 + 5, barButtonSize.height)];
+    UIView *rightButtonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barButtonSize.width * 3 + 15, barButtonSize.height)];
     
     // Edit button
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeSystem];
     editButton.backgroundColor = [UIColor clearColor];
-    editButton.frame = CGRectMake(0, 0, barButtonSize.width, barButtonSize.height);
+    editButton.frame = CGRectMake(barButtonSize.width + 10, 0, barButtonSize.width, barButtonSize.height);
     [editButton setImage:[UIImage imageNamed:@"settings-icon"] forState:UIControlStateNormal];
     editButton.tintColor = [UIColor whiteColor];
     editButton.autoresizesSubviews = YES;
@@ -183,7 +184,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     // Share button
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeSystem];
     shareButton.backgroundColor = [UIColor clearColor];
-    shareButton.frame = CGRectMake(editButton.frame.size.width + 5, 0, barButtonSize.width, barButtonSize.height - 5);
+    shareButton.frame = CGRectMake(editButton.frame.origin.x + barButtonSize.width + 5, 0, barButtonSize.width, barButtonSize.height - 5);
     [shareButton setImage:[UIImage imageNamed:@"share-icon"] forState:UIControlStateNormal];
     shareButton.tintColor = [UIColor whiteColor];
     shareButton.autoresizesSubviews = YES;
@@ -191,8 +192,8 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     [shareButton addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [rightButtonsView addSubview:shareButton];
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonsView];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
+    _rightBarButton.customView = rightButtonsView;
+    self.navigationItem.rightBarButtonItem = _rightBarButton;
     
     // Back button
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
@@ -281,6 +282,15 @@ static NSString *kEventDetailsScreenName = @"Event Details";
         SKAddEventTableViewController *editEventViewController = (SKAddEventTableViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
         editEventViewController.eventEditMode = YES;
         editEventViewController.event = _event;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UIPopoverController *popover = [(UIStoryboardPopoverSegue *)segue popoverController];
+            SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+            NSDictionary *colors = [delegate currentTheme];
+            popover.backgroundColor = [colors objectForKey:@"background"];
+
+            editEventViewController.popover = popover;
+        }
     }
 }
 

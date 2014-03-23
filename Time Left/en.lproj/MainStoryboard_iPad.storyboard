@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="1en-D8-7sA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="1en-D8-7sA">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Events Collection View Controller-->
         <scene sceneID="rIj-An-JX9">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="bN2-52-heh" customClass="SKEventsCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="bN2-52-heh" customClass="SKEventsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="7uC-rx-s1D">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="QYc-My-u1M" customClass="SKEventCell">
-                                <rect key="frame" x="0.0" y="64" width="242" height="242"/>
+                                <rect key="frame" x="0.0" y="0.0" width="242" height="242"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="242" height="242"/>
@@ -103,7 +103,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fF-ef-9S2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="285"/>
+            <point key="canvasLocation" x="1104" y="744"/>
         </scene>
         <!--Add Event Table View Controller - New Event-->
         <scene sceneID="igU-xF-oY6">
@@ -129,6 +129,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="nameTextFieldEditingChaged:" destination="NVY-q6-Sqb" eventType="editingChanged" id="cqN-FC-woQ"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.66897145270000002" blue="0.21519140940000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,7 +262,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GzR-7L-4lc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3063" y="802"/>
+            <point key="canvasLocation" x="3985" y="744"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="fhb-Me-tgL">
@@ -337,6 +340,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="QA4-pL-ggf" secondAttribute="centerX" id="Y2P-vY-YsO"/>
                             <constraint firstItem="tzq-jK-0W3" firstAttribute="leading" secondItem="2mj-qU-64X" secondAttribute="leading" constant="244" id="ZOW-eK-0cl"/>
@@ -346,15 +350,31 @@
                             <constraint firstItem="LGw-Mh-2QF" firstAttribute="centerX" secondItem="QA4-pL-ggf" secondAttribute="centerX" id="hkK-YQ-CVn"/>
                             <constraint firstAttribute="trailing" secondItem="tzq-jK-0W3" secondAttribute="trailing" constant="244" id="lSQ-yB-EsW"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="X4l-Sm-zBJ" appends="YES" id="8dG-OH-xFN"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="dMm-Tb-LZy"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="tzq-jK-0W3" id="Sdu-qh-fl1"/>
                         <outlet property="nameLabel" destination="LGw-Mh-2QF" id="6bU-U6-NEP"/>
                         <outlet property="progressView" destination="QA4-pL-ggf" id="9YS-Ye-raq"/>
+                        <outlet property="rightBarButton" destination="SVh-XY-7Kv" id="UN8-rN-n2a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jQB-aN-xZt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="X4l-Sm-zBJ">
+                    <connections>
+                        <action selector="tapGesture:" destination="UKg-H2-7Ro" id="Bfx-g4-tue"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <barButtonItem title="Item" id="SVh-XY-7Kv">
+                    <connections>
+                        <segue destination="yUQ-3F-6K5" kind="popover" identifier="showEditEventView" popoverAnchorBarButtonItem="SVh-XY-7Kv" id="RJN-zc-Ski">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="2089" y="-399"/>
         </scene>
@@ -374,7 +394,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2n-WF-liC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-56" y="285"/>
+            <point key="canvasLocation" x="192" y="744"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qQX-bK-dmV">
@@ -394,7 +414,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGY-T1-qSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089" y="802"/>
+            <point key="canvasLocation" x="3083" y="744"/>
         </scene>
     </scenes>
     <resources>
@@ -406,4 +426,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="RJN-zc-Ski"/>
+    </inferredMetricsTieBreakers>
 </document>
