@@ -60,6 +60,20 @@ static NSString *kEventsScreenName = @"Events Grid";
     layout.sectionInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
     self.collectionView.collectionViewLayout = layout;
     
+    // Motion effects
+    UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    xAxis.minimumRelativeValue = @-28;
+    xAxis.maximumRelativeValue = @28;
+    
+    UIInterpolatingMotionEffect *yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    yAxis.minimumRelativeValue = @-28;
+    yAxis.maximumRelativeValue = @28;
+    
+    UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
+    group.motionEffects = @[xAxis, yAxis];
+    
+    [self.collectionView addMotionEffect:group];
+    
     // Set navigation bar font
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
@@ -82,6 +96,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     NSDictionary *colors = [delegate currentTheme];
+    self.view.backgroundColor = [colors objectForKey:@"background"];
     self.collectionView.backgroundColor = [colors objectForKey:@"background"];
     // Transparent nav bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
