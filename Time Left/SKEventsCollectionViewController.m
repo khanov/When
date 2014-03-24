@@ -19,6 +19,8 @@ static NSInteger kMarginTopBottomiPad = 30;
 static NSInteger kMarginLeftRightiPhone = 10;
 static NSInteger kMarginLeftRightiPad = 10;
 
+static CGFloat kCollectionViewContentOffset = 64;
+
 static NSInteger kCellWeightHeightiPhone = 145;
 static NSInteger kCellWeightHeightiPad = 242;
 static NSString *kEventsScreenName = @"Events Grid";
@@ -28,6 +30,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (assign, nonatomic) BOOL shouldBeHidingStatusBar;
 
 - (IBAction)deleteButton:(UIButton *)sender;
 
@@ -102,6 +105,8 @@ static NSString *kEventsScreenName = @"Events Grid";
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    // Light status bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
 }
 
@@ -144,7 +149,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.fetchedEventsArray = [NSMutableArray arrayWithArray:[[SKDataManager sharedManager] getAllEvents]];
+    self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, -kCollectionViewContentOffset);
     [self doneEditing]; // if needed
     [self updateView];
     [self startTimer];
@@ -204,6 +209,47 @@ static NSString *kEventsScreenName = @"Events Grid";
     if (self.isEditing == NO) {
         [self startTimer];
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat statusBarHeight = 20.0f;
+    CGFloat scrollOffset = scrollView.contentOffset.y + kCollectionViewContentOffset;
+    
+    if ((scrollOffset - kCollectionViewContentOffset / 2) >= statusBarHeight) {
+        [self hideStatusBar];
+    } else {
+        [self showStatusBar];
+    }
+}
+
+
+#pragma mark - Status Bar Appearance
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.shouldBeHidingStatusBar;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationSlide;
+}
+
+- (void)hideStatusBar
+{
+    self.shouldBeHidingStatusBar = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
+}
+
+- (void)showStatusBar
+{
+    self.shouldBeHidingStatusBar = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 

@@ -90,6 +90,8 @@ static NSString *const kEditEventScreenName = @"Edit Event";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin" size:21.0],
                                                                     NSForegroundColorAttributeName : [colors objectForKey:@"colorText"]};
     self.navigationController.navigationBar.barTintColor = [colors objectForKey:@"background"];
+    // Light status bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
     // Text fields
     self.nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:kNameTextFieldPlaceholder
