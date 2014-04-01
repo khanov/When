@@ -289,31 +289,6 @@ NSString *const kDeletedKey = @"deleted";
     
     
     //
-    // Next Sunday
-    NSDate *now = [NSDate date];
-    NSDateComponents *dateComponents = [gregorianCalendar components:NSWeekdayCalendarUnit | NSHourCalendarUnit fromDate:now];
-    NSInteger weekday = [dateComponents weekday];
-    
-    NSDate *nextSunday = nil;
-    if (weekday == 1 && [dateComponents hour] < 12) {
-        // Sunday is today. Find next.
-        NSInteger daysTillNextSunday = 8;
-        int secondsInDay = 86400; // 24 * 60 * 60
-        nextSunday = [now dateByAddingTimeInterval:secondsInDay * daysTillNextSunday];
-    }
-    else {
-        NSInteger daysTillNextSunday = 8 - weekday;
-        int secondsInDay = 86400; // 24 * 60 * 60
-        nextSunday = [now dateByAddingTimeInterval:secondsInDay * daysTillNextSunday];
-    }
-        
-    [self createEventWithName:@"Fun With Friends"
-                    startDate:now
-                      endDate:nextSunday
-                      details:@"Next Sunday is going to be fun!"];
-    
-    
-    //
     // Installed the app
     [self createEventWithName:@"Install This App"
                     startDate:firstDayOfTheYear

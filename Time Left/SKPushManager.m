@@ -51,10 +51,12 @@
         
         SKEvent *addedEvent = [addedNotification.userInfo objectForKey:kAddedKey];
         UILocalNotification *localNotification = [self createNotificationForEvent:addedEvent];
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        [self.notifications addObject:localNotification];
-
-        NSLog(@"Scheduled notification for %@ at %@ (now = %@)", addedEvent.name, localNotification.fireDate, [NSDate date]);
+        if (localNotification) {
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+            [self.notifications addObject:localNotification];
+            NSLog(@"Scheduled notification for %@ at %@ (now = %@)", addedEvent.name, localNotification.fireDate, [NSDate date]);
+        }
+    
     }
 }
 
@@ -69,14 +71,18 @@
                 [[UIApplication sharedApplication] cancelLocalNotification:notification];
                 [self.notifications removeObject:notification];
                 *stop = YES;
+                
+                NSLog(@"Cancelled notification for %@ at %@ (now = %@)", updatedEvent.name, notification.fireDate, [NSDate date]);
             }
         }];
+        
         // Add new notification
         UILocalNotification *newNotification = [self createNotificationForEvent:updatedEvent];
-        [[UIApplication sharedApplication] scheduleLocalNotification:newNotification];
-        [self.notifications addObject:newNotification];
-        
-        NSLog(@"Updated notification for %@ at %@ (now = %@)", updatedEvent.name, newNotification.fireDate, [NSDate date]);
+        if (newNotification) {
+            [[UIApplication sharedApplication] scheduleLocalNotification:newNotification];
+            [self.notifications addObject:newNotification];
+            NSLog(@"Updated notification for %@ at %@ (now = %@)", updatedEvent.name, newNotification.fireDate, [NSDate date]);
+        }
     }
 }
 
@@ -99,14 +105,19 @@
 
 - (UILocalNotification *)createNotificationForEvent:(SKEvent *)event
 {
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = event.endDate;
-    localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", event.name];
-    localNotification.timeZone = [NSTimeZone systemTimeZone];
-    localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
-    localNotification.soundName = @"notification-sound.caf";
-    localNotification.userInfo = @{@"eventUUID" : event.uuid};
-    return localNotification;
+    // Create notification only for event that are going to end in the future
+    if ([event.endDate compare:[NSDate date]] == NSOrderedDescending) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = event.endDate;
+        localNotification.alertBody = [NSString stringWithFormat:@"%@ is happening now.", event.name];
+        localNotification.timeZone = [NSTimeZone systemTimeZone];
+        localNotification.alertAction = NSLocalizedString(@"check", @"On lock screen under notification — 'slide to ...' ");
+        localNotification.soundName = @"notification-sound.caf";
+        localNotification.userInfo = @{@"eventUUID" : event.uuid};
+        return localNotification;
+    }
+    
+    return nil;
 }
 
 @end
