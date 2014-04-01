@@ -19,7 +19,11 @@ static NSInteger kMarginTopBottomiPad = 30;
 static NSInteger kMarginLeftRightiPhone = 10;
 static NSInteger kMarginLeftRightiPad = 10;
 
-static CGFloat kCollectionViewContentOffset = -64.0f;
+static CGFloat kCollectionViewContentOffsetiPhone = -64.0f;
+static CGFloat kCollectionViewContentOffsetiPad = 0.0f;
+
+static CGFloat kAddButtonHiddenOffsetiPhone = 40.f;
+static CGFloat kAddButtonHiddenOffsetiPad = 80.f;
 
 static NSInteger kCellWeightHeightiPhone = 145;
 static NSInteger kCellWeightHeightiPad = 242;
@@ -156,8 +160,8 @@ static NSString *kEventsScreenName = @"Events Grid";
     
     // Fix strange case, when there's extra content offset added after returning from event detail view
     CGPoint offset = self.collectionView.contentOffset;
-    if (offset.y < kCollectionViewContentOffset) {
-        offset.y = kCollectionViewContentOffset;
+    if (offset.y < kCollectionViewContentOffsetiPhone) {
+        offset.y = kCollectionViewContentOffsetiPhone;
         self.collectionView.contentOffset = offset;
     }
 }
@@ -221,9 +225,15 @@ static NSString *kEventsScreenName = @"Events Grid";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat statusBarHeight = 20.0f;
-    CGFloat scrollOffset = scrollView.contentOffset.y - kCollectionViewContentOffset;
+    CGFloat scrollOffset = scrollView.contentOffset.y;
     
-    if ((scrollOffset + kCollectionViewContentOffset / 2) >= statusBarHeight) {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        scrollOffset -= kCollectionViewContentOffsetiPhone;
+    } else {
+        scrollOffset -= kCollectionViewContentOffsetiPad;
+    }
+    
+    if ((scrollOffset / 2) >= statusBarHeight) {
         [self hideStatusBar];
         [self hideAddButton];
     } else {
@@ -249,7 +259,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingStatusBar == NO) {
         self.shouldBeHidingStatusBar = YES;
-        [UIView animateWithDuration:0.1 animations:^{
+        [UIView animateWithDuration:0.1f animations:^{
             [self setNeedsStatusBarAppearanceUpdate];
         }];
     }
@@ -259,7 +269,7 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingStatusBar) {
         self.shouldBeHidingStatusBar = NO;
-        [UIView animateWithDuration:0.1 animations:^{
+        [UIView animateWithDuration:0.1f animations:^{
             [self setNeedsStatusBarAppearanceUpdate];
         }];
     }
@@ -272,8 +282,9 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingAddButton == NO) {
         self.shouldBeHidingAddButton = YES;
-        [UIView animateWithDuration:0.5f animations:^{
-            self.addButton.center = CGPointMake(self.addButton.center.x + 40, self.addButton.center.y);
+        [UIView animateWithDuration:0.1f animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x + ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
+                                                self.addButton.center.y);
         } completion:^(BOOL finished) {
             self.addButton.hidden = YES;
         }];
@@ -284,10 +295,13 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingAddButton) {
         self.shouldBeHidingAddButton = NO;
-        self.addButton.center = CGPointMake(self.addButton.center.x + 40, self.addButton.center.y);
+        self.addButton.center = CGPointMake(self.addButton.center.x + ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
+                                            self.addButton.center.y);
         self.addButton.hidden = NO;
-        [UIView animateWithDuration:0.5 animations:^{
-            self.addButton.center = CGPointMake(self.addButton.center.x - 40, self.addButton.center.y);
+        
+        [UIView animateWithDuration:0.1f animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x - ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
+                                                self.addButton.center.y);
         }];
     }
 }

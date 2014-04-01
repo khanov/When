@@ -88,17 +88,19 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="p3N-zZ-0LZ">
-                        <barButtonItem key="rightBarButtonItem" image="add-icon" id="VLH-O4-anE">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="yUQ-3F-6K5" kind="popover" identifier="showAddEventView" popoverAnchorBarButtonItem="VLH-O4-anE" id="YgQ-sR-Rf7">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" id="fzm-xt-Ra8">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5u6-JO-6Np">
+                                <rect key="frame" x="673" y="10" width="79" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="add-icon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="VLH-O4-anE" id="Zck-cP-SbH"/>
+                        <outlet property="addBarButtonItem" destination="fzm-xt-Ra8" id="UlJ-be-M6o"/>
+                        <outlet property="addButton" destination="5u6-JO-6Np" id="I2U-jL-7FH"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fF-ef-9S2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,7 +112,7 @@
             <objects>
                 <tableViewController id="NVY-q6-Sqb" customClass="SKAddEventTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GBq-yV-Irw">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -426,7 +428,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="YgQ-sR-Rf7"/>
-    </inferredMetricsTieBreakers>
 </document>
