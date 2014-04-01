@@ -28,6 +28,7 @@
 
 - (void)setupCrashlytics
 {
+//    [[Crashlytics sharedInstance] setDebugMode:YES];
     [Crashlytics startWithAPIKey:@"082c35275c8e0190668e584b9baaeb1b1c9bb403"];
 }
 
@@ -37,7 +38,7 @@
     [[GAI sharedInstance].logger setLogLevel:kGAILogLevelWarning];
     [GAI sharedInstance].dispatchInterval = 20;
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-47720523-1"];
-    
+//    
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     [tracker set:kGAIAppVersion value:version];
     [tracker set:kGAISampleRate value:@"50.0"];

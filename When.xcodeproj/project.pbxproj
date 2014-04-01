@@ -19,7 +19,6 @@
 		A65DE88B189E369E009F7AFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */; };
 		A65DE88D189E36AC009F7AFE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88C189E36AC009F7AFE /* libz.dylib */; };
 		A65DE88F189E41FA009F7AFE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65DE88E189E41FA009F7AFE /* AdSupport.framework */; };
-		A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */; };
 		A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355D179D31E200E5A40F /* UIKit.framework */; };
 		A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669355F179D31E200E5A40F /* Foundation.framework */; };
 		A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6693561179D31E200E5A40F /* CoreGraphics.framework */; };
@@ -32,6 +31,7 @@
 		A6A3E8AB1891255C00A3E4FB /* SKEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AA1891255C00A3E4FB /* SKEventsCollectionViewController.m */; };
 		A6A3E8B01891301500A3E4FB /* SKEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3E8AF1891301500A3E4FB /* SKEventCell.m */; };
 		A6B4C85118DF48B900586587 /* notification-sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = A6B4C85018DF48B900586587 /* notification-sound.caf */; };
+		A6B4C85518E09E4F00586587 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4C85418E09E4F00586587 /* Crashlytics.framework */; };
 		A6B8E09D188D1F7F007E857F /* SKAddEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */; };
 		A6DDBC9E18913656003B2D37 /* SKEventCellProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDBC9D18913656003B2D37 /* SKEventCellProgressView.m */; };
 		A6DEF6311899263900070415 /* SKCustomCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEF6301899263900070415 /* SKCustomCollectionViewFlowLayout.m */; };
@@ -63,7 +63,6 @@
 		A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A65DE88C189E36AC009F7AFE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A65DE88E189E41FA009F7AFE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "Time Left/Crashlytics.framework"; sourceTree = "<group>"; };
 		A669355A179D31E200E5A40F /* When.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = When.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A669355D179D31E200E5A40F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A669355F179D31E200E5A40F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,6 +81,7 @@
 		A6A3E8AE1891301500A3E4FB /* SKEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCell.h; sourceTree = "<group>"; };
 		A6A3E8AF1891301500A3E4FB /* SKEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKEventCell.m; sourceTree = "<group>"; };
 		A6B4C85018DF48B900586587 /* notification-sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "notification-sound.caf"; sourceTree = "<group>"; };
+		A6B4C85418E09E4F00586587 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A6B8E099188D1F7F007E857F /* SKAddEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddEventTableViewController.h; sourceTree = "<group>"; };
 		A6B8E09A188D1F7F007E857F /* SKAddEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddEventTableViewController.m; sourceTree = "<group>"; };
 		A6DDBC9C18913656003B2D37 /* SKEventCellProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKEventCellProgressView.h; sourceTree = "<group>"; };
@@ -97,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B4C85518E09E4F00586587 /* Crashlytics.framework in Frameworks */,
 				A65DE88F189E41FA009F7AFE /* AdSupport.framework in Frameworks */,
 				A65DE88D189E36AC009F7AFE /* libz.dylib in Frameworks */,
 				A65DE88B189E369E009F7AFE /* SystemConfiguration.framework in Frameworks */,
@@ -105,7 +106,6 @@
 				A669355E179D31E200E5A40F /* UIKit.framework in Frameworks */,
 				A65DE889189E365B009F7AFE /* libGoogleAnalyticsServices.a in Frameworks */,
 				A6693560179D31E200E5A40F /* Foundation.framework in Frameworks */,
-				A663AE0E189BEC1500CF3AFD /* Crashlytics.framework in Frameworks */,
 				A6693562179D31E200E5A40F /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,11 +146,11 @@
 		A669355C179D31E200E5A40F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6B4C85418E09E4F00586587 /* Crashlytics.framework */,
 				A65DE88E189E41FA009F7AFE /* AdSupport.framework */,
 				A65DE88C189E36AC009F7AFE /* libz.dylib */,
 				A65DE88A189E369E009F7AFE /* SystemConfiguration.framework */,
 				A65DE888189E365B009F7AFE /* libGoogleAnalyticsServices.a */,
-				A663AE0D189BEC1500CF3AFD /* Crashlytics.framework */,
 				A62A080E1892A2A90031AE7F /* CoreData.framework */,
 				A6A3E8A7188F931700A3E4FB /* QuartzCore.framework */,
 				A669355D179D31E200E5A40F /* UIKit.framework */,
@@ -452,7 +452,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Salavat Khanov (REFNZC5FDV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/khanov/Developer/Time-Left/Time\\ Left",
+					"\"/Users/khanov/Developer/Time-Left/Time Left\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/When-Prefix.pch";
@@ -479,7 +480,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Salavat Khanov (6P9PN587KS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/khanov/Developer/Time-Left/Time\\ Left",
+					"\"/Users/khanov/Developer/Time-Left/Time Left\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Time Left/When-Prefix.pch";
@@ -490,7 +492,7 @@
 					"/Users/khanov/Developer/Time-Left",
 				);
 				PRODUCT_NAME = When;
-				PROVISIONING_PROFILE = "354732A3-6CE7-47B6-A549-4F0657235632";
+				PROVISIONING_PROFILE = "E3092739-4603-4596-B51A-3B3DD20E4EC4";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
