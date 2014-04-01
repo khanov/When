@@ -209,7 +209,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="2yK-Sg-Rxr" id="F4P-B1-ALe"/>
+                        <outlet property="addBarButtonItem" destination="2yK-Sg-Rxr" id="WGa-vb-Iky"/>
+                        <outlet property="addButton" destination="myn-Nu-7ge" id="D0M-AB-av8"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrd-SI-Ipu" userLabel="First Responder" sceneMemberID="firstResponder"/>

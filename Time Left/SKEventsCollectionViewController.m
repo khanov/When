@@ -19,7 +19,7 @@ static NSInteger kMarginTopBottomiPad = 30;
 static NSInteger kMarginLeftRightiPhone = 10;
 static NSInteger kMarginLeftRightiPad = 10;
 
-static CGFloat kCollectionViewContentOffset = 64;
+static CGFloat kCollectionViewContentOffset = -64.0f;
 
 static NSInteger kCellWeightHeightiPhone = 145;
 static NSInteger kCellWeightHeightiPad = 242;
@@ -29,8 +29,11 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *fetchedEventsArray;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
 @property (assign, nonatomic) BOOL shouldBeHidingStatusBar;
+@property (assign, nonatomic) BOOL shouldBeHidingAddButton;
+@property (strong, nonatomic) UIDynamicAnimator *animator;
 
 - (IBAction)deleteButton:(UIButton *)sender;
 
@@ -65,22 +68,21 @@ static NSString *kEventsScreenName = @"Events Grid";
     
     // Motion effects
     UIInterpolatingMotionEffect *xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    xAxis.minimumRelativeValue = @-28;
-    xAxis.maximumRelativeValue = @28;
+    xAxis.minimumRelativeValue = @-20;
+    xAxis.maximumRelativeValue = @20;
     
     UIInterpolatingMotionEffect *yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    yAxis.minimumRelativeValue = @-28;
-    yAxis.maximumRelativeValue = @28;
+    yAxis.minimumRelativeValue = @-20;
+    yAxis.maximumRelativeValue = @20;
     
     UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
     group.motionEffects = @[xAxis, yAxis];
-    
     [self.collectionView addMotionEffect:group];
     
     // Set navigation bar font
     UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
-    
+
     // Long press gesture recognizer
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
     longPressGestureRecognizer.minimumPressDuration = 0.5; //seconds
@@ -107,7 +109,6 @@ static NSString *kEventsScreenName = @"Events Grid";
     self.navigationController.navigationBar.translucent = YES;
     // Light status bar
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
 }
 
 
@@ -149,10 +150,16 @@ static NSString *kEventsScreenName = @"Events Grid";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, -kCollectionViewContentOffset);
     [self doneEditing]; // if needed
     [self updateView];
     [self startTimer];
+    
+    // Fix strange case, when there's extra content offset added after returning from event detail view
+    CGPoint offset = self.collectionView.contentOffset;
+    if (offset.y < kCollectionViewContentOffset) {
+        offset.y = kCollectionViewContentOffset;
+        self.collectionView.contentOffset = offset;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -214,12 +221,14 @@ static NSString *kEventsScreenName = @"Events Grid";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat statusBarHeight = 20.0f;
-    CGFloat scrollOffset = scrollView.contentOffset.y + kCollectionViewContentOffset;
+    CGFloat scrollOffset = scrollView.contentOffset.y - kCollectionViewContentOffset;
     
-    if ((scrollOffset - kCollectionViewContentOffset / 2) >= statusBarHeight) {
+    if ((scrollOffset + kCollectionViewContentOffset / 2) >= statusBarHeight) {
         [self hideStatusBar];
+        [self hideAddButton];
     } else {
         [self showStatusBar];
+        [self showAddButton];
     }
 }
 
@@ -238,18 +247,49 @@ static NSString *kEventsScreenName = @"Events Grid";
 
 - (void)hideStatusBar
 {
-    self.shouldBeHidingStatusBar = YES;
-    [UIView animateWithDuration:0.5 animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-    }];
+    if (self.shouldBeHidingStatusBar == NO) {
+        self.shouldBeHidingStatusBar = YES;
+        [UIView animateWithDuration:0.1 animations:^{
+            [self setNeedsStatusBarAppearanceUpdate];
+        }];
+    }
 }
 
 - (void)showStatusBar
 {
-    self.shouldBeHidingStatusBar = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-    }];
+    if (self.shouldBeHidingStatusBar) {
+        self.shouldBeHidingStatusBar = NO;
+        [UIView animateWithDuration:0.1 animations:^{
+            [self setNeedsStatusBarAppearanceUpdate];
+        }];
+    }
+}
+
+
+#pragma mark - Add Button Appearance
+
+- (void)hideAddButton
+{
+    if (self.shouldBeHidingAddButton == NO) {
+        self.shouldBeHidingAddButton = YES;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x + 40, self.addButton.center.y);
+        } completion:^(BOOL finished) {
+            self.addButton.hidden = YES;
+        }];
+    }
+}
+
+- (void)showAddButton
+{
+    if (self.shouldBeHidingAddButton) {
+        self.shouldBeHidingAddButton = NO;
+        self.addButton.center = CGPointMake(self.addButton.center.x + 40, self.addButton.center.y);
+        self.addButton.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x - 40, self.addButton.center.y);
+        }];
+    }
 }
 
 
@@ -435,7 +475,7 @@ static NSString *kEventsScreenName = @"Events Grid";
     if (self.isEditing) {
         NSLog(@"Done editing");
         // Replace Add button to Done
-        [self.navigationItem setRightBarButtonItem:self.addButton];
+        [self.navigationItem setRightBarButtonItem:self.addBarButtonItem];
         // Stop Edit mode
         self.editing = NO;
         [self startTimer];
