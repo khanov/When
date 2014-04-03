@@ -22,8 +22,7 @@ static NSInteger kMarginLeftRightiPad = 10;
 static CGFloat kCollectionViewContentOffsetiPhone = -64.0f;
 static CGFloat kCollectionViewContentOffsetiPad = 0.0f;
 
-static CGFloat kAddButtonHiddenOffsetiPhone = 40.f;
-static CGFloat kAddButtonHiddenOffsetiPad = 80.f;
+static CGFloat kAddButtonHiddenOffset = 40.f;
 
 static NSInteger kCellWeightHeightiPhone = 145;
 static NSInteger kCellWeightHeightiPad = 242;
@@ -282,9 +281,8 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingAddButton == NO) {
         self.shouldBeHidingAddButton = YES;
-        [UIView animateWithDuration:0.1f animations:^{
-            self.addButton.center = CGPointMake(self.addButton.center.x + ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
-                                                self.addButton.center.y);
+        [UIView animateWithDuration:0.1 animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x + kAddButtonHiddenOffset, self.addButton.center.y);
         } completion:^(BOOL finished) {
             self.addButton.hidden = YES;
         }];
@@ -295,13 +293,11 @@ static NSString *kEventsScreenName = @"Events Grid";
 {
     if (self.shouldBeHidingAddButton) {
         self.shouldBeHidingAddButton = NO;
-        self.addButton.center = CGPointMake(self.addButton.center.x + ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
-                                            self.addButton.center.y);
+        self.addButton.center = CGPointMake(self.addButton.center.x + kAddButtonHiddenOffset, self.addButton.center.y);
         self.addButton.hidden = NO;
         
-        [UIView animateWithDuration:0.1f animations:^{
-            self.addButton.center = CGPointMake(self.addButton.center.x - ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? kAddButtonHiddenOffsetiPhone : kAddButtonHiddenOffsetiPad),
-                                                self.addButton.center.y);
+        [UIView animateWithDuration:0.1 animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x - kAddButtonHiddenOffset, self.addButton.center.y);
         }];
     }
 }

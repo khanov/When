@@ -175,7 +175,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeSystem];
     editButton.backgroundColor = [UIColor clearColor];
     editButton.frame = CGRectMake(barButtonSize.width + 10, 0, barButtonSize.width, barButtonSize.height);
-    [editButton setImage:[UIImage imageNamed:@"settings-icon"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"about-icon"] forState:UIControlStateNormal];
     editButton.tintColor = [UIColor whiteColor];
     editButton.autoresizesSubviews = YES;
     editButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
