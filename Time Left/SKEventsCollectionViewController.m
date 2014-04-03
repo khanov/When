@@ -380,7 +380,6 @@ static NSString *kEventsScreenName = @"Events Grid";
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         SKEventDetailsViewController *eventDetailsViewController = segue.destinationViewController;
         eventDetailsViewController.event = [self.fetchedEventsArray objectAtIndex:indexPath.row];
-        eventDetailsViewController.shouldAnimateStatusBar = self.shouldBeHidingStatusBar;
     } else if ([segue.identifier isEqualToString:@"showAddEventView"] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UIPopoverController *popover = [(UIStoryboardPopoverSegue *)segue popoverController];
         SKAppDelegate *delegate = [UIApplication sharedApplication].delegate;

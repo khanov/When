@@ -13,7 +13,7 @@
 
 static NSString *kEventDetailsScreenName = @"Event Details";
 
-@interface SKEventDetailsViewController ()
+@interface SKEventDetailsViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -44,6 +44,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self setupColors];
     [self setupProgressLabels];
     [self setupNavigationButtons];
@@ -175,7 +176,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeSystem];
     editButton.backgroundColor = [UIColor clearColor];
     editButton.frame = CGRectMake(barButtonSize.width + 10, 0, barButtonSize.width, barButtonSize.height);
-    [editButton setImage:[UIImage imageNamed:@"about-icon"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"settings-icon"] forState:UIControlStateNormal];
     editButton.tintColor = [UIColor whiteColor];
     editButton.autoresizesSubviews = YES;
     editButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
@@ -185,7 +186,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     // Share button
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeSystem];
     shareButton.backgroundColor = [UIColor clearColor];
-    shareButton.frame = CGRectMake(editButton.frame.origin.x + barButtonSize.width + 5, 0, barButtonSize.width, barButtonSize.height - 5);
+    shareButton.frame = CGRectMake(editButton.frame.origin.x + barButtonSize.width + 5, 0, barButtonSize.width, barButtonSize.height);
     [shareButton setImage:[UIImage imageNamed:@"share-icon"] forState:UIControlStateNormal];
     shareButton.tintColor = [UIColor whiteColor];
     shareButton.autoresizesSubviews = YES;
@@ -197,8 +198,22 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     self.navigationItem.rightBarButtonItem = _rightBarButton;
     
     // Back button
-    UIFont *backButtonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName : backButtonFont} forState:UIControlStateNormal];
+    UIImage *backButtonImage = [UIImage imageNamed:@"back-icon"];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    backButton.backgroundColor = [UIColor clearColor];
+    backButton.frame = CGRectMake(-2, 0, barButtonSize.width, barButtonSize.height);
+    [backButton setImage:backButtonImage forState:UIControlStateNormal];
+    backButton.tintColor = [UIColor whiteColor];
+    backButton.autoresizesSubviews = YES;
+    backButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+    [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    self.navigationController.navigationBar.backIndicatorImage = backButtonImage;
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = backButtonImage;
 }
 
 - (void)setupProgressLabels
@@ -224,10 +239,6 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     [super viewWillAppear:animated];
     [self setupLabels];
     [self updateProgressView];
-    
-    if (self.shouldAnimateStatusBar) {
-        [self showStatusBarAnimated];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -241,13 +252,6 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:kEventDetailsScreenName];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    if (self.shouldAnimateStatusBar) {
-        [self hideStatusBarAnimated];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -269,35 +273,6 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 {
     self.tapCounter++;
     [self setupLabels];
-}
-
-
-#pragma mark - Status Bar Appearance
-
-- (BOOL)prefersStatusBarHidden
-{
-    return self.isShouldBeHidingStatusBar;
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
-{
-    return UIStatusBarAnimationFade;
-}
-
-- (void)hideStatusBarAnimated
-{
-    self.shouldBeHidingStatusBar = YES;
-    [UIView animateWithDuration:0.1 animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-    }];
-}
-
-- (void)showStatusBarAnimated
-{
-    self.shouldBeHidingStatusBar = NO;
-    [UIView animateWithDuration:0.3 animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-    }];
 }
 
 
