@@ -21,6 +21,7 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 @property (weak, nonatomic) IBOutlet SKProgressIndicator *progressView;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger tapCounter;
+@property (assign, nonatomic, getter = isShouldBeHidingStatusBar) BOOL shouldBeHidingStatusBar;
 
 - (IBAction)tapGesture:(UITapGestureRecognizer *)sender;
 
@@ -223,6 +224,10 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     [super viewWillAppear:animated];
     [self setupLabels];
     [self updateProgressView];
+    
+    if (self.shouldAnimateStatusBar) {
+        [self showStatusBarAnimated];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -236,6 +241,13 @@ static NSString *kEventDetailsScreenName = @"Event Details";
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:kEventDetailsScreenName];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.shouldAnimateStatusBar) {
+        [self hideStatusBarAnimated];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -257,6 +269,35 @@ static NSString *kEventDetailsScreenName = @"Event Details";
 {
     self.tapCounter++;
     [self setupLabels];
+}
+
+
+#pragma mark - Status Bar Appearance
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.isShouldBeHidingStatusBar;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationFade;
+}
+
+- (void)hideStatusBarAnimated
+{
+    self.shouldBeHidingStatusBar = YES;
+    [UIView animateWithDuration:0.1 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
+}
+
+- (void)showStatusBarAnimated
+{
+    self.shouldBeHidingStatusBar = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 

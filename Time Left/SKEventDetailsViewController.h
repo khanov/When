@@ -14,5 +14,6 @@
 @interface SKEventDetailsViewController : UIViewController
 
 @property (strong, nonatomic) SKEvent *event;
+@property (assign, nonatomic) BOOL shouldAnimateStatusBar;
 
 @end
